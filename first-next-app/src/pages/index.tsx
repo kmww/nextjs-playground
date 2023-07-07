@@ -1,13 +1,5 @@
-import Head from 'next/head';
+const Homepage = () => {
+  return <main>homepage</main>;
+};
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <meta charSet='utf-8' />
-        <title>first-next-app</title>
-      </Head>
-      <main>homepage</main>
-    </>
-  );
-}
+export default Homepage;

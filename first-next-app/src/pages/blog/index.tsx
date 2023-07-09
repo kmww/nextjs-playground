@@ -1,3 +1,4 @@
+import Widget from '@/components/Widget';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -27,6 +28,10 @@ const BlogPage: NextPage = () => {
       </Link>
       <br />
       <Link href='/blog/2023-03-15/deadline'>Read Second Post</Link>
+      <br />
+      <div>
+        <Widget pageName='blog' />
+      </div>
     </div>
   );
 };

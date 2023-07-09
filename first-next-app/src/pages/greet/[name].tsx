@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 interface GreetProps {
@@ -20,6 +21,9 @@ const Greet: NextPage<GreetProps> = (props) => {
 
   return (
     <>
+      <Head>
+        <title>greet page</title>
+      </Head>
       <h1> Hello, {props.name}! (use params)</h1>
       <h1> Hello, {query.name}! (use router)</h1>
     </>

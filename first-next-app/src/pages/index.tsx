@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import axios from 'axios';
-import { User, Users } from '@/types/user';
+import { Users } from '@/types/user';
+import { GetServerSideProps } from 'next';
 
-export async function getServerSideProps() {
-  const { data } = await axios.get(`${process.env.API_ENDPOINT}/api/04/users`);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data } = await axios.get<Users>(
+    `${process.env.API_ENDPOINT}/api/04/users`
+  );
 
   return {
     props: {
       users: data,
     },
   };
-}
+};
 
 function HomePage({ users }: Users) {
   return (

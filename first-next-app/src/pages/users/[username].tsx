@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps<UserPageProps> = async (
   ctx
 ) => {
   const { username } = ctx.query;
-  const { data } = await axios.get<User>(
+  const { data, status } = await axios.get<User>(
     `${process.env.API_ENDPOINT}/api/04/users/${username}`,
     {
       headers: {
@@ -19,6 +19,12 @@ export const getServerSideProps: GetServerSideProps<UserPageProps> = async (
       },
     }
   );
+
+  if (status === 404) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {

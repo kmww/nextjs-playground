@@ -1,6 +1,14 @@
 import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const handler = async (req: any, res: any) => {
+interface ResponseData {
+  error: string;
+}
+
+const handler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) => {
   if (!req.query.username) {
     res.status(403).json({
       error: 'Missing "username" query parameter',

@@ -1,8 +1,12 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 import { User } from '@/types/user';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req: any, res: any): Promise<void> => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   const {
     query: { username },
   } = req;

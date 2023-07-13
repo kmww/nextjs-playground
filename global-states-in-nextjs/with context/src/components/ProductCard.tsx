@@ -15,7 +15,7 @@ const ProductCard = ({
   picture,
   price,
 }: ProductCardProps): ReactElement => {
-  const { items, setItems } = useContext(cartContext);
+  const { setItems, items } = useContext(cartContext);
   const productAmount = items?.[id] ?? 0;
 
   const handleAmount = (action: Action) => {

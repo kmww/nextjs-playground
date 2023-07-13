@@ -7,7 +7,7 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType>({
   items: {},
-  setItems: () => {},
+  setItems: () => null,
 });
 
 export default CartContext;

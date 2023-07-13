@@ -8,8 +8,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <Navbar />
       <ShoppingCartContext.Provider value={{ items, setItems }}>
+        <Navbar />
         <div className='w-9/12 m-auto pt-10'>
           <Component {...pageProps} />
         </div>

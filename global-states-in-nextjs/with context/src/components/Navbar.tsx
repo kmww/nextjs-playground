@@ -1,8 +1,10 @@
+import cartContext from '@/context/cartContext';
 import Link from 'next/link';
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 
 const Navbar = (): ReactElement => {
-  const totalItemsAmount = 0;
+  const { items } = useContext(cartContext);
+  const totalItemsAmount = Object.values(items).reduce((x, y) => x + y, 0);
 
   return (
     <div className='w-full bg-purple-600 p-4 text-white'>

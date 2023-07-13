@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { StoreEnhancer, applyMiddleware, createStore, Store } from 'redux';
+import { applyMiddleware, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 interface ActionType {
@@ -37,7 +37,9 @@ const reducer = (
   }
 };
 
-const initStore = (preloadedState = initialState) => {
+const initStore = (
+  preloadedState = initialState
+): Store<Record<string, number>, ActionType> => {
   return createStore(
     reducer,
     preloadedState,
@@ -64,7 +66,9 @@ export const initializeStore = (
   return _store;
 };
 
-export const useStore = (initialState: any) => {
-  const store = useMemo(() => initializeStore, [initialState]);
+export const useStore = (
+  initialState: any
+): Store<Record<string, number>, ActionType> => {
+  const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 };

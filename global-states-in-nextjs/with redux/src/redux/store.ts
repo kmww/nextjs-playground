@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { StoreEnhancer, applyMiddleware, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -44,7 +45,7 @@ const initStore = (preloadedState = initialState) => {
   );
 };
 
-export const initialStore = (
+export const initializeStore = (
   preloadedState: Record<string, number> | undefined
 ) => {
   let _store = store ?? initStore(preloadedState);
@@ -61,4 +62,9 @@ export const initialStore = (
   if (!store) store = _store;
 
   return _store;
+};
+
+export const useStore = (initialState: any) => {
+  const store = useMemo(() => initializeStore, [initialState]);
+  return store;
 };

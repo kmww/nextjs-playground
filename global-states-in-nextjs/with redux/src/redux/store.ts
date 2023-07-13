@@ -1,14 +1,14 @@
-import { StoreEnhancer, applyMiddleware, createStore } from 'redux';
+import { StoreEnhancer, applyMiddleware, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-let store;
-
-const initialState: Record<string, number> = {};
 
 interface ActionType {
   id: string;
   type: 'INCREMENT' | 'DECREMENT';
 }
+
+let store: Store<Record<string, number>, ActionType> | undefined;
+
+const initialState: Record<string, number> = {};
 
 const reducer = (
   state: Record<string, number> = initialState,
@@ -34,4 +34,31 @@ const reducer = (
     default:
       return state;
   }
+};
+
+const initStore = (preloadedState = initialState) => {
+  return createStore(
+    reducer,
+    preloadedState,
+    composeWithDevTools(applyMiddleware())
+  );
+};
+
+export const initialStore = (
+  preloadedState: Record<string, number> | undefined
+) => {
+  let _store = store ?? initStore(preloadedState);
+
+  if (preloadedState && store) {
+    _store = initStore({
+      ...store.getState(),
+      ...preloadedState,
+    });
+    store = undefined;
+  }
+
+  if (typeof window === 'undefined') return _store;
+  if (!store) store = _store;
+
+  return _store;
 };

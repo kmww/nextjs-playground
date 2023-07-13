@@ -1,8 +1,12 @@
+import { useGlobalItems } from '@/hooks/useGlobalItems';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
 const Navbar = (): ReactElement => {
-  const totalItemsAmount = 0;
+  const items = useGlobalItems();
+  const totalItemsAmount = Object.keys(items)
+    .map((key) => items[key])
+    .reduce((x, y) => x + y, 0);
 
   return (
     <div className='w-full bg-purple-600 p-4 text-white'>

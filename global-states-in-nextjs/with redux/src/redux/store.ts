@@ -2,17 +2,17 @@ import { useMemo } from 'react';
 import { applyMiddleware, createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-interface ActionType {
+export interface ActionType {
   id: string;
   type: 'INCREMENT' | 'DECREMENT';
 }
 
-let store: Store<Record<string, number>, ActionType> | undefined;
+let store: Store<Record<string, any>, ActionType> | undefined;
 
-const initialState: Record<string, number> = {};
+const initialState: Record<string, any> = {};
 
-const reducer = (
-  state: Record<string, number> = initialState,
+export const reducer = (
+  state: Record<string, any> = initialState,
   action: ActionType
 ) => {
   const itemId = action.id;
@@ -39,7 +39,7 @@ const reducer = (
 
 const initStore = (
   preloadedState = initialState
-): Store<Record<string, number>, ActionType> => {
+): Store<Record<string, any>, ActionType> => {
   return createStore(
     reducer,
     preloadedState,
@@ -48,7 +48,7 @@ const initStore = (
 };
 
 export const initializeStore = (
-  preloadedState: Record<string, number> | undefined
+  preloadedState: Record<string, any> | undefined
 ) => {
   let _store = store ?? initStore(preloadedState);
 
@@ -68,7 +68,7 @@ export const initializeStore = (
 
 export const useStore = (
   initialState: any
-): Store<Record<string, number>, ActionType> => {
+): Store<Record<string, any>, ActionType> => {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 };

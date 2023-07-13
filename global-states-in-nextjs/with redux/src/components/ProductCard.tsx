@@ -1,4 +1,8 @@
+import { useGlobalItems } from '@/hooks/useGlobalItems';
+import { ActionType } from '@/redux/store';
 import { ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +17,10 @@ const ProductCard = ({
   picture,
   price,
 }: ProductCardProps): ReactElement => {
+  const dispatch: Dispatch<ActionType> = useDispatch();
+  const items: Record<string, any> = useGlobalItems();
+  const productAmount = items && id ? items[id] ?? 0 : 0;
+
   return (
     <div className='bg-gray-200 p-6 rounded-md'>
       <div className='relative 100% h-40 m-auto'>
@@ -25,14 +33,14 @@ const ProductCard = ({
       <div className='flex justify-between mt-4 w-2/4 m-auto'>
         <button
           className='pl-2 pr-2 bg-red-400 text-white rounded-md'
-          disabled={false /* To be implemented */}
-          onClick={() => {} /* To be implemented */}>
+          disabled={productAmount === 0}
+          onClick={() => dispatch({ type: 'DECREMENT', id })}>
           -
         </button>
-        <div>{/* To be implemented */}</div>
+        <div>{productAmount}</div>
         <button
           className='pl-2 pr-2 bg-green-400 text-white rounded-md'
-          onClick={() => {} /* To be implemented */}>
+          onClick={() => dispatch({ type: 'INCREMENT', id })}>
           +
         </button>
       </div>

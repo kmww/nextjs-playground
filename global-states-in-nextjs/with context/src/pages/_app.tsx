@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import type { AppProps } from 'next/app';
-import ShoppingCartContext from '@/components/context/cartContext';
+import ShoppingCartContext from '@/context/cartContext';
 import { useState } from 'react';
 
 const App = ({ Component, pageProps }: AppProps) => {

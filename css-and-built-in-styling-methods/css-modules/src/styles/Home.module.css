@@ -1,4 +1,4 @@
-.homepage {
+.homepage-default {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,4 +9,9 @@
 
 .title {
   color: #f5f5f5;
+}
+
+.homepage-red {
+  composes: homepage-default;
+  background-color: red;
 }

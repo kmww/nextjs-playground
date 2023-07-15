@@ -1,5 +1,3 @@
-import Error from 'next/error';
-
 const { parse } = require('url');
 const express = require('express');
 const next = require('next');
@@ -14,7 +12,7 @@ const main = async () => {
   const server = express();
 
   server
-    .get('*', (req: Request, res: Response) => {
+    .get('*', (req, res) => {
       const url = parse(req.url, true);
       handle(req, res, url);
     })

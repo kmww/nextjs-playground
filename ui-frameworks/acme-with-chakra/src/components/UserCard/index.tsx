@@ -12,7 +12,7 @@ import { ReactElement } from 'react';
 
 const UserCard = (props: UserType): ReactElement => {
   return (
-    <Link href={`/user/${props.username}`} passHref>
+    <Link href={`/users/${props.username}`} passHref>
       <>
         <VStack
           spacing='4'

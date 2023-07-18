@@ -18,3 +18,17 @@ describe('cutTextToLength', () => {
     expect(cutResult).toEqual('7 chars');
   });
 });
+
+describe('slugify makes a string URL-safe', () => {
+  test('Should convert a string to URL-safe format', () => {
+    const initialString = 'This is a string to slugify';
+    const slugifiedString = slugify(initialString);
+    expect(slugifiedString).toEqual('this-is-a-string-to-slugify');
+  });
+
+  test('Should slugify a string with special characters', () => {
+    const initialString = 'This is a string to slugify!@#$%^&*()+';
+    const slugifiedString = slugify(initialString);
+    expect(slugifiedString).toEqual('this-is-a-string-to-slugify');
+  });
+});

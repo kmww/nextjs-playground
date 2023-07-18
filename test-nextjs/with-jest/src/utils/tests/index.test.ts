@@ -48,3 +48,11 @@ describe('composeArticleSlug should create a complete article URL given a title 
     expect(articleSlug).toEqual('this-is-a-title-j123');
   });
 });
+
+describe('extractArticleIdFromSlug should correctly extract the ID out of an article URL', () => {
+  test('Should correctly extract the ID out of an article URL', () => {
+    const articleSlug = 'this-is-a-title-j123';
+    const id = extractArticleIdFromSlug(articleSlug);
+    expect(id).toEqual('j123');
+  });
+});

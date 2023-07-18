@@ -32,3 +32,19 @@ describe('slugify makes a string URL-safe', () => {
     expect(slugifiedString).toEqual('this-is-a-string-to-slugify');
   });
 });
+
+describe('composeArticleSlug should create a complete article URL given a title and an ID', () => {
+  test('Should create a complete article URL', () => {
+    const title = 'This is a title';
+    const id = 'j123';
+    const articleSlug = composeArticleSlug(id, title);
+    expect(articleSlug).toEqual('this-is-a-title-j123');
+  });
+
+  test('Should create a complete article URL with special characters', () => {
+    const title = 'This is a title!@#$%^&*()+';
+    const id = 'j123';
+    const articleSlug = composeArticleSlug(id, title);
+    expect(articleSlug).toEqual('this-is-a-title-j123');
+  });
+});

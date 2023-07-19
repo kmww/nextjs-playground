@@ -33,4 +33,13 @@ describe('articles APIs', () => {
       }
     );
   });
+
+  it('should correctly return a 404 status code when an article is not found', () => {
+    cy.request({
+      url: 'http://localhost:3000/api/article?id=unexistingID',
+      failOnStatusCode: false,
+    })
+      .its('status')
+      .should('be.equal', 404);
+  });
 });

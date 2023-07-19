@@ -8,4 +8,13 @@ describe('Navigation', () => {
     );
     cy.get('h1').contains('Healthy summer melon-carrot soup');
   });
+
+  it('should correctly navigate back to the homepage', () => {
+    cy.visit(
+      'http://localhost:3000/articles/healthy-summer-meloncarrot-soup-u12w3o0d'
+    );
+    cy.get('a[href*="/"]').first().click();
+    cy.url().should('be.equal', 'http://localhost:3000/');
+    cy.get('h1').contains('My awesome blog');
+  });
 });

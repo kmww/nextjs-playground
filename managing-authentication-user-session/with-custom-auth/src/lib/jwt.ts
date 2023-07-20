@@ -1,4 +1,4 @@
-import { UserInfoType, UserType } from '@/types/user';
+import { UserInfoType } from '@/types/user';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = 'my_jwt_password';

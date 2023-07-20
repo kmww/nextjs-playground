@@ -2,7 +2,18 @@
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const loginApi = (req: NextApiRequest, res: NextApiResponse) => {
+interface LoginResponseType {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
+const loginApi = (
+  req: NextApiRequest,
+  res: NextApiResponse<LoginResponseType | { error: string }>
+) => {
   const { method } = req;
   const { email, password } = req.body;
 

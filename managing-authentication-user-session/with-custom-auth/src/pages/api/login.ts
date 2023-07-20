@@ -1,3 +1,5 @@
+//just simple example login process
+
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const loginApi = (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,6 +15,31 @@ const loginApi = (req: NextApiRequest, res: NextApiResponse) => {
       error: 'Missing required params',
     });
   }
+
+  const user = authenticateUser(email, password);
+
+  if (user) {
+    return res.json({ user });
+  } else {
+    return res.status(401).json({
+      error: 'Wrong email or password',
+    });
+  }
+};
+
+const authenticateUser = (email: string, password: string) => {
+  const validEmail = 'cojet123@ca.com';
+  const validPassword = 'simplepassword';
+
+  if (email === validEmail && password === validPassword) {
+    return {
+      id: 'f678f078-fcfe-43ca-9d20-eBc9a95209b6',
+      name: 'Cojet',
+      email: 'cojet123@ca.com',
+    };
+  }
+
+  return null;
 };
 
 export default loginApi;

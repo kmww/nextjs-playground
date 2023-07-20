@@ -1,18 +1,12 @@
 //just simple example login process
 
+import { encode } from '@/lib/jwt';
+import { UserType } from '@/types/user';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-interface LoginResponseType {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
-}
 
 const loginApi = (
   req: NextApiRequest,
-  res: NextApiResponse<LoginResponseType | { error: string }>
+  res: NextApiResponse<UserType | { error: string }>
 ) => {
   const { method } = req;
   const { email, password } = req.body;
@@ -43,11 +37,11 @@ const authenticateUser = (email: string, password: string) => {
   const validPassword = 'simplepassword';
 
   if (email === validEmail && password === validPassword) {
-    return {
+    return encode({
       id: 'f678f078-fcfe-43ca-9d20-eBc9a95209b6',
       name: 'Cojet',
       email: 'cojet123@ca.com',
-    };
+    });
   }
 
   return null;

@@ -13,6 +13,14 @@ const handleLogin = async (email: string, password: string) => {
       password,
     }),
   });
+
+  const data = await resp.json();
+
+  if (data.success) {
+    return;
+  }
+
+  throw new Error('Wrong email or password');
 };
 
 const LoginPage = () => {

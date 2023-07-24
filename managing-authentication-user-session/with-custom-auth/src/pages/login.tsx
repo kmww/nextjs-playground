@@ -1,6 +1,7 @@
 import { FormEvent, SetStateAction, useState } from 'react';
 import styles from '@/styles/app.module.css';
 import { useRouter } from 'next/router';
+import { useAuth } from '@/lib/hooks/auth';
 
 const handleLogin = async (email: string, password: string) => {
   const resp = await fetch('/api/login', {
@@ -26,6 +27,16 @@ const handleLogin = async (email: string, password: string) => {
 const LoginPage = () => {
   const router = useRouter();
   const [loginError, setLoginError] = useState<string | null>(null);
+  const { loading, loggedIn } = useAuth();
+
+  if (loading) {
+    return <p>loading</p>;
+  }
+
+  if (!loading && loggedIn) {
+    router.push('/protected-route');
+    return null;
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

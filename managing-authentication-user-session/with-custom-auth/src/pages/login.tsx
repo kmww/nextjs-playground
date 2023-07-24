@@ -30,7 +30,6 @@ const LoginPage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = e.currentTarget;
-    console.dir(email.value);
     setLoginError(null);
     handleLogin(email.value, password.value)
       .then(() => router.push('/protected-route'))

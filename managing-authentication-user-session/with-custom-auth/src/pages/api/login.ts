@@ -42,7 +42,7 @@ const loginApi = (
   if (user) {
     res.setHeader(
       'Set-Cookie',
-      serialize('my-auth', user, { path: '/', httpOnly: true })
+      serialize('my_auth', user, { path: '/', httpOnly: true })
     );
     return res.json({ success: true });
   } else {

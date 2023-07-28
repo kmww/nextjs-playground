@@ -3,8 +3,10 @@ export interface ProductType {
   name: string;
   slug: string;
   price: number;
-  images: {
-    id: string;
-    url: string;
-  };
+  images: [
+    {
+      id: string;
+      url: string;
+    }
+  ];
 }

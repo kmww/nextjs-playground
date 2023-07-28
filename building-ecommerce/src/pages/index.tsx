@@ -1,10 +1,12 @@
+import ProductCard from '@/components/ProductCard';
 import graphql from '@/graphql';
 import getAllProducts from '@/graphql/queries/getAllProducts';
 import { ProductType } from '@/types/product';
+import { Grid } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 
 interface ProductsType {
-  products: ProductType;
+  products: ProductType[];
 }
 
 export const getStaticProps: GetStaticProps<ProductsType> = async () => {
@@ -17,8 +19,14 @@ export const getStaticProps: GetStaticProps<ProductsType> = async () => {
   };
 };
 
-const Home = () => {
-  return <></>;
+const Home = (props: ProductsType) => {
+  return (
+    <Grid gridTemplateColumns='repeat(4, 1fr)' gap='5'>
+      {props.products.map((product) => (
+        <ProductCard key={product.id} {...product} />
+      ))}
+    </Grid>
+  );
 };
 
 export default Home;

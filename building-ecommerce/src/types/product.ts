@@ -9,6 +9,7 @@ export interface ProductType {
       url: string;
     }
   ];
+  description?: string;
 }
 
 export interface ProductsType {

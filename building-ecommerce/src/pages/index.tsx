@@ -1,7 +1,7 @@
 import ProductCard from '@/components/ProductCard';
 import graphql from '@/graphql';
 import getAllProducts from '@/graphql/queries/getAllProducts';
-import { ProductType, ProductsType } from '@/types/product';
+import { ProductsType } from '@/types/product';
 import { Grid } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 

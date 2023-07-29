@@ -10,3 +10,7 @@ export interface ProductType {
     }
   ];
 }
+
+export interface ProductsType {
+  products: ProductType[];
+}

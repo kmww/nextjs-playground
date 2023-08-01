@@ -13,6 +13,8 @@ import {
   Select,
   Text,
 } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
+import CartContext from '@/context/Cart';
 
 interface ProductDetailType {
   product: ProductType;
@@ -52,6 +54,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const ProductPage = ({ product }: ProductDetailType) => {
+  const [quantity, setQuantity] = useState(0);
+  const { items, setItems } = useContext(CartContext);
+
+  const alreadyInCart = product.id in items;
+
+  const addToCart = () => {
+    setItems({
+      ...items,
+      [product.id]: quantity,
+    });
+  };
+
   const price = ((product.price / 100) * 1.1).toFixed(2);
 
   return (
@@ -79,7 +93,7 @@ const ProductPage = ({ product }: ProductDetailType) => {
         </Text>
         <Divider my='6' />
         <Grid gridTemplateColumns='2fr 1fr' gap='5' alignItems='center'>
-          <Select placeholder='Quantity' onChange={() => {}} />
+          {/* <SelectQuantity></SelectQuantity> */}
           <Button colorScheme='blue'>Add to Cart</Button>
         </Grid>
       </Box>

@@ -1,7 +1,9 @@
 import { Select } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
-const SelectQuantitiy = (props: any): ReactElement => {
+const SelectQuantitiy = (props: {
+  onChange: (arg: string) => void;
+}): ReactElement => {
   const quantity = [...Array.from({ length: 10 })];
 
   return (

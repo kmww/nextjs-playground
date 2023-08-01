@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import CartContext from '@/context/Cart';
+import SelectQuantity from '@/components/SelectQuantity';
 
 interface ProductDetailType {
   product: ProductType;
@@ -93,8 +94,12 @@ const ProductPage = ({ product }: ProductDetailType) => {
         </Text>
         <Divider my='6' />
         <Grid gridTemplateColumns='2fr 1fr' gap='5' alignItems='center'>
-          {/* <SelectQuantity></SelectQuantity> */}
-          <Button colorScheme='blue'>Add to Cart</Button>
+          <SelectQuantity
+            onChange={(quantity: string) => setQuantity(parseInt(quantity))}
+          />
+          <Button colorScheme='blue' onClick={addToCart}>
+            {alreadyInCart ? 'Update' : 'Add to cart'}
+          </Button>
         </Grid>
       </Box>
     </Flex>

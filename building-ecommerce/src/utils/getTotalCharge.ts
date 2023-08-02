@@ -2,7 +2,7 @@ import { ProductsType } from '@/types/product';
 
 export const getTotalCharge = (
   items: Record<string, any>,
-  { products }: ProductsType
+  products: ProductsType['products']
 ) => {
   if (!products.length) return 0;
 

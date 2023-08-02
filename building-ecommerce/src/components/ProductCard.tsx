@@ -1,11 +1,10 @@
 import { ProductType } from '@/types/product';
+import { exchangeForDollars } from '@/utils/exchangeForDollars';
 import { Box, Divider, Image, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
 const ProductCard = (props: ProductType): ReactElement => {
-  const price = ((props.price / 100) * 1.1).toFixed(2);
-
   return (
     <Link href={`/product/${props.slug}`} passHref>
       <Box
@@ -27,7 +26,7 @@ const ProductCard = (props: ProductType): ReactElement => {
           <Text fontWeight='bold' textColor='purple' fontSize='lg'>
             {props.name}
           </Text>
-          <Text textColor='gray.700'>${price}</Text>
+          <Text textColor='gray.700'>${exchangeForDollars(props.price)}</Text>
         </Box>
       </Box>
     </Link>

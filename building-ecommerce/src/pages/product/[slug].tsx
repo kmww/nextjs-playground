@@ -16,6 +16,7 @@ import {
 import { useContext, useState } from 'react';
 import CartContext from '@/context/Cart';
 import SelectQuantity from '@/components/SelectQuantity';
+import { exchangeForDollars } from '@/utils/exchangeForDollars';
 
 interface ProductDetailType {
   product: ProductType;
@@ -67,8 +68,6 @@ const ProductPage = ({ product }: ProductDetailType) => {
     });
   };
 
-  const price = ((product.price / 100) * 1.1).toFixed(2);
-
   return (
     <Flex rounded='xl' boxShadow='2xl' w='full' p='16' bgColor='white'>
       <Image
@@ -87,7 +86,7 @@ const ProductPage = ({ product }: ProductDetailType) => {
           my='3'
           fontWeight='bold'
           textColor='blue.500'>
-          ${price}
+          ${exchangeForDollars(product.price)}
         </Text>
         <Text maxW='96' textAlign='justify' fontSize='sm'>
           {product.description}

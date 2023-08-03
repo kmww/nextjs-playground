@@ -10,7 +10,7 @@ export const getTotalCharge = (
     .map(
       (id) =>
         (products.find((product) => product.id === id)?.price as number) *
-        ((items[id] / 100) * 1.1)
+        (items[id] / 100)
     )
     .reduce((acc, cur) => acc + cur)
     .toFixed(2);

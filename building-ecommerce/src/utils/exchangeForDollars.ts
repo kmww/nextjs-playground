@@ -1,3 +1,3 @@
 export const exchangeForDollars = (price: number) => {
-  return ((price / 100) * 1.1).toFixed(2);
+  return (price / 100).toFixed(2);
 };

@@ -16,6 +16,22 @@ const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
       ids: Object.keys(items),
     }
   );
+
+  const line_items = products.map((product) => ({
+    adjustable_quantity: {
+      enabled: true,
+      minimun: 1,
+    },
+    price_data: {
+      currency: 'USD',
+      product_data: {
+        name: product.name,
+        images: product.images.map((image) => image.url),
+      },
+      unit_amount: product.price,
+    },
+    quantity: items[product.id],
+  }));
 };
 
 export default checkout;

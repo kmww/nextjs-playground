@@ -3,6 +3,7 @@ import CartContext from '@/context/Cart';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
+import checkout from './api/checkout';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [items, setItems] = useState({});

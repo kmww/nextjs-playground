@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import graphql from '@/graphql';
 import getProductDetailsById from '@/graphql/queries/getProductDetailsById';
 import { ShippingAddressCollection, ShippingOptions } from '@/types/checkout';
@@ -57,7 +56,7 @@ export const shipping_options: ShippingOptions = [
   },
 ];
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
   const { items } = req.body;
   const { products } = await graphql.request<ProductsType>(
     getProductDetailsById,
@@ -69,7 +68,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const line_items = products.map((product) => ({
     adjustable_quantity: {
       enabled: true,
-      minimun: 1,
+      minimum: 1,
     },
     price_data: {
       currency: 'USD',
@@ -85,7 +84,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     line_items,
-    payment_method_types: ['card', 'sepa_debit'],
+    payment_method_types: ['card'],
     shipping_address_collection,
     shipping_options,
     success_url: `${process.env.URL}/success`,
@@ -94,3 +93,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.status(201).json({ session });
 };
+
+export default checkout;

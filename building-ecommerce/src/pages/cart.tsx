@@ -1,6 +1,7 @@
 import CartContext from '@/context/Cart';
 import graphql from '@/graphql';
 import getProductsById from '@/graphql/queries/getProductsById';
+import getStripe from '@/stripe';
 import { ProductsType } from '@/types/product';
 import { exchangeForDollars } from '@/utils/exchangeForDollars';
 import { getTotalCharge } from '@/utils/getTotalCharge';
@@ -24,6 +25,24 @@ const CartPage = () => {
       })
       .catch((err) => console.error(err));
   }, [hasProducts, items]);
+
+  const handlePayment = async () => {
+    const stripe = await getStripe();
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items,
+      }),
+    });
+
+    const { session } = await res.json();
+    await stripe?.redirectToCheckout({
+      sessionId: session.id,
+    });
+  };
 
   return (
     <Box rounded='xl' boxShadow='2xl' w='container.lg' p='16' bgColor='white'>
@@ -65,7 +84,9 @@ const CartPage = () => {
               <Text fontSize='xl' fontWeight='bold'>
                 Total: ${getTotalCharge(items, products)}
               </Text>
-              <Button colorScheme='blue'>Pay now</Button>
+              <Button colorScheme='blue' onClick={handlePayment}>
+                Pay now
+              </Button>
             </Flex>
           </>
         )}

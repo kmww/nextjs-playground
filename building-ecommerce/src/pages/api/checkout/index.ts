@@ -1,6 +1,8 @@
+/* eslint-disable import/no-anonymous-default-export */
 import graphql from '@/graphql';
 import getProductDetailsById from '@/graphql/queries/getProductDetailsById';
-import { ProductType, ProductsType } from '@/types/product';
+import { ShippingAddressCollection, ShippingOptions } from '@/types/checkout';
+import { ProductsType } from '@/types/product';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
@@ -8,13 +10,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2022-11-15',
 });
 
-export const shipping_address_collection = {
-  allowed_countries: ['US'],
+export const shipping_address_collection: ShippingAddressCollection = {
+  allowed_countries: ['KR', 'US'],
 };
 
-export const shipping_options = [
+export const shipping_options: ShippingOptions = [
   {
-    shipping_rate_date: {
+    shipping_rate_data: {
       type: 'fixed_amount',
       fixed_amount: {
         amount: 0,
@@ -55,7 +57,7 @@ export const shipping_options = [
   },
 ];
 
-const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { items } = req.body;
   const { products } = await graphql.request<ProductsType>(
     getProductDetailsById,
@@ -84,11 +86,11 @@ const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
     mode: 'payment',
     line_items,
     payment_method_types: ['card', 'sepa_debit'],
+    shipping_address_collection,
+    shipping_options,
     success_url: `${process.env.URL}/success`,
     cancel_url: `${process.env.URL}/cancel`,
   });
 
   res.status(201).json({ session });
 };
-
-export default checkout;

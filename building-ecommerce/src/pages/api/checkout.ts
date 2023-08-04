@@ -8,6 +8,53 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: '2022-11-15',
 });
 
+export const shipping_address_collection = {
+  allowed_countries: ['US'],
+};
+
+export const shipping_options = [
+  {
+    shipping_rate_date: {
+      type: 'fixed_amount',
+      fixed_amount: {
+        amount: 0,
+        currency: 'USD',
+      },
+      display_name: 'Free Shipping',
+      delivery_estimate: {
+        minimum: {
+          unit: 'business_day',
+          value: 3,
+        },
+        maximum: {
+          unit: 'business_day',
+          value: 5,
+        },
+      },
+    },
+  },
+  {
+    shipping_rate_data: {
+      type: 'fixed_amount',
+      fixed_amount: {
+        amount: 499,
+        currency: 'USD',
+      },
+      display_name: 'Next day air',
+      delivery_estimate: {
+        minimum: {
+          unit: 'business_day',
+          value: 1,
+        },
+        maximum: {
+          unit: 'business_day',
+          value: 1,
+        },
+      },
+    },
+  },
+];
+
 const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
   const { items } = req.body;
   const { products } = await graphql.request<ProductsType>(

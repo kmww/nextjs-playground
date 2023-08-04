@@ -32,6 +32,16 @@ const checkout = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     quantity: items[product.id],
   }));
+
+  const session = await stripe.checkout.sessions.create({
+    mode: 'payment',
+    line_items,
+    payment_method_types: ['card', 'sepa_debit'],
+    success_url: `${process.env.URL}/success`,
+    cancel_url: `${process.env.URL}/cancel`,
+  });
+
+  res.status(201).json({ session });
 };
 
 export default checkout;

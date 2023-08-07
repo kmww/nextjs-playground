@@ -1,10 +1,12 @@
 import CartContext from '@/context/Cart';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ReactElement, useContext } from 'react';
-import { MdShoppingCart } from 'react-icons/md';
+import { MdShoppingCart, MdLogin, MdLogout } from 'react-icons/md';
 
 const Navbar = (): ReactElement => {
+  const { user } = useUser();
   const { items } = useContext(CartContext);
 
   const itemsCount = Object.values(items).reduce((acc, cur) => acc + cur, 0);
@@ -23,12 +25,29 @@ const Navbar = (): ReactElement => {
             My e-commerce
           </Text>
         </Link>
-        <Link href='/cart' passHref>
-          <Button>
-            <MdShoppingCart />
-            <Text ml='3'>{itemsCount}</Text>
-          </Button>
-        </Link>
+        <Flex>
+          {user ? (
+            <Link href='api/auth/logout' passHref>
+              <Button>
+                <MdLogout />
+                <Text ml='3'>Logout</Text>
+              </Button>
+            </Link>
+          ) : (
+            <Link href='api/auth/login' passHref>
+              <Button>
+                <MdLogin />
+                <Text ml='3'>Login</Text>
+              </Button>
+            </Link>
+          )}
+          <Link href='/cart' passHref>
+            <Button>
+              <MdShoppingCart />
+              <Text ml='3'>{itemsCount}</Text>
+            </Button>
+          </Link>
+        </Flex>
       </Flex>
     </Box>
   );

@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 
 const CartPage = () => {
-  const { items } = useContext(CartContext);
+  const { items, setItems } = useContext(CartContext);
   const [products, setProducts] = useState<ProductsType['products']>([]);
   const hasProducts = Object.keys(items).length;
 
@@ -42,6 +42,18 @@ const CartPage = () => {
     await stripe?.redirectToCheckout({
       sessionId: session.id,
     });
+  };
+
+  const handleDelete = (productId: string) => {
+    const updatedItems = { ...items };
+    delete updatedItems[productId];
+    setItems(updatedItems);
+
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    );
+
+    setProducts(updatedProducts);
   };
 
   return (
@@ -76,7 +88,9 @@ const CartPage = () => {
                   $
                   {items[product.id] *
                     Number(exchangeForDollars(product.price))}
-                  <Button ml={1}>x</Button>
+                  <Button ml={1} onClick={() => handleDelete(product.id)}>
+                    x
+                  </Button>
                 </Box>
               </Flex>
             ))}

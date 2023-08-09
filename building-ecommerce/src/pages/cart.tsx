@@ -57,8 +57,8 @@ const CartPage = () => {
           <>
             {products.map((product) => (
               <Flex key={product.id} justifyContent='space-between' mb='4'>
-                <Box>
-                  <Link href={`/product/${product.slug}`} passHref>
+                <Box display='flex' alignItems='center'>
+                  <Link href={`/product/${product.slug}`}>
                     <Text
                       fontWeight='bold'
                       _hover={{
@@ -72,10 +72,11 @@ const CartPage = () => {
                     </Text>
                   </Link>
                 </Box>
-                <Box>
+                <Box display='flex' alignItems='center'>
                   $
                   {items[product.id] *
                     Number(exchangeForDollars(product.price))}
+                  <Button ml={1}>x</Button>
                 </Box>
               </Flex>
             ))}

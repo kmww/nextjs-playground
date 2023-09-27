@@ -1,4 +1,5 @@
 import Button from '@/components/Button';
+import CountButton from '@/components/CountButton';
 import Head from 'next/head';
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
             onClick={() => console.log('clicked')}
             text='console'
           />
+          <CountButton label='Container Component' maximum={5} />
         </div>
       </main>
     </>

@@ -47,6 +47,12 @@ const StyledLink = styled(BaseLink)`
   font-size: 2em;
 `;
 
+const Text = styled.span`
+  color: ${(props) => props.theme.colors.red};
+  font-size: ${(props) => props.theme.fontSizes[3]};
+  margin: ${(props) => props.theme.space[2]};
+`;
+
 const Page: NextPage = () => {
   return (
     <div>
@@ -58,6 +64,7 @@ const Page: NextPage = () => {
         Button
       </Button>
       <StyledLink href='/'>Go to home</StyledLink>
+      <Text>Theme에서 참조한 색상</Text>
     </div>
   );
 };

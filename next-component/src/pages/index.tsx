@@ -1,6 +1,11 @@
 import Button from '@/components/Button';
 import CountButton from '@/components/CountButton';
 import Head from 'next/head';
+import styled from 'styled-components';
+
+const StyledTitle = styled.h1`
+  color: red;
+`;
 
 const Home = () => {
   return (
@@ -12,6 +17,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
+        <StyledTitle>styled title</StyledTitle>
         <div>
           <Button
             disabled={false}

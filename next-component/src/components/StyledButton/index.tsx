@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const variants = {
+export const variants = {
   primary: {
     color: '#ffffff',
     backgroundColor: '#1D3461',

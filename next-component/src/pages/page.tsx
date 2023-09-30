@@ -36,11 +36,16 @@ const Button = styled.button<ButtonProps>`
 const BaseLink = (props: BaseLinkProps) => {
   const { className, children, ...rest } = props;
   return (
-    <Link {...rest}>
-      <a className={className}>{children}</a>
+    <Link {...rest} className={className}>
+      {children}
     </Link>
   );
 };
+
+const StyledLink = styled(BaseLink)`
+  color: #1e90ff;
+  font-size: 2em;
+`;
 
 const Page: NextPage = () => {
   return (
@@ -52,6 +57,7 @@ const Page: NextPage = () => {
       <Button backgroundColor='#1E90FF' color='#FFFFFF'>
         Button
       </Button>
+      <StyledLink href='/'>Go to home</StyledLink>
     </div>
   );
 };

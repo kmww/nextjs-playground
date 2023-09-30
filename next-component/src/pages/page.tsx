@@ -1,10 +1,17 @@
 import { NextPage } from 'next';
+import Link, { LinkProps } from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps {
   color: string;
   backgroundColor: string;
 }
+
+type BaseLinkProps = React.PropsWithChildren<LinkProps> & {
+  className?: string;
+  children: React.ReactNode;
+};
 
 const Badge = styled.span`
   padding: 8px 16px;
@@ -25,6 +32,15 @@ const Button = styled.button<ButtonProps>`
   border-radius: 8px;
   cursor: pointer;
 `;
+
+const BaseLink = (props: BaseLinkProps) => {
+  const { className, children, ...rest } = props;
+  return (
+    <Link {...rest}>
+      <a className={className}>{children}</a>
+    </Link>
+  );
+};
 
 const Page: NextPage = () => {
   return (

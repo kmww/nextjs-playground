@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import StyledButton from '../components/StyledButton';
 import { action } from '@storybook/addon-actions';
 import { useState } from 'react';
@@ -8,10 +8,24 @@ export default {
   component: StyledButton,
   argTypes: {
     onClick: { action: 'clicked' },
+    variant: {
+      control: { type: 'radio' },
+      options: ['primary', 'success', 'transparent'],
+    },
   },
 } as ComponentMeta<typeof StyledButton>;
 
 const incrementAction = action('increment');
+
+const Template: ComponentStory<typeof StyledButton> = (args) => (
+  <StyledButton {...args} />
+);
+
+export const TemplateTest = Template.bind({});
+
+TemplateTest.args = {
+  variant: 'primary',
+};
 
 export const Primary = (
   props: React.ButtonHTMLAttributes<HTMLButtonElement>

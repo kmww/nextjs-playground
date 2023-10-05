@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import StyledButton from '../components/StyledButton';
 import { action } from '@storybook/addon-actions';
 import { useState } from 'react';
+import MDXDocument from './StyledButton.mdx';
 
 export default {
   title: 'StyledButton',
@@ -16,6 +17,11 @@ export default {
       control: {
         control: { type: 'text' },
       },
+    },
+  },
+  parameters: {
+    docs: {
+      page: MDXDocument,
     },
   },
 } as ComponentMeta<typeof StyledButton>;

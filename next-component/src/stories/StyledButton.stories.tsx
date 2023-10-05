@@ -12,6 +12,11 @@ export default {
       control: { type: 'radio' },
       options: ['primary', 'success', 'transparent'],
     },
+    children: {
+      control: {
+        control: { type: 'text' },
+      },
+    },
   },
 } as ComponentMeta<typeof StyledButton>;
 
@@ -25,6 +30,7 @@ export const TemplateTest = Template.bind({});
 
 TemplateTest.args = {
   variant: 'primary',
+  children: 'Primary',
 };
 
 export const Primary = (

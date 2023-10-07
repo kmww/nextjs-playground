@@ -7,6 +7,4 @@ fontSizes.mediumLarge = fontSizes[3];
 fontSizes.large = fontSizes[4];
 fontSizes.extraLarge = fontSizes[5];
 
-console.log(fontSizes);
-
 export default fontSizes;

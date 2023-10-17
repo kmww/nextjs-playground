@@ -112,3 +112,12 @@ export type CSSPropertyGridColumn =
   | (string & {});
 
 export type CSSPropertyGridRow = CSSPropertyGlobals | GridLine | (string & {});
+
+export type CSSPropertyGridAutoFlow =
+  | CSSPropertyGlobals
+  | 'column'
+  | 'dense'
+  | 'row'
+  | (string & {});
+
+export type CSSPropertyGridArea = CSSPropertyGlobals | GridLine | (string & {});

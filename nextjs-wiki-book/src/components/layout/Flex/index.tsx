@@ -1,5 +1,5 @@
-import { BoxProps } from '@/components/layout/Box';
-import {
+import Box, { BoxProps } from '@/components/layout/Box';
+import type {
   CSSPropertyAlignContent,
   CSSPropertyAlignItems,
   CSSPropertyAlignSelf,
@@ -11,7 +11,6 @@ import {
   Responsive,
 } from '@/types/styles';
 import { toPropValue } from '@/utils/styles';
-import { Box } from '@mui/material';
 import styled from 'styled-components';
 
 type FlexProps = BoxProps & {

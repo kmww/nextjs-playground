@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Input from './';
 
 const meta: Meta<typeof Input> = {
@@ -31,3 +31,20 @@ const meta: Meta<typeof Input> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Input>;
+
+const template: Story = {
+  render: (args) => <Input {...args} />,
+};
+
+export const Normal = {
+  ...template,
+};
+
+export const Error = {
+  ...template,
+  args: {
+    hasError: true,
+  },
+};

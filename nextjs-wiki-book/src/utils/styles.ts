@@ -1,5 +1,5 @@
 import { theme } from '@/styles/themes';
-import { ResponsiveProp, Responsive } from '@/types/styles';
+import type { ResponsiveProp, Responsive } from '@/types/styles';
 
 export type AppTheme = typeof theme;
 type SpaceThemeKeys = keyof typeof theme.space;
@@ -31,12 +31,13 @@ export const toPropValue = <T>(
     const result = [];
     for (const responsiveKey in prop) {
       if (responsiveKey === 'base') {
-        result.push(`
-        ${propKey}: ${toThemeValueIfNeeded(
-          propKey,
-          prop[responsiveKey],
-          theme,
-        )}`);
+        result.push(
+          `${propKey}: ${toThemeValueIfNeeded(
+            propKey,
+            prop[responsiveKey],
+            theme,
+          )};`,
+        );
       } else if (
         responsiveKey === 'sm' ||
         responsiveKey === 'md' ||
@@ -48,14 +49,14 @@ export const toPropValue = <T>(
           propKey,
           prop[responsiveKey],
           theme,
-        )}`;
-        result.push(`@media screen and (min-width: ${breakpoint} {${style}})`);
+        )};`;
+        result.push(`@media screen and (min-width: ${breakpoint}) {${style}}`);
       }
     }
     return result.join('\n');
   }
 
-  return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)}`;
+  return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)};`;
 };
 
 const SPACE_KEYS = new Set([
@@ -123,11 +124,12 @@ const toThemeValueIfNeeded = <T>(
 
 const isResponsivePropType = <T>(prop: any): prop is ResponsiveProp<T> => {
   return (
-    (prop && prop.base !== undefined) ||
-    prop.sm !== undefined ||
-    prop.md !== undefined ||
-    prop.lg !== undefined ||
-    prop.xl !== undefined
+    prop &&
+    (prop.base !== undefined ||
+      prop.sm !== undefined ||
+      prop.md !== undefined ||
+      prop.lg !== undefined ||
+      prop.xl !== undefined)
   );
 };
 

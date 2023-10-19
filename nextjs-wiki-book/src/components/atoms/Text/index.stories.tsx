@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Text from './';
 
 const meta: Meta<typeof Text> = {
@@ -128,5 +128,70 @@ const meta: Meta<typeof Text> = {
         type: { summary: 'number' },
       },
     },
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof Text>;
+
+const Template: Story = {
+  render: (args) => <Text {...args} />,
+};
+
+const longText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Contrary to popular belief, Lorem Ipsum is not simply random text.
+It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.`;
+
+export const ExtraSmall = {
+  ...Template,
+  args: {
+    variant: 'extraSmall',
+    children: longText,
+  },
+};
+
+export const Small = {
+  ...Template,
+  args: {
+    variant: 'small',
+    children: longText,
+  },
+};
+
+export const Medium = {
+  ...Template,
+  args: {
+    variant: 'medium',
+    children: longText,
+  },
+};
+
+export const MediumLarge = {
+  ...Template,
+  args: {
+    variant: 'mediumLarge',
+    children: longText,
+  },
+};
+
+export const Large = {
+  ...Template,
+  args: {
+    variant: 'large',
+    children: longText,
+  },
+};
+
+export const ExtraLarge = {
+  ...Template,
+  args: {
+    variant: 'extraLarge',
+    children: longText,
   },
 };

@@ -1,5 +1,5 @@
-import { Meta } from '@storybook/react';
-import ShapeImage from './';
+import { Meta, StoryObj } from '@storybook/react';
+import ShapeImage from '.';
 
 const meta: Meta<typeof ShapeImage> = {
   title: 'Atoms/ShapeImage',
@@ -23,7 +23,6 @@ const meta: Meta<typeof ShapeImage> = {
     },
     width: {
       control: { type: 'number' },
-      defaultValue: 320,
       description: '이미지 너비',
       table: {
         type: { summary: 'number' },
@@ -31,11 +30,38 @@ const meta: Meta<typeof ShapeImage> = {
     },
     height: {
       control: { type: 'number' },
-      defaultValue: 320,
       description: '이미지 높이',
       table: {
         type: { summary: 'number' },
       },
     },
+  },
+  args: {
+    width: 320,
+    height: 320,
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof ShapeImage>;
+
+const Template: Story = {
+  render: (args) => <ShapeImage {...args} />,
+};
+
+export const Circle = {
+  ...Template,
+  args: {
+    src: '/images/sample/1.jpg',
+    shape: 'circle',
+  },
+};
+
+export const Square = {
+  ...Template,
+  args: {
+    src: '/images/sample/1.jpg',
+    shape: 'square',
   },
 };

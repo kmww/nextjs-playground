@@ -1,4 +1,3 @@
-import { theme } from '@/styles/themes';
 import { Responsive } from '@/types/styles';
 import {
   Color,
@@ -8,7 +7,6 @@ import {
   Space,
   toPropValue,
 } from '@/utils/styles';
-import React from 'react';
 import styled from 'styled-components';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger';
@@ -108,22 +106,22 @@ const Button = styled.button<ButtonProps>`
       !pseudoClass &&
         styles.push(
           `&:hover {
-          ${toPropValue(
-            'background-color',
-            variants[variant].pseudoClass.hover.backgroundColor,
-            theme,
-          )}
-        }`.replaceAll('\n', ''),
+            ${toPropValue(
+              'background-color',
+              variants[variant].pseudoClass.hover.backgroundColor,
+              theme,
+            )}
+          }`.replaceAll('\n', ''),
         );
       !pseudoClass &&
         styles.push(
           `&:disabled {
-          ${toPropValue(
-            'background-color',
-            variants[variant].pseudoClass.disabled.backgroundColor,
-            theme,
-          )}
-        }`.replaceAll('\n', ''),
+            ${toPropValue(
+              'background-color',
+              variants[variant].pseudoClass.disabled.backgroundColor,
+              theme,
+            )}
+          }`.replaceAll('\n', ''),
         );
       return styles.join('\n');
     }
@@ -136,7 +134,7 @@ const Button = styled.button<ButtonProps>`
     toPropValue('background-color', props.backgroundColor, props.theme)}
   ${(props) => toPropValue('width', props.width, props.theme)}
   ${(props) => toPropValue('height', props.height, props.theme)}
-  ${(props) => toPropValue('min-width', props.minHeight, props.theme)}
+  ${(props) => toPropValue('min-width', props.minWidth, props.theme)}
   ${(props) => toPropValue('min-height', props.minHeight, props.theme)}
   ${(props) => toPropValue('display', props.display, props.theme)}
   ${(props) => toPropValue('border', props.border, props.theme)}

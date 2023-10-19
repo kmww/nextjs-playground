@@ -23,7 +23,7 @@
     "react-content-loader": "^6.2.1",
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
-    "styled-components": "^6.0.8",
+    "styled-components": "5.3.5",
     "swr": "^2.2.4"
   },
   "devDependencies": {

@@ -9,3 +9,9 @@ const BadgeWrapper = styled.div<{ backgroundColor: string }>`
   justify-content: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
 `;
+
+const BadgeText = styled.p`
+  color: white;
+  font-size: 11px;
+  user-select: none;
+`;

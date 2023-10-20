@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import TextArea from './';
 
 const meta: Meta<typeof TextArea> = {
@@ -53,3 +53,20 @@ const meta: Meta<typeof TextArea> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof TextArea>;
+
+const template: Story = {
+  render: (args) => <TextArea {...args} />,
+};
+
+export const Normal = {
+  ...template,
+};
+
+export const Error = {
+  ...template,
+  args: {
+    hasError: true,
+  },
+};

@@ -15,3 +15,8 @@ const BadgeText = styled.p`
   font-size: 11px;
   user-select: none;
 `;
+
+interface BadgeProps {
+  content: string;
+  backgroundColor: string;
+}

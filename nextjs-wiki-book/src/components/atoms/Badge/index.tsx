@@ -20,3 +20,13 @@ interface BadgeProps {
   content: string;
   backgroundColor: string;
 }
+
+const Badge = ({ content, backgroundColor }: BadgeProps) => {
+  return (
+    <BadgeWrapper backgroundColor={backgroundColor}>
+      <BadgeText>{content}</BadgeText>
+    </BadgeWrapper>
+  );
+};
+
+export default Badge;

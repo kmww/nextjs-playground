@@ -24,3 +24,27 @@ const ScaleEffectImage = styled(Image)`
     transform: scale(1.1);
   }
 `;
+
+const ScaleImage = ({
+  containerWidth,
+  containerHeight,
+  alt,
+  ...props
+}: ScaleImageProps) => {
+  return (
+    <ScaleEffectImageContainer
+      width={containerWidth ?? `${props.width}` ?? '320px'}
+      height={containerHeight ?? `${props.height}` ?? '320px'}
+    >
+      <ScaleEffectImage
+        quality="85"
+        alt={alt ?? 'Product Image'}
+        height={props.height ?? 320}
+        width={props.width ?? 320}
+        {...props}
+      />
+    </ScaleEffectImageContainer>
+  );
+};
+
+export default ScaleImage;

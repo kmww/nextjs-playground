@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ScaleImage from './';
 
 const meta: Meta<typeof ScaleImage> = {
@@ -47,3 +47,16 @@ const meta: Meta<typeof ScaleImage> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof ScaleImage>;
+
+const Template: Story = {
+  render: (args) => <ScaleImage {...args} />,
+};
+
+export const Normal = {
+  ...Template,
+  args: {
+    src: '/images/sample/1.jpg',
+  },
+};

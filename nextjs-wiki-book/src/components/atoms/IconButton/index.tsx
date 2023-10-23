@@ -44,7 +44,7 @@ const IconWrapper = styled.div<IconWrapperProps>`
 
 export interface IconButtonProps {
   onClick?: React.MouseEventHandler<SVGSVGElement>;
-  colors?: ThemeColors;
+  color?: ThemeColors;
   className?: string;
   backgroundColor?: string;
   size?: number;

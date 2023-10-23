@@ -1,10 +1,10 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import RectLoader from './';
 
 const meta: Meta<typeof RectLoader> = {
   title: 'Atoms/RectLoader',
   argTypes: {
-    with: {
+    width: {
       control: { type: 'number' },
       defaultValue: 320,
       description: '가로폭',
@@ -13,9 +13,9 @@ const meta: Meta<typeof RectLoader> = {
       },
     },
     height: {
-      contorl: { type: 'number' },
-      defaultValue: 320,
+      control: { type: 'number' },
       description: '세로폭',
+      defaultValue: 320,
       table: {
         type: { summary: 'number' },
       },
@@ -24,3 +24,13 @@ const meta: Meta<typeof RectLoader> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof RectLoader>;
+
+const Template: Story = {
+  render: (args) => <RectLoader {...args} />,
+};
+
+export const Normal = {
+  ...Template,
+};

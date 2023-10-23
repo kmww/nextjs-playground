@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import Spinner from './';
+import styled from 'styled-components';
 
 const meta: Meta<typeof Spinner> = {
   title: 'Atoms/Spinner',
@@ -32,3 +33,15 @@ const meta: Meta<typeof Spinner> = {
 };
 
 export default meta;
+
+const SpinnerWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1199;
+`;

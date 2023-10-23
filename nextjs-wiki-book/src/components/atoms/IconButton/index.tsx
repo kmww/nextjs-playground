@@ -1,4 +1,17 @@
 import { theme } from '@/styles/themes';
+import {
+  Cancel,
+  CheckBox,
+  CheckBoxOutlineBlank,
+  Close,
+  CloudUpload,
+  GitHub,
+  Person,
+  PersonOutline,
+  Search,
+  ShoppingCart,
+} from '@mui/icons-material';
+import { SvgIcon } from '@mui/material';
 import styled from 'styled-components';
 
 export type ThemeColors = keyof typeof theme.colors;
@@ -36,3 +49,45 @@ export interface IconButtonProps {
   backgroundColor?: string;
   size?: number;
 }
+
+const withIconStyle = (
+  Icon: typeof SvgIcon,
+): React.ComponentType<IconButtonProps> => {
+  const IconWithStyle = (props: IconButtonProps) => {
+    const { onClick, className, size = 24, ...rest } = props;
+    const cursor = onClick ? 'pointer' : '';
+
+    return (
+      <IconWrapper cursor={cursor} size={size} {...rest}>
+        <Icon
+          className={className}
+          fontSize="inherit"
+          color="inherit"
+          onClick={onClick}
+        />
+      </IconWrapper>
+    );
+  };
+
+  return IconWithStyle;
+};
+
+export const CloseIcon = withIconStyle(Close);
+
+export const SearchIcon = withIconStyle(Search);
+
+export const CloudUploadIcon = withIconStyle(CloudUpload);
+
+export const CancelIcon = withIconStyle(Cancel);
+
+export const CheckBoxOutlineBlankIcon = withIconStyle(CheckBoxOutlineBlank);
+
+export const CheckBoxIcon = withIconStyle(CheckBox);
+
+export const PersonIcon = withIconStyle(Person);
+
+export const GitHubIcon = withIconStyle(GitHub);
+
+export const PersonOutlineIcon = withIconStyle(PersonOutline);
+
+export const ShoppingCartIcon = withIconStyle(ShoppingCart);

@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/react';
+import { SearchIcon } from './';
+
+const meta: Meta<typeof SearchIcon> = {
+  title: 'Atoms/IconButton',
+  argTypes: {
+    color: {
+      control: { type: 'string' },
+      description: '아이콘 색상',
+      table: {
+        type: { summary: 'ThemeColors' },
+      },
+    },
+    backgroundColor: {
+      contorl: { type: 'color' },
+      description: '배경 색상',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    size: {
+      control: { type: 'number' },
+      defaultValue: 24,
+      description: '아이콘 크기',
+      table: {
+        type: { summary: 'number' },
+      },
+    },
+    onClick: {
+      description: 'onClick 이벤트 핸들러',
+      table: {
+        type: { summary: 'function' },
+      },
+    },
+  },
+};
+
+export default meta;

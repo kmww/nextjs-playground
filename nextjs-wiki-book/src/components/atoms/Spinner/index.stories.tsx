@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Spinner from './';
 import styled from 'styled-components';
 
@@ -45,3 +45,17 @@ const SpinnerWrapper = styled.div`
   align-items: center;
   z-index: 1199;
 `;
+
+type Story = StoryObj<typeof Spinner>;
+
+const Template: Story = {
+  render: (args) => (
+    <SpinnerWrapper>
+      <Spinner {...args} />
+    </SpinnerWrapper>
+  ),
+};
+
+export const Normal = {
+  ...Template,
+};

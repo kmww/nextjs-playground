@@ -28,3 +28,11 @@ const IconWrapper = styled.div<IconWrapperProps>`
     display: block;
   }
 `;
+
+export interface IconButtonProps {
+  onClick?: React.MouseEventHandler<SVGSVGElement>;
+  colors?: ThemeColors;
+  className?: string;
+  backgroundColor?: string;
+  size?: number;
+}

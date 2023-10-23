@@ -1,5 +1,16 @@
-import { Meta } from '@storybook/react';
-import { SearchIcon } from './';
+import { Meta, StoryObj } from '@storybook/react';
+import {
+  CancelIcon,
+  CheckBoxIcon,
+  CheckBoxOutlineBlankIcon,
+  CloseIcon,
+  CloudUploadIcon,
+  GitHubIcon,
+  PersonIcon,
+  PersonOutlineIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+} from './';
 
 const meta: Meta<typeof SearchIcon> = {
   title: 'Atoms/IconButton',
@@ -12,7 +23,7 @@ const meta: Meta<typeof SearchIcon> = {
       },
     },
     backgroundColor: {
-      contorl: { type: 'color' },
+      control: { type: 'color' },
       description: '배경 색상',
       table: {
         type: { summary: 'string' },
@@ -36,3 +47,24 @@ const meta: Meta<typeof SearchIcon> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof SearchIcon>;
+
+const Template: Story = {
+  render: (args) => (
+    <>
+      <CloseIcon {...args} />
+      <SearchIcon {...args} />
+      <CancelIcon {...args} />
+      <CheckBoxOutlineBlankIcon {...args} />
+      <CheckBoxIcon {...args} />
+      <PersonIcon {...args} />
+      <GitHubIcon {...args} />
+      <ShoppingCartIcon {...args} />
+      <CloudUploadIcon {...args} />
+      <PersonOutlineIcon {...args} />
+    </>
+  ),
+};
+
+export const Normal = { ...Template };

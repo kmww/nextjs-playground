@@ -1,6 +1,6 @@
 import Text from '@/components/atoms/Text';
 import Flex from '@/components/layout/Flex';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const DropdownRoot = styled.div`
@@ -143,4 +143,14 @@ const Dropdown = (props: DropdownProps) => {
     setIsOpen(false);
     onChange && onChange(item);
   };
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick, false);
+    document.addEventListener('touchend', handleDocumentClick, false);
+
+    return function cleanup() {
+      document.removeEventListener('click', handleDocumentClick, false);
+      document.removeEventListener('touchend', handleDocumentClick, false);
+    };
+  }, []);
 };

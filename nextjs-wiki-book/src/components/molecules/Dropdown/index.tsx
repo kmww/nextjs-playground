@@ -127,4 +127,20 @@ const Dropdown = (props: DropdownProps) => {
     },
     [dropdownRef],
   );
+
+  const handleMouseDown = (e: React.SyntheticEvent) => {
+    setIsOpen((isOpen) => !isOpen);
+    e.stopPropagation();
+  };
+
+  const handleSelectValue = (
+    e: React.FormEvent<HTMLDivElement>,
+    item: DropdownItemType,
+  ) => {
+    e.stopPropagation();
+
+    setSelectedItem(item);
+    setIsOpen(false);
+    onChange && onChange(item);
+  };
 };

@@ -153,4 +153,47 @@ const Dropdown = (props: DropdownProps) => {
       document.removeEventListener('touchend', handleDocumentClick, false);
     };
   }, []);
+
+  return (
+    <DropdownRoot ref={dropdownRef}>
+      <DropdownControl
+        hasError={hasError}
+        onMouseDown={handleMouseDown}
+        onTouchEnd={handleMouseDown}
+        data-testid="dropdown-control"
+      >
+        {selectedItem && (
+          <DropdownValue>
+            <DropdownItem item={selectedItem} />
+          </DropdownValue>
+        )}
+        {!selectedItem && (
+          <DropdownPlaceholder>{props.placeholder}</DropdownPlaceholder>
+        )}
+        <input
+          type="hidden"
+          name={name}
+          value={selectedItem?.value ?? ''}
+          onChange={() => onChange && onChange(selectedItem)}
+        />
+        <DropdownArrow isOpen={isOpen} />
+      </DropdownControl>
+      {isOpen && (
+        <DropdownMenu>
+          {props.options.map((item, index) => (
+            <DropdownOption
+              key={index}
+              onMouseDown={(e) => handleSelectValue(e, item)}
+              onClick={(e) => handleSelectValue(e, item)}
+              data-testid="dropdown-option"
+            >
+              <DropdownItem item={item} />
+            </DropdownOption>
+          ))}
+        </DropdownMenu>
+      )}
+    </DropdownRoot>
+  );
 };
+
+export default Dropdown;

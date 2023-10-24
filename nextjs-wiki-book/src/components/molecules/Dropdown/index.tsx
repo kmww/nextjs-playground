@@ -93,3 +93,12 @@ const DropdownItem = (props: DropdownItemProps) => {
     </Flex>
   );
 };
+
+interface DropdownProps {
+  options: DropdownItemType[];
+  value?: string | number;
+  name?: string;
+  placeholder?: string;
+  hasError?: boolean;
+  onChange?: (selected?: DropdownItemType) => void;
+}

@@ -1,3 +1,4 @@
+import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 export interface CheckBoxProps
@@ -14,3 +15,18 @@ const Label = styled.label`
   margin-left: 6px;
   user-select: none;
 `;
+
+const CheckBox = (props: CheckBoxProps) => {
+  const { id, label, checked, onChange, ...rest } = props;
+  const [isChecked, setIsChecked] = useState(checked);
+  const ref = useRef<HTMLInputElement>(null);
+
+  const onClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      ref.current?.click();
+      setIsChecked((isChecked) => !isChecked);
+    },
+    [ref, setIsChecked],
+  );
+};

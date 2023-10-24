@@ -1,3 +1,9 @@
+import {
+  CheckBoxIcon,
+  CheckBoxOutlineBlankIcon,
+} from '@/components/atoms/IconButton';
+import Text from '@/components/atoms/Text';
+import Flex from '@/components/layout/Flex';
 import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -29,4 +35,31 @@ const CheckBox = (props: CheckBoxProps) => {
     },
     [ref, setIsChecked],
   );
+
+  return (
+    <>
+      <CheckBoxElement
+        {...rest}
+        ref={ref}
+        type="checkbox"
+        checked={isChecked}
+        readOnly={!onChange}
+        onChange={onChange}
+      />
+      <Flex alignItems="center">
+        {checked ?? isChecked ? (
+          <CheckBoxIcon size={20} onClick={onClick} />
+        ) : (
+          <CheckBoxOutlineBlankIcon size={20} onClick={onClick} />
+        )}
+        {label && label.length > 0 && (
+          <Label htmlFor={id} onClick={onClick}>
+            <Text>{label}</Text>
+          </Label>
+        )}
+      </Flex>
+    </>
+  );
 };
+
+export default CheckBox;

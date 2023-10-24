@@ -1,5 +1,6 @@
 import Text from '@/components/atoms/Text';
 import Flex from '@/components/layout/Flex';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const DropdownRoot = styled.div`
@@ -102,3 +103,11 @@ interface DropdownProps {
   hasError?: boolean;
   onChange?: (selected?: DropdownItemType) => void;
 }
+
+const Dropdown = (props: DropdownProps) => {
+  const { options, value, name, hasError, onChange } = props;
+  const initialItem = options.find((option) => option.value === value);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(initialItem);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+};

@@ -21,3 +21,10 @@ const DropdownControl = styled.div<{ hasError?: boolean }>`
 const DropdownValue = styled.div`
   color: ${({ theme }) => theme.colors.text};
 `;
+
+const DropdownPlaceholder = styled.div`
+  color: #757575;
+  font-size: ${({ theme }) => theme.fontSizes[1]};
+  min-height: 20px;
+  line-height: 20px;
+`;

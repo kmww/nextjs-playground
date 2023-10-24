@@ -63,3 +63,10 @@ const DropdownMenu = styled.div`
   width: 100%;
   z-index: 1000;
 `;
+
+const DropdownOption = styled.div`
+  padding: 8px 12px 8px 12px;
+  &:hover {
+    background-color: #f9f9f9;
+  }
+`;

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import CheckBox from './';
 
 const meta: Meta<typeof CheckBox> = {
@@ -28,3 +28,16 @@ const meta: Meta<typeof CheckBox> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof CheckBox>;
+
+const Template: Story = {
+  render: (args) => <CheckBox {...args} />,
+};
+
+export const WithLabel = {
+  ...Template,
+  args: {
+    label: 'Label',
+  },
+};

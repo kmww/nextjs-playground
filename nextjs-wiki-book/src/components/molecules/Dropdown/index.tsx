@@ -45,3 +45,21 @@ const DropdownArrow = styled.div<{ isOpen?: boolean }>`
   right: 10px;
   width: 0;
 `;
+
+const DropdownMenu = styled.div`
+  background-color: #ffffff;
+  border: ${({ theme }) => theme.colors.border};
+  box-shadow:
+    0px 5px 5px -3px rgb(0 0 0 / 20%),
+    0px 8px 10px 1px rgb(0 0 0 / 10%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%);
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin-top: -1px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+`;

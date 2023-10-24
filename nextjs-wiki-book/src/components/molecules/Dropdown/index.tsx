@@ -38,7 +38,7 @@ const DropdownArrow = styled.div<{ isOpen?: boolean }>`
   border-color: ${({ isOpen }) =>
     isOpen
       ? `transparent transparent #222222`
-      : `#222222 transparent trasparent`};
+      : `#222222 transparent transparent`};
   border-width: ${({ isOpen }) => (isOpen ? `0 5px 5px` : `5px 5px 0`)};
   border-style: solid;
   content: ' ';

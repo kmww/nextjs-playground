@@ -17,3 +17,7 @@ const DropdownControl = styled.div<{ hasError?: boolean }>`
   outline: none;
   padding: 8px 52px 8px 12px;
 `;
+
+const DropdownValue = styled.div`
+  color: ${({ theme }) => theme.colors.text};
+`;

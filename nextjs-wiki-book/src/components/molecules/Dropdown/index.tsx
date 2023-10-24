@@ -1,3 +1,5 @@
+import Text from '@/components/atoms/Text';
+import Flex from '@/components/layout/Flex';
 import styled from 'styled-components';
 
 const DropdownRoot = styled.div`
@@ -70,3 +72,24 @@ const DropdownOption = styled.div`
     background-color: #f9f9f9;
   }
 `;
+
+export interface DropdownItemType {
+  value: string | number | null;
+  label?: string;
+}
+
+interface DropdownItemProps {
+  item: DropdownItemType;
+}
+
+const DropdownItem = (props: DropdownItemProps) => {
+  const { item } = props;
+
+  return (
+    <Flex alignItems="center">
+      <Text margin={0} variant="small">
+        {item.label ?? item.value}
+      </Text>
+    </Flex>
+  );
+};

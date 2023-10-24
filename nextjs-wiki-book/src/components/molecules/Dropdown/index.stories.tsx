@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import Dropdown from './';
 
 const meta: Meta<typeof Dropdown> = {
@@ -42,3 +42,46 @@ const meta: Meta<typeof Dropdown> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof Dropdown>;
+
+const Template: Story = {
+  render: (args) => <Dropdown {...args} />,
+};
+
+export const Normal = {
+  ...Template,
+  args: {
+    options: [
+      { value: null, label: '-' },
+      { value: 'first', label: 'First' },
+      { value: 'second', label: 'Second' },
+      { value: 'third', label: 'Third' },
+    ],
+    placeholder: 'Please select items',
+  },
+};
+
+export const InitialValue = {
+  ...Template,
+  args: {
+    options: [
+      { value: null, label: '-' },
+      { value: 'first', label: 'First' },
+      { value: 'second', label: 'Second' },
+      { value: 'third', label: 'Third' },
+    ],
+    placeholder: 'Please select items',
+    value: 'first',
+  },
+};
+
+export const ManyItems = {
+  ...Template,
+  args: {
+    options: Array.from(Array(20), (_, index) => {
+      return { value: index.toString(), label: index.toString() };
+    }),
+    placeholder: 'Please select items',
+  },
+};

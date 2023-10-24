@@ -11,9 +11,11 @@ const DropdownRoot = styled.div`
 const DropdownControl = styled.div<{ hasError?: boolean }>`
   position: relative;
   overflow: hidden;
-  background: #ffffff;
+  background-color: #ffffff;
   border: ${({ theme, hasError }) =>
-    hasError ? `1px solid ${theme.colors.danger}` : `${theme.colors.border}`};
+    hasError
+      ? `1px solid ${theme.colors.danger}`
+      : `1px solid ${theme.colors.border}`};
   border-radius: 5px;
   box-sizing: border-box;
   cursor: default;

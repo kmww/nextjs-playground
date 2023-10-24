@@ -28,3 +28,20 @@ const DropdownPlaceholder = styled.div`
   min-height: 20px;
   line-height: 20px;
 `;
+
+const DropdownArrow = styled.div<{ isOpen?: boolean }>`
+  border-color: ${({ isOpen }) =>
+    isOpen
+      ? `transparent transparent #222222`
+      : `#222222 transparent trasparent`};
+  border-width: ${({ isOpen }) => (isOpen ? `0 5px 5px` : `5px 5px 0`)};
+  border-style: solid;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  top: 16px;
+  right: 10px;
+  width: 0;
+`;

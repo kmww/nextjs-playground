@@ -1,6 +1,6 @@
 import Text from '@/components/atoms/Text';
 import Flex from '@/components/layout/Flex';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const DropdownRoot = styled.div`
@@ -110,4 +110,21 @@ const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(initialItem);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleDocumentClick = useCallback(
+    (e: MouseEvent | TouchEvent) => {
+      // 자기 자신 선택시 동작x
+      if (dropdownRef.current) {
+        const elements = dropdownRef.current.querySelectorAll('*');
+        for (let i = 0; i < elements.length; i += 1) {
+          if (elements[i] === e.target) {
+            return;
+          }
+        }
+      }
+
+      setIsOpen(false);
+    },
+    [dropdownRef],
+  );
 };

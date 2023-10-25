@@ -75,3 +75,7 @@ const DropzoneContent = styled.div<{
   height: ${({ height }) =>
     typeof height === 'number' ? `${height}px` : height};
 `;
+
+const DropzoneInputFile = styled.input`
+  display: none;
+`;

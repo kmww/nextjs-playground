@@ -109,4 +109,27 @@ const Dropzone = (props: DropzoneProps) => {
     onDrop && onDrop(files);
     onChange && onChange(files);
   };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFocused(false);
+
+    const files = value.concat(
+      getFilesFromEvent(e).filter((file) =>
+        acceptedFileTypes.includes(file.type as FileTypes),
+      ),
+    );
+
+    if (files.length === 0) {
+      return window.alert(
+        `다음 파일 포맷은 지원하지 않습니다. 지원 포맷: ${acceptedFileTypes.join(
+          ' ,',
+        )}`,
+      );
+    }
+
+    onDrop && onDrop(files);
+    onChange && onChange(files);
+  };
 };

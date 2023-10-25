@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const isDragEvent = (value: any): value is React.DragEvent => {
@@ -79,3 +80,20 @@ const DropzoneContent = styled.div<{
 const DropzoneInputFile = styled.input`
   display: none;
 `;
+
+const Dropzone = (props: DropzoneProps) => {
+  const {
+    value = [],
+    name,
+    acceptedFileTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
+    width = '100%',
+    height = '200px',
+    onDrop,
+    onChange,
+    hasError,
+  } = props;
+
+  const rootRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+};

@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 const isDragEvent = (value: any): value is React.DragEvent => {
   return !!value.dataTransfer;
 };
@@ -42,3 +44,21 @@ interface DropzoneRootProps {
   width?: number | string;
   height?: number | string;
 }
+
+const DropzoneRoot = styled.div<DropzoneRootProps>`
+  border: 1px dashed
+    ${({ theme, isFocused, hasError }) => {
+      if (hasError) {
+        return theme.colors.danger;
+      } else if (isFocused) {
+        return theme.colors.black;
+      } else {
+        return theme.colors.border;
+      }
+    }};
+  border-radius: 8px;
+  cursor: pointer;
+  width: ${({ width }) => (typeof width === 'number' ? `${width}px` : width)};
+  height: ${({ height }) =>
+    typeof height === 'number' ? `${height}px` : height};
+`;

@@ -62,3 +62,16 @@ const DropzoneRoot = styled.div<DropzoneRootProps>`
   height: ${({ height }) =>
     typeof height === 'number' ? `${height}px` : height};
 `;
+
+const DropzoneContent = styled.div<{
+  width: number | string;
+  height: number | string;
+}>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: ${({ width }) => (typeof width === 'number' ? `${width}px` : width)};
+  height: ${({ height }) =>
+    typeof height === 'number' ? `${height}px` : height};
+`;

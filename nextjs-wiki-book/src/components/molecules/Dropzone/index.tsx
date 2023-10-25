@@ -96,4 +96,17 @@ const Dropzone = (props: DropzoneProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+
+    const files = value.concat(
+      getFilesFromEvent(e).filter((file) =>
+        acceptedFileTypes.includes(file.type as FileTypes),
+      ),
+    );
+
+    onDrop && onDrop(files);
+    onChange && onChange(files);
+  };
 };

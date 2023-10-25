@@ -143,4 +143,10 @@ const Dropzone = (props: DropzoneProps) => {
     e.stopPropagation();
     setIsFocused(false);
   }, []);
+
+  const handleDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFocused(true);
+  }, []);
 };

@@ -91,7 +91,7 @@ const Dropzone = (props: DropzoneProps) => {
     height = '200px',
     onDrop,
     onChange,
-    hasError,
+    hasError = false,
   } = props;
 
   const rootRef = useRef<HTMLDivElement>(null);
@@ -188,11 +188,6 @@ const Dropzone = (props: DropzoneProps) => {
       </DropzoneRoot>
     </>
   );
-};
-
-Dropzone.defaultProps = {
-  accetedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
-  hasError: false,
 };
 
 export default Dropzone;

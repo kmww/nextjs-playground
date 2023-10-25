@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const isDragEvent = (value: any): value is React.DragEvent => {
@@ -132,4 +132,9 @@ const Dropzone = (props: DropzoneProps) => {
     onDrop && onDrop(files);
     onChange && onChange(files);
   };
+
+  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
 };

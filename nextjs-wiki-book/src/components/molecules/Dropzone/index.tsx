@@ -15,3 +15,30 @@ const getFilesFromEvent = (e: React.DragEvent | React.ChangeEvent): File[] => {
 
   return [];
 };
+
+type FileTypes =
+  | 'image/png'
+  | 'image/jpeg'
+  | 'image/jpg'
+  | 'image/gif'
+  | 'video/mp4'
+  | 'video/quicktime'
+  | 'application/pdf';
+
+interface DropzoneProps {
+  value?: File[];
+  name?: string;
+  acceptedFileTypes?: FileTypes[];
+  width?: number | string;
+  height?: number | string;
+  hasError?: boolean;
+  onDrop?: (files: File[]) => void;
+  onChange?: (files: File[]) => void;
+}
+
+interface DropzoneRootProps {
+  isFocused?: boolean;
+  hasError?: boolean;
+  width?: number | string;
+  height?: number | string;
+}

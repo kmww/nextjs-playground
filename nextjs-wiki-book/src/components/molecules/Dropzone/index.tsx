@@ -1,4 +1,5 @@
-import { useCallback, useRef, useState } from 'react';
+import { CloudUploadIcon } from '@/components/atoms/IconButton';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const isDragEvent = (value: any): value is React.DragEvent => {
@@ -149,4 +150,49 @@ const Dropzone = (props: DropzoneProps) => {
     e.stopPropagation();
     setIsFocused(true);
   }, []);
+
+  const handleClick = () => inputRef.current?.click();
+
+  useEffect(() => {
+    if (inputRef.current && value && value.length === 0) {
+      inputRef.current.value = '';
+    }
+  }, [value]);
+
+  return (
+    <>
+      <DropzoneRoot
+        ref={rootRef}
+        isFocused={isFocused}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDragEnter={handleDragEnter}
+        onClick={handleClick}
+        hasError={hasError}
+        width={width}
+        height={height}
+        data-testid="dropzone"
+      >
+        <DropzoneInputFile
+          ref={inputRef}
+          name={name}
+          accept={acceptedFileTypes.join(',')}
+          onChange={handleChange}
+          multiple
+        />
+        <DropzoneContent width={width} height={height}>
+          <CloudUploadIcon size={24} />
+          <span style={{ textAlign: 'center' }}>업로드</span>
+        </DropzoneContent>
+      </DropzoneRoot>
+    </>
+  );
 };
+
+Dropzone.defaultProps = {
+  accetedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
+  hasError: false,
+};
+
+export default Dropzone;

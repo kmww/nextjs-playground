@@ -50,3 +50,8 @@ const Container = styled.div`
   gap: 10px;
   grid-template-columns: 1fr;
 `;
+
+interface Image {
+  file?: File;
+  src?: string;
+}

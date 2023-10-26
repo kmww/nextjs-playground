@@ -1,5 +1,6 @@
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
+import React from 'react';
 import styled from 'styled-components';
 
 const ImagePreviewContainer = styled(Box)`
@@ -24,3 +25,19 @@ interface ImagePreviewProps {
   height?: string;
   onRemove?: (src: string) => void;
 }
+
+const ImagePreview = ({
+  src,
+  alt,
+  width,
+  height,
+  onRemove,
+}: ImagePreviewProps) => {
+  const handleCloseClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onRemove && src && onRemove(src);
+
+    return false;
+  };
+};

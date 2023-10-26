@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import ImagePreview from './';
+import styled from 'styled-components';
 
 const meta: Meta<typeof ImagePreview> = {
   title: 'Molecules/ImagePreview',
@@ -42,3 +43,10 @@ const meta: Meta<typeof ImagePreview> = {
 };
 
 export default meta;
+
+const Container = styled.div`
+  width: 280px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+`;

@@ -13,3 +13,10 @@ const BadgeWrapper = styled.div`
   top: -7px;
   right: -10px;
 `;
+
+interface BadgeIconButtonProps {
+  icon: React.ReactNode;
+  badgContent?: number;
+  badgeBackgroundColor: string;
+  size?: number | string;
+}

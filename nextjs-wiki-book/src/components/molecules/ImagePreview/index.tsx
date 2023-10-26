@@ -16,3 +16,11 @@ const CloseBox = styled(Flex)`
   background-color: rgba(44, 44, 44, 0.66);
   cursor: pointer;
 `;
+
+interface ImagePreviewProps {
+  src?: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+  onRemove?: (src: string) => void;
+}

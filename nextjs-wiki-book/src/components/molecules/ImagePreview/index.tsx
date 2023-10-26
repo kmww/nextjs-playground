@@ -1,3 +1,4 @@
+import { CloseIcon } from '@/components/atoms/IconButton';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import React from 'react';
@@ -40,4 +41,19 @@ const ImagePreview = ({
 
     return false;
   };
+
+  return (
+    <ImagePreviewContainer width={width} height={height}>
+      <img src={src} alt={alt} width={width} height={height} />
+      <CloseBox
+        alignItems="center"
+        justifyContent="center"
+        onClick={handleCloseClick}
+      >
+        <CloseIcon size={24} color="white" />
+      </CloseBox>
+    </ImagePreviewContainer>
+  );
 };
+
+export default ImagePreview;

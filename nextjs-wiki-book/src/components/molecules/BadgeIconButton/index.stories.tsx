@@ -1,5 +1,10 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import BadgeIconButton from '.';
+import {
+  PersonIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+} from '@/components/atoms/IconButton';
 
 const meta: Meta<typeof BadgeIconButton> = {
   title: 'Molecules/BadgeIconButton',
@@ -25,14 +30,40 @@ const meta: Meta<typeof BadgeIconButton> = {
         type: { summary: 'string' },
       },
     },
-    size: {
-      contorl: { type: 'number' },
-      description: '배지 컨테이너 사이즈',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
   },
 };
 
 export default meta;
+
+type Story = StoryObj<typeof BadgeIconButton>;
+
+const Template: Story = {
+  render: (args) => <BadgeIconButton {...args} />,
+};
+
+export const SearchBadgIcon = {
+  ...Template,
+  args: {
+    icon: <SearchIcon size={24} />,
+    badgeContent: 1,
+    badgeBackgroundColor: '#ed9f28',
+  },
+};
+
+export const PersonBadgeIcon = {
+  ...Template,
+  args: {
+    icon: <PersonIcon size={24} />,
+    badgeContent: 1,
+    badgeBackgroundColor: '#d4001a',
+  },
+};
+
+export const ShoppingCartBadgeIcon = {
+  ...Template,
+  args: {
+    icon: <ShoppingCartIcon size={24} />,
+    badgeContent: 1,
+    badgeBackgroundColor: '#32bf00',
+  },
+};

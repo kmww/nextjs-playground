@@ -11,3 +11,9 @@ const BreadcrumbRoot = styled(Flex)`
 interface BreadcrumbProps {
   children?: React.ReactNode;
 }
+
+const Breadcrumb = ({ children }: BreadcrumbProps) => {
+  return <BreadcrumbRoot as="ol">{children}</BreadcrumbRoot>;
+};
+
+export default Breadcrumb;

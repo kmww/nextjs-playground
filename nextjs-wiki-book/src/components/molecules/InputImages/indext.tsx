@@ -1,6 +1,9 @@
 import Flex from '@/components/layout/Flex';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
+import ImagePreview from '@/components/molecules/ImagePreview';
+import Dropzone from '@/components/molecules/Dropzone';
+import Box from '@/components/layout/Box';
 
 const InputImagesContainer = styled(Flex)`
   & > *:not(:first-child) {
@@ -36,9 +39,13 @@ const InputImages = (props: InputImagesProps) => {
     height = '260px',
     onChange,
   } = props;
-  const files = useMemo(() => {
-    images.filter((img: FileData) => img.file).map((img: FileData) => img.file);
-  }, [images]);
+  const files = useMemo(
+    () =>
+      images
+        .filter((img: FileData) => img.file)
+        .map((img: FileData) => img.file as File),
+    [images],
+  );
 
   const isDropzoneDisplay =
     !maximumNumber || images.length < maximumNumber ? 'block' : 'none';
@@ -77,4 +84,37 @@ const InputImages = (props: InputImagesProps) => {
     },
     [images, maximumNumber, onChange],
   );
+
+  return (
+    <InputImagesContainer flexDirection="column">
+      {images &&
+        images.map((img, index) => (
+          <ImagePreview
+            alt={img.id}
+            key={index}
+            src={img.src}
+            height={height}
+            onRemove={onRemove}
+          />
+        ))}
+      <Box style={{ display: isDropzoneDisplay }}>
+        <Dropzone
+          acceptedFileTypes={[
+            'image/gif',
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+          ]}
+          name={name}
+          width={width}
+          height={height}
+          value={files}
+          hasError={hasError}
+          onDrop={onDrop}
+        />
+      </Box>
+    </InputImagesContainer>
+  );
 };
+
+export default InputImages;

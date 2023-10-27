@@ -1,4 +1,7 @@
+import Text from '@/components/atoms/Text';
+import Box from '@/components/layout/Box';
 import { useCallback, useEffect, useState } from 'react';
+import CheckBox from '@/components/molecules/CheckBox';
 
 interface Item {
   label: string;
@@ -38,4 +41,26 @@ const FilterGroup = ({
     },
     [onChange, selected],
   );
+
+  return (
+    <>
+      <Text fontWeight="bold" variant="mediumLarge">
+        {title}
+      </Text>
+      <Box marginTop={2}>
+        {items.map(({ label, name }, index) => (
+          <Box key={index} marginTop={index === 0 ? 0 : '4px'}>
+            <CheckBox
+              name={name}
+              label={label}
+              checked={!!selected.find((e) => e === name)}
+              onChange={handleChnage}
+            />
+          </Box>
+        ))}
+      </Box>
+    </>
+  );
 };
+
+export default FilterGroup;

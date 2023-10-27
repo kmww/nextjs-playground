@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import FilterGroup from './';
+import { useState } from 'react';
 
 const meta: Meta<typeof FilterGroup> = {
   title: 'Molecules/FilterGroup',
@@ -28,3 +29,29 @@ const meta: Meta<typeof FilterGroup> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof FilterGroup>;
+
+const Template: Story = {
+  render: (args) => {
+    const [value, setValue] = useState<string[]>([]);
+    const handleChange = (value: string[]) => {
+      setValue(value);
+      args && args.onChange && args.onChange(value);
+    };
+
+    return <FilterGroup value={value} onChange={handleChange} {...args} />;
+  },
+};
+
+export const Standard = {
+  ...Template,
+  args: {
+    title: 'All categories',
+    items: [
+      { label: 'Clothes', name: 'clothes' },
+      { label: 'HandBook', name: 'handbook' },
+      { label: 'Figure', name: 'figure' },
+    ],
+  },
+};

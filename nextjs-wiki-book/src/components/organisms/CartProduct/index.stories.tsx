@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import CartProduct from './';
 
 const meta: Meta<typeof CartProduct> = {
@@ -48,3 +48,19 @@ const meta: Meta<typeof CartProduct> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof CartProduct>;
+
+const Template: Story = {
+  render: (args) => <CartProduct {...args} />,
+};
+
+export const Emoji = {
+  ...Template,
+  args: {
+    id: 1,
+    imageUrl: '/images/sample/1.jpg',
+    title: '모코코',
+    price: 1500,
+  },
+};

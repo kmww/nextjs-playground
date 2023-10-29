@@ -7,3 +7,12 @@ const RemoveText = styled(Text)`
     text-decoration: underline;
   }
 `;
+
+interface CartProductProps {
+  id: number;
+  imageUrl: string;
+  title: string;
+  price: number;
+  onBuyButtonClick?: (id: number) => void;
+  onRemoveButtonClick?: (id: number) => void;
+}

@@ -1,5 +1,4 @@
-import { ApiContext } from '@/types/api';
-import { User } from '@/types/auth';
+import type { User, ApiContext } from '@/types';
 import { fetcher } from '@/utils';
 
 export interface GetUserparams {

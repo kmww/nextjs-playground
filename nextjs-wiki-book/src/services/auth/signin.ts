@@ -1,5 +1,4 @@
-import { ApiContext } from '@/types/api';
-import { SigninParams, User } from '@/types/auth';
+import type { ApiContext, SigninParams, User } from '@/types';
 import { fetcher } from '@/utils';
 
 const signin = async (

@@ -10,3 +10,12 @@ interface ShoppingCartContextType {
 interface ShoppingCartContextProviderProps {
   children?: React.ReactNode;
 }
+
+const ShoppingCartContext = React.createContext<ShoppingCartContextType>({
+  cart: [],
+  addProductToCart: () => {},
+  removeProductFromCart: () => {},
+});
+
+export const useShoppingCartContext = (): ShoppingCartContextType =>
+  useContext<ShoppingCartContextType>(ShoppingCartContext);

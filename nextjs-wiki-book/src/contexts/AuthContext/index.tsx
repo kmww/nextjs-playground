@@ -1,4 +1,5 @@
 import type { ApiContext, User } from '@/types';
+import React, { useContext } from 'react';
 
 interface AuthContextType {
   authUser?: User;
@@ -14,3 +15,14 @@ interface AuthContextType {
 interface AuthContextProviderProps {
   context: ApiContext;
 }
+
+const AuthContext = React.createContext<AuthContextType>({
+  authUser: undefined,
+  isLoading: false,
+  signin: async () => Promise.resolve(),
+  signout: async () => Promise.resolve(),
+  mutate: async () => Promise.resolve(undefined),
+});
+
+export const useAuthContext = (): AuthContextType =>
+  useContext<AuthContextType>(AuthContext);

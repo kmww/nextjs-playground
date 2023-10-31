@@ -1,4 +1,5 @@
 import AppLogo from '@/components/atoms/AppLogo';
+import Button from '@/components/atoms/Button';
 import {
   PersonIcon,
   SearchIcon,
@@ -133,6 +134,11 @@ const Header = () => {
                 );
               }
             })()}
+          </NavLink>
+          <NavLink>
+            <Link href="sell">
+              <Button>등록</Button>
+            </Link>
           </NavLink>
         </Nav>
       </Flex>

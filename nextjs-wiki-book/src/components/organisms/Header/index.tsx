@@ -1,3 +1,4 @@
+import Text from '@/components/atoms/Text';
 import Flex from '@/components/layout/Flex';
 import styled from 'styled-components';
 
@@ -15,4 +16,11 @@ const Nav = styled(Flex)`
 
 const NavLink = styled.span`
   display: inline;
+`;
+
+const Anchor = styled(Text)`
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;

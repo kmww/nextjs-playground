@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ProductCard from './';
 
 const meta: Meta<typeof ProductCard> = {
@@ -48,3 +48,39 @@ const meta: Meta<typeof ProductCard> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof ProductCard>;
+
+const Template: Story = {
+  render: (args) => <ProductCard {...args} />,
+};
+
+export const Listing: typeof meta = {
+  ...Template,
+  args: {
+    variant: 'listing',
+    title: '이모티콘',
+    imageUrl: '/images/sample/1.jpg',
+    price: 2000,
+  },
+};
+
+export const Small: typeof meta = {
+  ...Template,
+  args: {
+    variant: 'small',
+    title: '이모티콘',
+    imageUrl: '/images/sample/1.jpg',
+    price: 2000,
+  },
+};
+
+export const Detail: typeof meta = {
+  ...Template,
+  args: {
+    variant: 'detail',
+    title: '이모티콘',
+    imageUrl: '/images/sample/1.jpg',
+    price: 2000,
+  },
+};

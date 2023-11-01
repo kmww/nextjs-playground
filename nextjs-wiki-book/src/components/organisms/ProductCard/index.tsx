@@ -93,6 +93,17 @@ const ProductCard = ({
             style={{ objectFit: 'cover' }}
           />
         )}
+        {!blurDataUrl && (
+          <ScaleImage
+            src={imageUrl}
+            width={imgSize ?? 240}
+            height={imgSize ?? 240}
+            containerWidth={size}
+            containerHeight={size}
+            alt={imageUrl}
+            style={{ objectFit: 'cover' }}
+          />
+        )}
       </ProductCardImageContainer>
       {variant === 'small' && (
         <Box marginTop={1}>

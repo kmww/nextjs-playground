@@ -135,6 +135,34 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
           </Text>
         )}
       </Box>
+      <Box marginBottom={1}>
+        <Text as="label" variant="medium">
+          상품 상태
+        </Text>
+        <Controller
+          control={control}
+          name="condition"
+          rules={{ required: true }}
+          defaultValue="used"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <Dropdown
+              options={[
+                { value: 'used', label: '중고' },
+                { value: 'new', label: '신품' },
+              ]}
+              hasError={!!error}
+              value={value ?? 'used'}
+              placeholder="상품의 상태를 선택해주세요 (미개봉: 신품, 개봉: 중고)"
+              onChange={(v) => onChange(v?.value)}
+            />
+          )}
+        />
+        {errors.condition && (
+          <Text color="danger" variant="medium" paddingLeft={1}>
+            상품의 상태를 선택해주세요
+          </Text>
+        )}
+      </Box>
     </form>
   );
 };

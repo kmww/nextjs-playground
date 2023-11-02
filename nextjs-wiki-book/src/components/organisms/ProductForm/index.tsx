@@ -1,3 +1,4 @@
+import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import TextArea from '@/components/atoms/TextArea';
@@ -68,101 +69,123 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
           <Text as="label" variant="medium">
             제목
           </Text>
+
+          <Input
+            {...register('title', { required: true })}
+            name="title"
+            type="text"
+            placeholder="상품 제목"
+            hasError={!!errors.title}
+          />
+          {errors.title && (
+            <Text color="danger" variant="small" paddingLeft={1}>
+              제목을 입력해주세요
+            </Text>
+          )}
         </Box>
-        <Input
-          {...register('title', { required: true })}
-          name="title"
-          type="text"
-          placeholder="상품 제목"
-          hasError={!!errors.title}
-        />
-        {errors.title && (
-          <Text color="danger" variant="small" paddingLeft={1}>
-            제목을 입력해주세요
+
+        <Box marginBottom={1}>
+          <Text as="label" variant="medium">
+            설명
           </Text>
-        )}
-      </Box>
-      <Box marginBottom={1}>
-        <Text as="label" variant="medium">
-          설명
-        </Text>
-        <Controller
-          control={control}
-          name="description"
-          rules={{ required: true }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <TextArea
-              placeholder="상품에 대한 설명을 입력해주세요"
-              hasError={!!error}
-              onChange={onChange}
-            >
-              {value}
-            </TextArea>
+          <Controller
+            control={control}
+            name="description"
+            rules={{ required: true }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextArea
+                placeholder="상품에 대한 설명을 입력해주세요"
+                hasError={!!error}
+                onChange={onChange}
+              >
+                {value}
+              </TextArea>
+            )}
+          />
+          {errors.description && (
+            <Text color="danger" variant="small" paddingLeft={1}>
+              상품 설명을 입력해주세요
+            </Text>
           )}
-        />
-        {errors.description && (
-          <Text color="danger" variant="small" paddingLeft={1}>
-            상품 설명을 입력해주세요
+        </Box>
+        <Box marginBottom={1}>
+          <Text as="label" variant="medium">
+            카테고리
           </Text>
-        )}
-      </Box>
-      <Box marginBottom={1}>
-        <Text as="label" variant="medium">
-          카테고리
-        </Text>
-        <Controller
-          control={control}
-          name="category"
-          rules={{ required: true }}
-          defaultValue="emoji"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <Dropdown
-              options={[
-                { value: 'emoji', label: '이모티콘' },
-                { value: 'figures', label: '피규어' },
-                { value: 'pad', label: '마우스 패드' },
-              ]}
-              hasError={!!error}
-              value={value}
-              placeholder="카테고리를 선택해 주세요"
-              onChange={(v) => onChange(v?.value)}
-            />
+          <Controller
+            control={control}
+            name="category"
+            rules={{ required: true }}
+            defaultValue="emoji"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <Dropdown
+                options={[
+                  { value: 'emoji', label: '이모티콘' },
+                  { value: 'figures', label: '피규어' },
+                  { value: 'pad', label: '마우스 패드' },
+                ]}
+                hasError={!!error}
+                value={value}
+                placeholder="카테고리를 선택해 주세요"
+                onChange={(v) => onChange(v?.value)}
+              />
+            )}
+          />
+          {errors.category && (
+            <Text color="danger" variant="small" paddingLeft={1}>
+              카테고리를 선택해주세요
+            </Text>
           )}
-        />
-        {errors.category && (
-          <Text color="danger" variant="small" paddingLeft={1}>
-            카테고리를 선택해주세요
+        </Box>
+        <Box marginBottom={1}>
+          <Text as="label" variant="medium">
+            상품 상태
           </Text>
-        )}
-      </Box>
-      <Box marginBottom={1}>
-        <Text as="label" variant="medium">
-          상품 상태
-        </Text>
-        <Controller
-          control={control}
-          name="condition"
-          rules={{ required: true }}
-          defaultValue="used"
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
-            <Dropdown
-              options={[
-                { value: 'used', label: '중고' },
-                { value: 'new', label: '신품' },
-              ]}
-              hasError={!!error}
-              value={value ?? 'used'}
-              placeholder="상품의 상태를 선택해주세요 (미개봉: 신품, 개봉: 중고)"
-              onChange={(v) => onChange(v?.value)}
-            />
+          <Controller
+            control={control}
+            name="condition"
+            rules={{ required: true }}
+            defaultValue="used"
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <Dropdown
+                options={[
+                  { value: 'used', label: '중고' },
+                  { value: 'new', label: '신품' },
+                ]}
+                hasError={!!error}
+                value={value ?? 'used'}
+                placeholder="상품의 상태를 선택해주세요 (미개봉: 신품, 개봉: 중고)"
+                onChange={(v) => onChange(v?.value)}
+              />
+            )}
+          />
+          {errors.condition && (
+            <Text color="danger" variant="medium" paddingLeft={1}>
+              상품의 상태를 선택해주세요
+            </Text>
           )}
-        />
-        {errors.condition && (
-          <Text color="danger" variant="medium" paddingLeft={1}>
-            상품의 상태를 선택해주세요
+        </Box>
+        <Box>
+          <Text as="label" variant="medium">
+            가격(원)
           </Text>
-        )}
+          <Input
+            {...register('price', { required: true })}
+            name="price"
+            type="number"
+            placeholder="100"
+            hasError={!!errors.price}
+          />
+          {errors.price && (
+            <Text color="danger" variant="small" paddingLeft={1}>
+              가격을 입력해주세요
+            </Text>
+          )}
+        </Box>
       </Box>
+      <Button width="100%" type="submit">
+        등록
+      </Button>
     </form>
   );
 };

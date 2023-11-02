@@ -1,3 +1,4 @@
+import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import InputImages, { FileData } from '@/components/molecules/InputImages';
@@ -52,6 +53,30 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
         {errors.image && (
           <Text color="danger" variant="small" paddingLeft={1}>
             상품의 이미지가 필요합니다.
+          </Text>
+        )}
+      </Box>
+      <Box marginBottom={3}>
+        <Box marginBottom={2}>
+          <Text as="label" variant="mediumLarge" fontWeight="bold">
+            상품 정보
+          </Text>
+        </Box>
+        <Box marginBottom={1}>
+          <Text as="label" variant="medium">
+            제목
+          </Text>
+        </Box>
+        <Input
+          {...register('title', { required: true })}
+          name="title"
+          type="text"
+          placeholder="상품 제목"
+          hasError={!!errors.title}
+        />
+        {errors.title && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            제목을 입력해주세요
           </Text>
         )}
       </Box>

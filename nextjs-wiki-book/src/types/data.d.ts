@@ -1,6 +1,6 @@
 import { User } from './auth';
 
-export type Category = 'shoes' | 'clothes' | 'book';
+export type Category = 'emoji' | 'figures' | 'pad';
 export type Condition = 'new' | 'used';
 
 export interface Product {

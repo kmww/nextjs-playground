@@ -1,5 +1,6 @@
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
+import TextArea from '@/components/atoms/TextArea';
 import Box from '@/components/layout/Box';
 import InputImages, { FileData } from '@/components/molecules/InputImages';
 import { Category, Condition } from '@/types';
@@ -77,6 +78,30 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
         {errors.title && (
           <Text color="danger" variant="small" paddingLeft={1}>
             제목을 입력해주세요
+          </Text>
+        )}
+      </Box>
+      <Box marginBottom={1}>
+        <Text as="label" variant="medium">
+          설명
+        </Text>
+        <Controller
+          control={control}
+          name="description"
+          rules={{ required: true }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <TextArea
+              placeholder="상품에 대한 설명을 입력해주세요"
+              hasError={!!error}
+              onChange={onChange}
+            >
+              {value}
+            </TextArea>
+          )}
+        />
+        {errors.description && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            상품 설명을 입력해주세요
           </Text>
         )}
       </Box>

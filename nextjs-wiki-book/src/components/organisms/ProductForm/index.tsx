@@ -2,6 +2,7 @@ import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import TextArea from '@/components/atoms/TextArea';
 import Box from '@/components/layout/Box';
+import Dropdown from '@/components/molecules/Dropdown';
 import InputImages, { FileData } from '@/components/molecules/InputImages';
 import { Category, Condition } from '@/types';
 import { Controller, useForm } from 'react-hook-form';
@@ -102,6 +103,35 @@ const ProductForm = ({ onProductSave }: ProductFormProps) => {
         {errors.description && (
           <Text color="danger" variant="small" paddingLeft={1}>
             상품 설명을 입력해주세요
+          </Text>
+        )}
+      </Box>
+      <Box marginBottom={1}>
+        <Text as="label" variant="medium">
+          카테고리
+        </Text>
+        <Controller
+          control={control}
+          name="category"
+          rules={{ required: true }}
+          defaultValue="emoji"
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <Dropdown
+              options={[
+                { value: 'emoji', label: '이모티콘' },
+                { value: 'figures', label: '피규어' },
+                { value: 'pad', label: '마우스 패드' },
+              ]}
+              hasError={!!error}
+              value={value}
+              placeholder="카테고리를 선택해 주세요"
+              onChange={(v) => onChange(v?.value)}
+            />
+          )}
+        />
+        {errors.category && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            카테고리를 선택해주세요
           </Text>
         )}
       </Box>

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ProductForm from './';
 
 const meta: Meta<typeof ProductForm> = {
@@ -14,3 +14,13 @@ const meta: Meta<typeof ProductForm> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof ProductForm>;
+
+const Template: Story = {
+  render: (args) => <ProductForm {...args} />,
+};
+
+export const Form = {
+  ...Template,
+};

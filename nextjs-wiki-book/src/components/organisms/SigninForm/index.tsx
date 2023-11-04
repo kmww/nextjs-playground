@@ -41,6 +41,20 @@ const SigninForm = ({ onSingin }: SigninFormProps) => {
           </Text>
         )}
       </Box>
+      <Box marginBottom={2}>
+        <Input
+          {...register('password', { required: true })}
+          name="password"
+          type="password"
+          placeholder="비밀번호"
+          hasError={!!errors.password}
+        />
+        {errors.password && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            비밀번호를 입력해주세요
+          </Text>
+        )}
+      </Box>
     </form>
   );
 };

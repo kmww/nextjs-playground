@@ -1,3 +1,4 @@
+import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
@@ -55,6 +56,9 @@ const SigninForm = ({ onSingin }: SigninFormProps) => {
           </Text>
         )}
       </Box>
+      <Button width="100%" type="submit">
+        로그인
+      </Button>
     </form>
   );
 };

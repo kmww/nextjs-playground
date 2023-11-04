@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import SigninForm from './';
 
 const meta: Meta<typeof SigninForm> = {
@@ -14,3 +14,13 @@ const meta: Meta<typeof SigninForm> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof SigninForm>;
+
+const Template: Story = {
+  render: (args) => <SigninForm {...args} />,
+};
+
+export const Form = {
+  ...Template,
+};

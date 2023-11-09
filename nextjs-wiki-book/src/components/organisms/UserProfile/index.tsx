@@ -21,15 +21,17 @@ const UserProfile = ({
   const profileImageSize = variant === 'small' ? 100 : 120;
 
   return (
-    <Box minWidth={`${profileImageSize}px`}>
-      <ShapeImage
-        shape="circle"
-        quality="85"
-        src={profileImageUrl}
-        alt={username}
-        height={profileImageSize}
-        width={profileImageSize}
-      />
+    <Flex>
+      <Box minWidth={`${profileImageSize}px`}>
+        <ShapeImage
+          shape="circle"
+          quality="85"
+          src={profileImageUrl}
+          alt={username}
+          height={profileImageSize}
+          width={profileImageSize}
+        />
+      </Box>
       <Box padding={1}>
         <Flex
           height="100%"
@@ -46,7 +48,7 @@ const UserProfile = ({
             >
               {username}
             </Text>
-            <Text as="p" marginTop={0} marginLeft={1}>
+            <Text as="p" marginTop={0} marginBottom={1}>
               {numberOfProducts}개의 제품 게시 완료
             </Text>
             {variant === 'normal' && (
@@ -57,7 +59,7 @@ const UserProfile = ({
           </Box>
         </Flex>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

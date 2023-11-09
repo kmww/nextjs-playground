@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import UserProfile from './';
 
 const meta: Meta<typeof UserProfile> = {
@@ -46,3 +46,31 @@ const meta: Meta<typeof UserProfile> = {
 };
 
 export default meta;
+
+type Story = StoryObj<typeof UserProfile>;
+
+const Template: Story = {
+  render: (args) => <UserProfile {...args} />,
+};
+
+export const Small = {
+  ...Template,
+  args: {
+    variant: 'small',
+    username: '테스트 사용자',
+    profileImageUrl: '/images/sample/1.jpg',
+    numberOfProducts: 2000,
+    description: '샘플 테스트',
+  },
+};
+
+export const Normal = {
+  ...Template,
+  args: {
+    variant: 'normal',
+    username: '테스트 사용자',
+    profileImageUrl: '/images/sample/1.jpg',
+    numberOfProducts: 2000,
+    description: '샘플 테스트',
+  },
+};

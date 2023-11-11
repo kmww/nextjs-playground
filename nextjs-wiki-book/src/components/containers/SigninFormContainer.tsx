@@ -1,5 +1,6 @@
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import SigninForm from '@/components/organisms/SigninForm';
 
 interface SigninFormContainerProps {
   onSingin: (error?: Error) => void;
@@ -23,6 +24,8 @@ const SigninFormContainer = ({ onSingin }: SigninFormContainerProps) => {
       setGlobalSpinner(false);
     }
   };
+
+  return <SigninForm onSingin={handleSignin} />;
 };
 
 export default SigninFormContainer;

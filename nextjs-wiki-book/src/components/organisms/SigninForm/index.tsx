@@ -10,10 +10,10 @@ export interface SigninFormData {
 }
 
 interface SigninFormProps {
-  onSingin?: (username: string, password: string) => void;
+  onSignin?: (username: string, password: string) => void;
 }
 
-const SigninForm = ({ onSingin }: SigninFormProps) => {
+const SigninForm = ({ onSignin }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +23,7 @@ const SigninForm = ({ onSingin }: SigninFormProps) => {
   const onSubmit = (data: SigninFormData) => {
     const { username, password } = data;
 
-    onSingin && onSingin(username, password);
+    onSignin && onSignin(username, password);
   };
 
   return (

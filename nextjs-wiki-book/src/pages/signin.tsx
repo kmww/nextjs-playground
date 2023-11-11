@@ -4,6 +4,7 @@ import Flex from '@/components/layout/Flex';
 import Layout from '@/components/templates/Layout';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import SigninFormContainer from '@/components/containers/SigninFOrmContainer';
 
 const SigninPage: NextPage = () => {
   const router = useRouter();
@@ -35,7 +36,9 @@ const SigninPage: NextPage = () => {
           <Box marginBottom={2}>
             <AppLogo />
           </Box>
-          <Box>{/* <signinFormConatainer onSignin={handleSignin}/> */}</Box>
+          <Box width="100%">
+            <SigninFormContainer onSignin={handleSignin} />
+          </Box>
         </Flex>
       </Flex>
     </Layout>

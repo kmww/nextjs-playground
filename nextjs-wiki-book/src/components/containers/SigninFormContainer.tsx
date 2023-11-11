@@ -3,10 +3,10 @@ import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext'
 import SigninForm from '@/components/organisms/SigninForm';
 
 interface SigninFormContainerProps {
-  onSingin: (error?: Error) => void;
+  onSignin: (error?: Error) => void;
 }
 
-const SigninFormContainer = ({ onSingin }: SigninFormContainerProps) => {
+const SigninFormContainer = ({ onSignin }: SigninFormContainerProps) => {
   const { signin } = useAuthContext();
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
 
@@ -14,18 +14,18 @@ const SigninFormContainer = ({ onSingin }: SigninFormContainerProps) => {
     try {
       setGlobalSpinner(true);
       await signin(username, password);
-      onSingin && onSingin();
+      onSignin && onSignin();
     } catch (err: unknown) {
       if (err instanceof Error) {
         window.alert(err.message);
-        onSingin && onSingin(err);
+        onSignin && onSignin(err);
       }
     } finally {
       setGlobalSpinner(false);
     }
   };
 
-  return <SigninForm onSingin={handleSignin} />;
+  return <SigninForm onSignin={handleSignin} />;
 };
 
 export default SigninFormContainer;

@@ -97,6 +97,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       user,
       products: products ?? [],
     },
+    revalidate: 10,
   };
 };
 

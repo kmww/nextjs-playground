@@ -7,9 +7,15 @@ import Flex from '@/components/layout/Flex';
 import Breadcrumb from '@/components/molecules/Breadcrumb';
 import Layout from '@/components/templates/Layout';
 import getAllProducts from '@/services/products/get-all-products';
+import getAllUsers from '@/services/users/get-all-users';
 import getUser from '@/services/users/get-users';
 import { ApiContext } from '@/types';
-import { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next';
+import {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -57,6 +63,17 @@ const UserPage: NextPage<UserPageProps> = ({
       </Flex>
     </Layout>
   );
+};
+
+export const getStaticPath: GetStaticPaths = async () => {
+  const context: ApiContext = {
+    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+  };
+
+  const users = getAllUsers(context);
+  const paths = (await users).map((u) => `/users/${u.id}`);
+
+  return { paths, fallback: true };
 };
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {

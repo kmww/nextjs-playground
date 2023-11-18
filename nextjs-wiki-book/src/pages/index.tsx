@@ -3,6 +3,8 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import getAllProducts from '@/services/products/get-all-products';
 import { ApiContext } from '@/types';
 
+type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
+
 const Home = () => {
   return (
     <>

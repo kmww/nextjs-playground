@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import getAllProducts from '@/services/products/get-all-products';
+import { ApiContext } from '@/types';
 
 const Home = () => {
   return (
@@ -12,6 +15,29 @@ const Home = () => {
       <main></main>
     </>
   );
+};
+
+export type Category = 'emoji' | 'figures' | 'pad';
+
+export const getStaticProps: GetStaticProps = async () => {
+  const context: ApiContext = {
+    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+  };
+
+  const [emojiProducts, figuresProducts, padProducts] = await Promise.all([
+    getAllProducts(context, { category: 'emoji', limit: 6, page: 1 }),
+    getAllProducts(context, { category: 'figures', limit: 6, page: 1 }),
+    getAllProducts(context, { category: 'pad', limit: 6, page: 1 }),
+  ]);
+
+  return {
+    props: {
+      emojiProducts,
+      figuresProducts,
+      padProducts,
+    },
+    revalidatee: 60,
+  };
 };
 
 export default Home;

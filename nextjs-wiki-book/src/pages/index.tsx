@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import getAllProducts from '@/services/products/get-all-products';
 import { ApiContext, Product } from '@/types';
@@ -6,6 +5,9 @@ import ProductCardCrousel from '@/components/organisms/ProductCardCarousel';
 import Box from '@/components/layout/Box';
 import Link from 'next/link';
 import ProductCard from '@/components/organisms/ProductCard';
+import Layout from '@/components/templates/Layout';
+import Flex from '@/components/layout/Flex';
+import Text from '@/components/atoms/Text';
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -33,6 +35,74 @@ const Home = ({
       </ProductCardCrousel>
     );
   };
+
+  return (
+    <Layout>
+      <Flex
+        width={{ base: '100%', md: '1040px' }}
+        justifyContent="center"
+        alignItems="center"
+        flexDirection={{ base: 'column', md: 'row' }}
+      >
+        <Box width="100%">
+          <Text as="h1" marginBottom={0} color="white" variant="extraLarge">
+            LOA C2C에서
+          </Text>
+          <Text as="h1" marginTop={0} color="white" variant="extraLarge">
+            마음에 드는 아이템을 찾자
+          </Text>
+        </Box>
+        <Box width="100%">
+          <Text as="p" color="white" variant="mediumLarge">
+            LOA C@C는 데모 애플리케이션 입니다. 목 서버를 사용하며 소스코드는
+            <Text
+              as="a"
+              style={{ textDecoration: 'underline' }}
+              target="_blank"
+              href="https://github.com/kmww/nextjs-playground/tree/main/nextjs-wiki-book"
+              variant="mediumLarge"
+              color="white"
+            >
+              다음
+            </Text>
+            의 Github에서 확인 할 수 있습니다.
+          </Text>
+          <Text as="p" color="white" variant="mediumLarge">
+            이 애플리케이션은 Next.js/TypeScript로 제작되었으며, 백엔드의 목
+            API는 json-server가 사용되고 있습니다.
+          </Text>
+        </Box>
+      </Flex>
+      <Flex paddingBottom={2} justifyContent="center">
+        <Box
+          paddingLeft={{ base: 2, md: 0 }}
+          paddingRight={{ base: 2, md: 0 }}
+          width={{ base: '100%', md: '1040px' }}
+        >
+          <Box marginBottom={3}>
+            <Text as="h2" variant="large">
+              이모티콘
+            </Text>
+            {renderProductCardCarousel(emojiProducts)}
+          </Box>
+
+          <Box marginBottom={3}>
+            <Text as="h2" variant="large">
+              피규어
+            </Text>
+            {renderProductCardCarousel(figuresProducts)}
+          </Box>
+
+          <Box>
+            <Text as="h2" variant="large">
+              마우스 패드
+            </Text>
+            {renderProductCardCarousel(padProducts)}
+          </Box>
+        </Box>
+      </Flex>
+    </Layout>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {

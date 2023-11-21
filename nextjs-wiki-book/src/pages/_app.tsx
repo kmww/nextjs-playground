@@ -1,6 +1,7 @@
+import { theme } from '@/styles/themes';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -41,7 +42,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta property="og:type" content="website" />
       </Head>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 };

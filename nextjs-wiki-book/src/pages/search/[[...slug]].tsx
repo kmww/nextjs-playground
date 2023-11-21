@@ -32,4 +32,14 @@ const SearchPage: NextPage = () => {
       return [];
     }
   };
+
+  const handleChange = (selected: string[]) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        slug,
+        conditions: selected,
+      },
+    });
+  };
 };

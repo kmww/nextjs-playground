@@ -5,6 +5,7 @@ import Flex from '@/components/layout/Flex';
 import Breadcrumb from '@/components/molecules/Breadcrumb';
 import FilterGroup from '@/components/molecules/FilterGroup';
 import Layout from '@/components/templates/Layout';
+import ProductCardListContainer from '@/components/containers/ProductCardListContainer';
 import { Category, Condition } from '@/types';
 import { NextPage } from 'next';
 import Link from 'next/link';
@@ -121,7 +122,10 @@ const SearchPage: NextPage = () => {
             >
               상품 목록
             </Text>
-            {/* <ProductCardlistContainer /> */}
+            <ProductCardListContainer
+              category={slug.length > 0 ? slug[slug.length - 1] : undefined}
+              conditions={conditions()}
+            />
           </Box>
         </Flex>
       </Box>

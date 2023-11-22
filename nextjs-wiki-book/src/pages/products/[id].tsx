@@ -1,4 +1,5 @@
 import getAllProducts from '@/services/products/get-all-products';
+import getProduct from '@/services/products/get-product';
 import { ApiContext, Category } from '@/types';
 import {
   GetStaticProps,

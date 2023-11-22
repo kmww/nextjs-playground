@@ -1,6 +1,10 @@
 import getAllProducts from '@/services/products/get-all-products';
 import { ApiContext, Category } from '@/types';
-import { InferGetStaticPropsType } from 'next';
+import {
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from 'next';
 
 const categoryNameDict: Record<Category, string> = {
   emoji: '이모티콘',
@@ -21,4 +25,27 @@ export const getStaticPaths = async () => {
   const paths = products.map((product) => `/products/${product.id}`);
 
   return { paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext) => {
+  const context: ApiContext = {
+    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+  };
+
+  if (!params) {
+    throw new Error('products params is undefined');
+  }
+
+  const productId = Number(params.id);
+  const product = await getProduct(context, { id: productId });
+
+  return {
+    props: {
+      id: productId,
+      product,
+    },
+    revalidate: 10,
+  };
 };

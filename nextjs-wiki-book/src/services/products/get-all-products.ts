@@ -21,7 +21,7 @@ const getAllProducts = async (
     order = 'desc',
     limit,
     page,
-  }: GetAllProductsParams,
+  }: GetAllProductsParams = {},
 ): Promise<Product[]> => {
   const path = `${context.apiRootUrl.replace(/\/$/g, '')}/products`;
   const params = new URLSearchParams();

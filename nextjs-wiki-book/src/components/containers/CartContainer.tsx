@@ -2,6 +2,7 @@ import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext'
 import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
 import purchase from '@/services/purchases/purchase';
 import { ApiContext } from '@/types';
+import CartProduct from '@/components/organisms/CartProduct';
 
 const context: ApiContext = {
   apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || '/api/proxy',
@@ -11,7 +12,7 @@ const CartContainer = () => {
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
   const { cart, removeProductFromCart } = useShoppingCartContext();
 
-  const handleRemoveButotnClick = (id: number) => {
+  const handleRemoveButtonClick = (id: number) => {
     removeProductFromCart(id);
   };
 
@@ -29,4 +30,22 @@ const CartContainer = () => {
       setGlobalSpinner(false);
     }
   };
+
+  return (
+    <>
+      {cart.map((product) => (
+        <CartProduct
+          key={product.id}
+          id={product.id}
+          imageUrl={product.imageUrl}
+          title={product.title}
+          price={product.price}
+          onRemoveButtonClick={handleRemoveButtonClick}
+          onBuyButtonClick={handleBuyButtonClick}
+        />
+      ))}
+    </>
+  );
 };
+
+export default CartContainer;

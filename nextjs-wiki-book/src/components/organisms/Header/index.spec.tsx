@@ -66,4 +66,31 @@ describe('Header', () => {
     renderResult.unmount();
     useShoppingCartContextMock.mockReset();
   });
+
+  it('비 로그인', async () => {
+    useShoppingCartContextMock.mockReturnValue({
+      cart: [],
+      addProductToCart: () => {},
+      removeProductFromCart: () => {},
+    });
+
+    renderResult = render(
+      <ThemeProvider theme={theme}>
+        <ShoppingCartContextProvider>
+          <AuthContextProvider context={{ apiRootUrl: 'https://dummy ' }}>
+            <Header />
+          </AuthContextProvider>
+        </ShoppingCartContextProvider>
+      </ThemeProvider>,
+    );
+
+    // 유저 이미지 없음
+    expect(screen.queryByTestId('profile-shape-image')).toBeNull();
+
+    // 카트가 비어있음
+    expect(screen.queryByTestId('badge-wrapper')).toBeNull();
+
+    renderResult.unmount();
+    useShoppingCartContextMock.mockReset();
+  });
 });

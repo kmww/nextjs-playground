@@ -45,6 +45,7 @@ const CheckBox = (props: CheckBoxProps) => {
         checked={isChecked}
         readOnly={!onChange}
         onChange={onChange}
+        data-testid="checkbox-wrapper"
       />
       <Flex alignItems="center">
         {checked ?? isChecked ? (

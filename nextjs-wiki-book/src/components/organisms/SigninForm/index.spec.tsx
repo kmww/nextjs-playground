@@ -46,4 +46,17 @@ describe('SigninForm', () => {
 
     expect(handleSignin).toHaveBeenCalledTimes(1);
   });
+
+  it('비밀번호 미입력시 onSignin이 호출되지 않는다.', async () => {
+    await act(async () => {
+      const inputUsernameNode = screen.getByPlaceholderText(
+        /사용자명/,
+      ) as HTMLInputElement;
+      fireEvent.change(inputUsernameNode, { target: { value: 'user' } });
+
+      fireEvent.click(screen.getByText('로그인'));
+    });
+
+    expect(handleSignin).toHaveBeenCalledTimes(0);
+  });
 });

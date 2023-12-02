@@ -34,6 +34,31 @@ const product: Product = {
   owner: authUser,
 };
 
+const products: Product[] = [
+  {
+    id: 1,
+    category: 'emoji',
+    title: 'Product',
+    description: '',
+    imageUrl: '/images/sample/1.jpg',
+    blurDataUrl: '',
+    price: 3000,
+    condition: 'new',
+    owner: authUser,
+  },
+  {
+    id: 2,
+    category: 'emoji',
+    title: 'Product',
+    description: '',
+    imageUrl: '/images/sample/2.jpg',
+    blurDataUrl: '',
+    price: 5000,
+    condition: 'new',
+    owner: authUser,
+  },
+];
+
 describe('Header', () => {
   let renderResult: RenderResult;
   const useShoppingCartContextMock =
@@ -62,6 +87,32 @@ describe('Header', () => {
     );
     // 카트에 상품 존재시 배지가 표시된다.
     expect(screen.getAllByTestId('badge-wrapper').length).toBeGreaterThan(0);
+
+    renderResult.unmount();
+    useShoppingCartContextMock.mockReset();
+  });
+
+  it('카트에 상품이 2개 존재한다.', async () => {
+    useShoppingCartContextMock.mockReturnValue({
+      cart: [...products],
+      addProductToCart: () => {},
+      removeProductFromCart: () => {},
+    });
+
+    renderResult = render(
+      <ThemeProvider theme={theme}>
+        <ShoppingCartContextProvider>
+          <AuthContextProvider
+            authUser={authUser}
+            context={{ apiRootUrl: 'https/dummy' }}
+          >
+            <Header />
+          </AuthContextProvider>
+        </ShoppingCartContextProvider>
+      </ThemeProvider>,
+    );
+
+    expect(screen.queryAllByTestId('badge-wrapper')[0].textContent).toBe('2');
 
     renderResult.unmount();
     useShoppingCartContextMock.mockReset();

@@ -52,7 +52,7 @@ const UserProfile = ({
               {numberOfProducts}개의 제품 게시 완료
             </Text>
             {variant === 'normal' && (
-              <Text as="p" margin={0}>
+              <Text as="p" margin={0} data-testid="user-description">
                 {description}
               </Text>
             )}

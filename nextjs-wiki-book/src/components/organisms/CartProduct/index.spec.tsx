@@ -43,4 +43,14 @@ describe('ProductCart', () => {
     fireEvent.click(screen.getByText('구입'));
     expect(onBuyButtonClick).toHaveBeenNthCalledWith(1, product.id);
   });
+
+  it('삭제 버튼을 누르면 onRemoveButtonClick이 호출된다.', () => {
+    onRemoveButtonClick = jest.fn();
+    renderResult = render(
+      <CartProduct {...product} onRemoveButtonClick={onRemoveButtonClick} />,
+    );
+
+    fireEvent.click(screen.getByText('삭제'));
+    expect(onRemoveButtonClick).toHaveBeenNthCalledWith(1, product.id);
+  });
 });

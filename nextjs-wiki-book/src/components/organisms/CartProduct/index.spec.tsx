@@ -1,4 +1,9 @@
-import { RenderResult, render, screen } from '@testing-library/react';
+import {
+  RenderResult,
+  fireEvent,
+  render,
+  screen,
+} from '@testing-library/react';
 import type { CartProductProps } from './';
 import CartProduct from './';
 
@@ -27,5 +32,15 @@ describe('ProductCart', () => {
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     // 제품 가격
     expect(screen.getByText('1000원')).toBeInTheDocument();
+  });
+
+  it('구입 버튼을 누르면 onBuyButtonClick이 호출된다.', () => {
+    onBuyButtonClick = jest.fn();
+    renderResult = render(
+      <CartProduct {...product} onBuyButtonClick={onBuyButtonClick} />,
+    );
+
+    fireEvent.click(screen.getByText('구입'));
+    expect(onBuyButtonClick).toHaveBeenNthCalledWith(1, product.id);
   });
 });

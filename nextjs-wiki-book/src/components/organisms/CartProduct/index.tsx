@@ -13,7 +13,7 @@ const RemoveText = styled(Text)`
   }
 `;
 
-interface CartProductProps {
+export interface CartProductProps {
   id: number;
   imageUrl: string;
   title: string;

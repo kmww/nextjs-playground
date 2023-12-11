@@ -1,3 +1,11 @@
+import {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Separator from '@/components/atoms/Sparator';
 import UserProductCardListContainer from '@/components/containers/UserProductCardListContainer';
@@ -10,14 +18,6 @@ import getAllProducts from '@/services/products/get-all-products';
 import getAllUsers from '@/services/users/get-all-users';
 import getUser from '@/services/users/get-users';
 import { ApiContext } from '@/types';
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  NextPage,
-} from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 type UserPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -65,7 +65,7 @@ const UserPage: NextPage<UserPageProps> = ({
   );
 };
 
-export const getStaticPath: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const context: ApiContext = {
     apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
   };

@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
-import InputImages, { FileData } from './';
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+import InputImages, { FileData } from './';
 
 const meta: Meta<typeof InputImages> = {
   title: 'Molecules/InputImages',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const fetcher = async (
   resource: RequestInfo,
   init?: RequestInit,

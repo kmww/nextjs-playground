@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import FilterGroup from './';
 import { useState } from 'react';
+import FilterGroup from './';
 
 const meta: Meta<typeof FilterGroup> = {
   title: 'Molecules/FilterGroup',
@@ -34,6 +34,7 @@ type Story = StoryObj<typeof FilterGroup>;
 
 const Template: Story = {
   render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [value, setValue] = useState<string[]>([]);
     const handleChange = (value: string[]) => {
       setValue(value);

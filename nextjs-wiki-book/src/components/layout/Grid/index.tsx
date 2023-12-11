@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+import Box, { BoxProps } from '@/components/layout/Box';
 import type {
   CSSPropertyGridArea,
   CSSPropertyGridAutoFlow,
@@ -5,8 +7,6 @@ import type {
   CSSPropertyGridRow,
   Responsive,
 } from '@/types/styles';
-import Box, { BoxProps } from '@/components/layout/Box';
-import styled from 'styled-components';
 import { toPropValue } from '@/utils/styles';
 
 type GridProps = BoxProps & {

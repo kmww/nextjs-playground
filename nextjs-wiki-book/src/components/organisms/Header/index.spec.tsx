@@ -1,12 +1,12 @@
-import { AuthContextProvider } from '@/contexts/AuthContext';
-import { theme } from '@/styles/themes';
-import { Product, User } from '@/types';
 import { RenderResult, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import Header from './';
+import { AuthContextProvider } from '@/contexts/AuthContext';
+import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
+import { theme } from '@/styles/themes';
+import { Product, User } from '@/types';
 
 jest.mock('contexts/shoppingCartContext');
-import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
 const { ShoppingCartContextProvider } = jest.requireActual(
   'contexts/ShoppingCartContext',
 );

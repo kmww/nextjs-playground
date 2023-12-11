@@ -1,10 +1,10 @@
+import Link from 'next/link';
+import RectLoader from '@/components/atoms/RectLoader';
+import Box from '@/components/layout/Box';
+import ProductCard from '@/components/organisms/ProductCard';
+import ProductCardList from '@/components/organisms/ProductCardList';
 import useSearch from '@/services/products/use-search';
 import { ApiContext, Category, Condition } from '@/types';
-import ProductCardList from '@/components/organisms/ProductCardList';
-import Box from '@/components/layout/Box';
-import RectLoader from '@/components/atoms/RectLoader';
-import Link from 'next/link';
-import ProductCard from '@/components/organisms/ProductCard';
 
 const context: ApiContext = {
   apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || 'api/porxy',

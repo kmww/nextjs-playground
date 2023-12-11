@@ -1,5 +1,5 @@
-import Badge from '@/components/atoms/Badge';
 import styled from 'styled-components';
+import Badge from '@/components/atoms/Badge';
 
 const BadgeIconButtonWrapper = styled.span<{ size: number | string }>`
   position: relative;

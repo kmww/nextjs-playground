@@ -1,4 +1,3 @@
-import { theme } from '@/styles/themes';
 import {
   Cancel,
   CheckBox,
@@ -13,6 +12,7 @@ import {
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import styled from 'styled-components';
+import { theme } from '@/styles/themes';
 
 export type ThemeColors = keyof typeof theme.colors;
 

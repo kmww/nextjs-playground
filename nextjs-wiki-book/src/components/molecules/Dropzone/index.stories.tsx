@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from '@storybook/react';
-import Dropzone from './';
 import { useEffect, useState } from 'react';
-import Box from '@/components/layout/Box';
+import Dropzone from './';
 import Button from '@/components/atoms/Button';
+import Box from '@/components/layout/Box';
 
 const meta: Meta<typeof Dropzone> = {
   title: 'Molecules/Dropzone',

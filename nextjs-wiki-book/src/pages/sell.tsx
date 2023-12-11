@@ -1,3 +1,5 @@
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import AppLogo from '@/components/atoms/AppLogo';
 import ProductFormContainer from '@/components/containers/ProductFormContainer';
 import Box from '@/components/layout/Box';
@@ -5,8 +7,6 @@ import Flex from '@/components/layout/Flex';
 import Layout from '@/components/templates/Layout';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useAuthGuard } from '@/utils/hooks';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 
 const SellPage: NextPage = () => {
   const router = useRouter();

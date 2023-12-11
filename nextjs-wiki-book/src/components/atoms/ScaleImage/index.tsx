@@ -1,7 +1,7 @@
-import { Responsive } from '@/types/styles';
-import { toPropValue } from '@/utils/styles';
 import Image, { ImageProps } from 'next/image';
 import styled from 'styled-components';
+import { Responsive } from '@/types/styles';
+import { toPropValue } from '@/utils/styles';
 
 type ScaleImageProps = Omit<ImageProps, 'quality'> & {
   containerWidth?: Responsive<string>;

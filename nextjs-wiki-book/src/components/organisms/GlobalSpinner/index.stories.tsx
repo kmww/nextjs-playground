@@ -1,9 +1,9 @@
 import { Meta } from '@storybook/react';
 import GlobalSpinner from './';
+import Button from '@/components/atoms/Button';
 import GlobalSpinnerContextProvider, {
   useGlobalSpinnerActionsContext,
 } from '@/contexts/GlobalSpinnerContext';
-import Button from '@/components/atoms/Button';
 
 const meta: Meta<typeof GlobalSpinner> = {
   title: 'Organisms/GlobalSpinner',

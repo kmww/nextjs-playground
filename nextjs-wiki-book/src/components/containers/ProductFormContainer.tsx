@@ -1,10 +1,10 @@
-import { useAuthContext } from '@/contexts/AuthContext';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
-import { ApiContext, Product } from '@/types';
 import ProductForm, {
   ProductFormData,
 } from '@/components/organisms/ProductForm';
+import { useAuthContext } from '@/contexts/AuthContext';
+import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
 import addProduct from '@/services/products/add-product';
+import { ApiContext, Product } from '@/types';
 
 const context: ApiContext = {
   apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || 'api/proxy',

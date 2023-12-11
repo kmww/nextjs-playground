@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
+import { useEffect } from 'react';
 import Header from './';
-import { User } from '@/types';
+import { AuthContextProvider } from '@/contexts/AuthContext';
 import {
   ShoppingCartContextProvider,
   useShoppingCartContext,
 } from '@/contexts/ShoppingCartContext';
-import { useEffect } from 'react';
-import { AuthContextProvider } from '@/contexts/AuthContext';
+import { User } from '@/types';
 
 const meta: Meta<typeof Header> = {
   title: 'Organisms/Header',
@@ -34,7 +34,7 @@ export const Login = () => {
     useEffect(() => {
       addProductToCart({
         id: 1,
-        category: 'book',
+        category: 'emoji',
         title: 'Product',
         description: '',
         imageUrl: '/images/sample/1.jpg',

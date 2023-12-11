@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import ScaleImage from '@/components/atoms/ScaleImage';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
-import styled from 'styled-components';
 
 interface ProductCardProps {
   title: string;

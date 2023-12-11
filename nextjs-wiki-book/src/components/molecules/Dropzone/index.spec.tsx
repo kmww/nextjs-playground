@@ -1,4 +1,3 @@
-import { theme } from '@/styles/themes';
 import {
   RenderResult,
   fireEvent,
@@ -7,6 +6,7 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import Dropzone from './';
+import { theme } from '@/styles/themes';
 
 describe('Dropzone', () => {
   let renderResult: RenderResult;

@@ -1,10 +1,10 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import styled from 'styled-components';
 import Button from '@/components/atoms/Button';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import Image from 'next/image';
-import Link from 'next/link';
-import styled from 'styled-components';
 
 const RemoveText = styled(Text)`
   cursor: pointer;

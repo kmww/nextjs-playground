@@ -1,3 +1,5 @@
+import { NextPage } from 'next';
+import Link from 'next/link';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Text from '@/components/atoms/Text';
 import CartContainer from '@/components/containers/CartContainer';
@@ -6,8 +8,6 @@ import Flex from '@/components/layout/Flex';
 import Breadcrumb from '@/components/molecules/Breadcrumb';
 import Layout from '@/components/templates/Layout';
 import { useAuthGuard } from '@/utils/hooks';
-import { NextPage } from 'next';
-import Link from 'next/link';
 
 const CartPage: NextPage = () => {
   useAuthGuard();

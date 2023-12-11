@@ -4,8 +4,8 @@ import {
   render,
   screen,
 } from '@testing-library/react';
-import CheckBox from './';
 import { ThemeProvider } from 'styled-components';
+import CheckBox from './';
 import { theme } from '@/styles/themes';
 
 describe('CheckBox', () => {

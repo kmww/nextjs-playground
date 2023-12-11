@@ -1,8 +1,8 @@
+import React, { useContext } from 'react';
+import useSWR from 'swr';
 import signin from '@/services/auth/signin';
 import signout from '@/services/auth/signout';
 import type { ApiContext, User } from '@/types';
-import React, { useContext } from 'react';
-import useSWR from 'swr';
 
 interface AuthContextType {
   authUser?: User;

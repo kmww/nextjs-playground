@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import Box, { BoxProps } from '@/components/layout/Box';
 import type {
   CSSPropertyAlignContent,
@@ -11,7 +12,6 @@ import type {
   Responsive,
 } from '@/types/styles';
 import { toPropValue } from '@/utils/styles';
-import styled from 'styled-components';
 
 type FlexProps = BoxProps & {
   alignItems?: Responsive<CSSPropertyAlignItems>;

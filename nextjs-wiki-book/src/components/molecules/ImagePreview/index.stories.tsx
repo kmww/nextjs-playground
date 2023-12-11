@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from '@storybook/react';
-import ImagePreview from './';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Dropzone from '../Dropzone';
+import ImagePreview from './';
 
 const meta: Meta<typeof ImagePreview> = {
   title: 'Molecules/ImagePreview',

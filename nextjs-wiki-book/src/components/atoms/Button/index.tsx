@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { Responsive } from '@/types/styles';
 import {
   Color,
@@ -7,7 +8,6 @@ import {
   Space,
   toPropValue,
 } from '@/utils/styles';
-import styled from 'styled-components';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger';
 

@@ -1,5 +1,5 @@
-import { ApiContext, Product } from '@/types';
 import useSWR from 'swr';
+import { ApiContext, Product } from '@/types';
 
 export interface UseProductProps {
   id: number;

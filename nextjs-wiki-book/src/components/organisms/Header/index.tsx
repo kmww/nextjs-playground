@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import styled from 'styled-components';
 import AppLogo from '@/components/atoms/AppLogo';
 import Button from '@/components/atoms/Button';
 import {
@@ -13,8 +15,6 @@ import Flex from '@/components/layout/Flex';
 import BadgeIconButton from '@/components/molecules/BadgeIconButton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
-import Link from 'next/link';
-import styled from 'styled-components';
 
 const HeaderRoot = styled.header`
   height: 88px;

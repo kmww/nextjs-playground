@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 export type ResponsiveProp<T> = {
   base?: T;
   sm?: T;

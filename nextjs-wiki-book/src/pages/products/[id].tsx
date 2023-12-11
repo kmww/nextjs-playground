@@ -1,3 +1,11 @@
+import {
+  GetStaticProps,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPage,
+} from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Separator from '@/components/atoms/Sparator';
 import Text from '@/components/atoms/Text';
@@ -12,14 +20,6 @@ import getAllProducts from '@/services/products/get-all-products';
 import getProduct from '@/services/products/get-product';
 import useProduct from '@/services/products/use-product';
 import { ApiContext, Category, Product } from '@/types';
-import {
-  GetStaticProps,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-  NextPage,
-} from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const categoryNameDict: Record<Category, string> = {
   emoji: '이모티콘',

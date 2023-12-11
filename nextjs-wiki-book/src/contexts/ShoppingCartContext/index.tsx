@@ -1,6 +1,6 @@
-import type { Product } from '@/types';
 import React, { useContext, useReducer } from 'react';
 import { shopReducer } from './reducers';
+import type { Product } from '@/types';
 
 interface ShoppingCartContextType {
   cart: Product[];

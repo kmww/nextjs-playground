@@ -1,11 +1,11 @@
+import { useCallback, useRef, useState } from 'react';
+import styled from 'styled-components';
 import {
   CheckBoxIcon,
   CheckBoxOutlineBlankIcon,
 } from '@/components/atoms/IconButton';
 import Text from '@/components/atoms/Text';
 import Flex from '@/components/layout/Flex';
-import { useCallback, useRef, useState } from 'react';
-import styled from 'styled-components';
 
 export interface CheckBoxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue'> {

@@ -1,4 +1,3 @@
-import { theme } from '@/styles/themes';
 import {
   RenderResult,
   act,
@@ -8,6 +7,7 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import SigninForm from './';
+import { theme } from '@/styles/themes';
 
 describe('SigninForm', () => {
   let renderResult: RenderResult;

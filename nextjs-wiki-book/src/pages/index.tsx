@@ -6,8 +6,9 @@ import Flex from '@/components/layout/Flex';
 import ProductCard from '@/components/organisms/ProductCard';
 import ProductCardCrousel from '@/components/organisms/ProductCardCarousel';
 import Layout from '@/components/templates/Layout';
-import getAllProducts from '@/services/products/get-all-products';
-import { ApiContext, Product } from '@/types';
+import { ProductsDocument } from '@/generated/graphql';
+import { Product } from '@/types';
+import { client } from '@/utils/apollo-client';
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -106,15 +107,28 @@ const Home = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const context: ApiContext = {
-    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:4000/graphql',
-  };
+  // const context: ApiContext = {
+  //   apiRootUrl: process.env.API_BASE_URL || 'http://localhost:4000/graphql',
+  // };
 
-  const [emojiProducts, figuresProducts, padProducts] = await Promise.all([
-    getAllProducts(context, { category: 'emoji', limit: 6, page: 1 }),
-    getAllProducts(context, { category: 'figures', limit: 6, page: 1 }),
-    getAllProducts(context, { category: 'pad', limit: 6, page: 1 }),
-  ]);
+  const { data } = await client.query({
+    query: ProductsDocument,
+  });
+
+  const emojiProducts = data?.products
+    .filter((product: Product) => product.category === 'emoji')
+    .slice(0, 6);
+  const figuresProducts = data.products
+    .filter((product: Product) => product.category === 'figures')
+    .slice(0, 6);
+  const padProducts = data.products
+    .filter((product: Product) => product.category === 'pad')
+    .slice(0, 6);
+  // const [emojiProducts, figuresProducts, padProducts] = await Promise.all([
+  //   getAllProducts(context, { category: 'emoji', limit: 6, page: 1 }),
+  //   getAllProducts(context, { category: 'figures', limit: 6, page: 1 }),
+  //   getAllProducts(context, { category: 'pad', limit: 6, page: 1 }),
+  // ]);
 
   return {
     props: {

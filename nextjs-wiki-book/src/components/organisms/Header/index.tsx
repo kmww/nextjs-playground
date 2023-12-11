@@ -63,14 +63,14 @@ const Header = () => {
           </NavLink>
           <NavLink>
             <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search/clothes" passHref>
-                <Anchor>의류</Anchor>
+              <Link href="/search/emoji" passHref>
+                <Anchor>이모티콘</Anchor>
               </Link>
             </Box>
           </NavLink>
           <NavLink>
             <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search/figure" passHref>
+              <Link href="/search/figures" passHref>
                 피규어
               </Link>
             </Box>

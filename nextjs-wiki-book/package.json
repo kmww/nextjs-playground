@@ -39,6 +39,7 @@
     "@graphql-codegen/cli": "3.3.1",
     "@graphql-codegen/typescript": "3.0.4",
     "@graphql-codegen/typescript-operations": "3.0.4",
+    "@graphql-codegen/typescript-react-apollo": "3.3.7",
     "@mdx-js/react": "^2.3.0",
     "@storybook/addon-essentials": "7.4.6",
     "@storybook/addon-interactions": "7.4.6",

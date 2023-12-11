@@ -1,5 +1,5 @@
-import dummyProducts from 'src/data/productdata';
-import { Product } from 'src/entities/Product';
+import dummyProducts from '../data/productdata';
+import { Product } from '../entities/Product';
 import { Query, Resolver } from 'type-graphql';
 
 @Resolver(Product)

@@ -1,13 +1,4 @@
-import { Product } from 'src/entities/Product';
-
-export interface Owner {
-  id: number;
-  username: string;
-  displayName: string;
-  email: string;
-  profileImageUrl: string;
-  description: string;
-}
+import { Product } from '../entities/Product';
 
 export interface ProductsData {
   products: Product[];

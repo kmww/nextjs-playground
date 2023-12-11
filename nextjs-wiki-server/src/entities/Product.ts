@@ -1,5 +1,5 @@
-import { Owner } from 'src/data/productdata';
 import { Field, Int, ObjectType } from 'type-graphql';
+import { User } from './User';
 
 @ObjectType()
 export class Product {
@@ -28,5 +28,5 @@ export class Product {
   condition: string;
 
   @Field({ description: '소유자' })
-  owner: Owner;
+  owner: User;
 }

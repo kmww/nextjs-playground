@@ -1,25 +1,21 @@
 import 'reflect-metadata';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import http from 'http';
+import { buildSchema } from 'type-graphql';
+import { ProductResolver } from './resolvers/Product';
 
 async function main() {
   const app = express();
 
   const apolloServer = new ApolloServer({
-    typeDefs: gql`
-      type Query {
-        hello: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        hello: () => `Hello!`,
-      },
-    },
+    schema: await buildSchema({
+      resolvers: [ProductResolver],
+    }),
     plugins: [ApolloServerPluginLandingPageLocalDefault()],
   });
+
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });
 

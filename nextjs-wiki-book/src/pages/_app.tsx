@@ -1,7 +1,14 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { SWRConfig } from 'swr';
+import GlobalSpinner from '@/components/organisms/GlobalSpinner';
+import { AuthContextProvider } from '@/contexts/AuthContext';
+import GlobalSpinnerContextProvider from '@/contexts/GlobalSpinnerContext';
+import { ShoppingCartContextProvider } from '@/contexts/ShoppingCartContext';
 import { theme } from '@/styles/themes';
+import { ApiContext } from '@/types';
+import { fetcher } from '@/utils';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -28,6 +35,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const context: ApiContext = {
+  apiRootUrl: process.env.NEXT_PUBLIC_BASE_PATH || '/api/proxy',
+};
+
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
@@ -43,7 +54,21 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <SWRConfig
+          value={{
+            shouldRetryOnError: false,
+            fetcher,
+          }}
+        >
+          <GlobalSpinnerContextProvider>
+            <ShoppingCartContextProvider>
+              <AuthContextProvider context={context}>
+                <GlobalSpinner />
+                <Component {...pageProps} />
+              </AuthContextProvider>
+            </ShoppingCartContextProvider>
+          </GlobalSpinnerContextProvider>
+        </SWRConfig>
       </ThemeProvider>
     </>
   );

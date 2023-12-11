@@ -107,7 +107,7 @@ const Home = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   const context: ApiContext = {
-    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:4000/graphql',
   };
 
   const [emojiProducts, figuresProducts, padProducts] = await Promise.all([

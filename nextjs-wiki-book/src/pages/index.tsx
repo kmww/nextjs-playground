@@ -86,7 +86,6 @@ const Home = ({
             </Text>
             {renderProductCardCarousel(emojiProducts)}
           </Box>
-
           <Box marginBottom={3}>
             <Text as="h2" variant="large">
               피규어

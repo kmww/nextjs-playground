@@ -8,12 +8,15 @@ const dummyProducts: ProductsData = {
   products: [
     {
       id: 1,
-      title: 'sample emoji 1',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '기분좋은 향기',
+      description: `
+        모코코 이모티콘: 기분좋은 향기가 싹 도노
+        출처: https://lostark.game.onstove.com/ContestBoard/Views/237?page=1&boardType=100&parentNo=3&category=3&searchtype=0&searchtext=&ordertype=latest
+        `,
       category: 'emoji',
-      imageUrl: '/products/emojis/emoji-637523259763204055.png',
-      price: 50000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/26/637523259763204055.png',
+      price: 1000,
       condition: 'new',
       owner: {
         id: 1,
@@ -27,12 +30,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 2,
-      title: 'sample emoji 2',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '모코~ 코~',
+      description: `
+      모코코 이모티콘: 모코~ 코~
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/237?page=1&boardType=100&parentNo=3&category=3&searchtype=0&searchtext=&ordertype=latest
+      `,
       category: 'emoji',
-      imageUrl: '/products/emojis/emoji-1283468_1920.jpeg',
-      price: 10000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/26/637523259673627150.png',
+      price: 1000,
       condition: 'new',
       owner: {
         id: 1,
@@ -46,11 +52,14 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 3,
-      title: 'sample emoji 3',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '전사 직업 이모티콘',
+      description: `
+        전사 이모티콘 모음
+        출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+        `,
       category: 'emoji',
-      imageUrl: '/products/emojis/emoji-3510326_1920.jpeg',
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521769547904513.png',
       price: 5000,
       condition: 'used',
       owner: {
@@ -65,12 +74,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 4,
-      title: 'sample emoji 4',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '무도가 직업 이모티콘',
+      description: `
+      무도가 이모티콘 모음
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+      `,
       category: 'emoji',
-      imageUrl: '/products/emojis/paper-3061485_1920.jpeg',
-      price: 20000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521769634226666.png',
+      price: 5000,
       condition: 'new',
       owner: {
         id: 1,
@@ -84,12 +96,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 5,
-      title: 'sample emoji 5',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '마법사 직업 이모티콘',
+      description: `
+      마법사 이모티콘 모음
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+      `,
       category: 'emoji',
-      imageUrl: '/products/emojis/tea-time-3240766_1920.jpeg',
-      price: 30000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521870499456172.png',
+      price: 5000,
       condition: 'new',
       owner: {
         id: 3,
@@ -103,12 +118,59 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 6,
-      title: 'sample emoji 6',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '암살자 직업 이모티콘',
+      description: `
+      암살자 이모티콘 모음
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+      `,
       category: 'emoji',
-      imageUrl: '/products/emojis/rashtravardhan-kataria.jpeg',
-      price: 60000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521770196252283.png',
+      price: 5000,
+      condition: 'used',
+      owner: {
+        id: 3,
+        username: 'jinho',
+        displayName: 'Jinho Yoon',
+        email: 'jinho.yoon@example.com',
+        profileImageUrl: '/users/3.png',
+        description:
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      },
+    },
+    {
+      id: 6,
+      title: '헌터 직업 이모티콘',
+      description: `
+      헌터 이모티콘 모음
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+      `,
+      category: 'emoji',
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521772554203181.png',
+      price: 5000,
+      condition: 'used',
+      owner: {
+        id: 3,
+        username: 'jinho',
+        displayName: 'Jinho Yoon',
+        email: 'jinho.yoon@example.com',
+        profileImageUrl: '/users/3.png',
+        description:
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      },
+    },
+    {
+      id: 6,
+      title: '젠더락 직업 이모티콘',
+      description: `
+      젠더락 이모티콘 모음
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/13?page=1&boardType=100&parentNo=3&category=3&searchtype=2&searchtext=%EC%9D%B4%EB%AA%A8%ED%8B%B0%EC%BD%98&ordertype=latest
+      `,
+      category: 'emoji',
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/03/24/637521770426526918.png',
+      price: 5000,
       condition: 'used',
       owner: {
         id: 3,

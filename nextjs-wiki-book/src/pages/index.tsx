@@ -8,7 +8,7 @@ import ProductCardCrousel from '@/components/organisms/ProductCardCarousel';
 import Layout from '@/components/templates/Layout';
 import { ProductsDocument } from '@/generated/graphql';
 import { Product } from '@/types';
-import { client } from '@/utils/apollo-client';
+import { fetcher } from '@/utils';
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -108,15 +108,9 @@ const Home = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const context: ApiContext = {
-  //   apiRootUrl: process.env.API_BASE_URL || 'http://localhost:4000/graphql',
-  // };
+  const data = await fetcher(ProductsDocument);
 
-  const { data } = await client.query({
-    query: ProductsDocument,
-  });
-
-  const emojiProducts = data?.products
+  const emojiProducts = data.products
     .filter((product: Product) => product.category === 'emoji')
     .slice(0, 6);
   const figuresProducts = data.products
@@ -125,11 +119,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const padProducts = data.products
     .filter((product: Product) => product.category === 'pad')
     .slice(0, 6);
-  // const [emojiProducts, figuresProducts, padProducts] = await Promise.all([
-  //   getAllProducts(context, { category: 'emoji', limit: 6, page: 1 }),
-  //   getAllProducts(context, { category: 'figures', limit: 6, page: 1 }),
-  //   getAllProducts(context, { category: 'pad', limit: 6, page: 1 }),
-  // ]);
 
   return {
     props: {

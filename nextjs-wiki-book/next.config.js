@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cdn-lostark.game.onstove.com', 'd3kxs6kpbh59hp.cloudfront.net'],
+    domains: [
+      'cdn-lostark.game.onstove.com',
+      'd3kxs6kpbh59hp.cloudfront.net',
+      'd2x8kymwjom7h7.cloudfront.net',
+    ],
   },
   compiler: (() => {
     let compilerConfig = {

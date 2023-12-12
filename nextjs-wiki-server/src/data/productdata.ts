@@ -316,12 +316,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 40,
-      title: 'sample pad 1',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '모코코 장패드',
+      description: `
+      모모코 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/Free/Views/8307649?page=108&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/baby-pad-505471_1920.jpeg',
-      price: 60000,
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/c48882abd8c143bb980017b638f7e773/9cadaa4be70b47a2b08d01f9ce78d3ae_1646918516.jpg',
+      price: 35000,
       condition: 'new',
       owner: {
         id: 1,
@@ -335,12 +338,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 41,
-      title: 'sample pad 2',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '소울이터 장패드',
+      description: `
+      소울이터 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/Free/Views/9677846?page=2&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/belt-952834_1920.jpeg',
-      price: 120000,
+      imageUrl:
+        'https://d2x8kymwjom7h7.cloudfront.net/live/application_no/96001/default/COMMUNITY/20acf2fe88bc44d58f571f5ddbd1e15f/d3f725e51d4640829cb5d76fe7b3d840.jpg',
+      price: 25000,
       condition: 'used',
       owner: {
         id: 1,
@@ -354,13 +360,16 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 42,
-      title: 'sample pad 3',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '건슬링어 장패드1',
+      description: `
+      건슬링어 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/Free/Views/6754005?page=2289&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/boots-181744_1280.jpeg',
-      price: 100000,
-      condition: 'used',
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/b5804e6c9c7d40d380972e467c1e580e/cc9dd5c76a3f4303bbe0642ec2a768fc_1611994538.png',
+      price: 34000,
+      condition: 'new',
       owner: {
         id: 2,
         username: 'eunyoung',
@@ -373,12 +382,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 43,
-      title: 'sample pad 4',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '건슬링어 장패드2',
+      description: `
+      건슬링어 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/Free/Views/6754005?page=2289&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/brown-pad-1150071_1920.jpeg',
-      price: 70000,
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/0a05f24cc93148aea9e33fff59b1fbcd/d4065db693034884a86c57e7a6a045c2_1611994549.png',
+      price: 20000,
       condition: 'used',
       owner: {
         id: 2,
@@ -392,12 +404,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 44,
-      title: 'sample pad 5',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '바드 장패드',
+      description: `
+      바드 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/FanArt/Views/7413409?page=6&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=122541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/feet-1840619_1920.jpeg',
-      price: 90000,
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/6b1c877291864a4782c964c41fdf7239/5ff9c907db9947aca010def935c0c271_1627321757.jpg',
+      price: 43000,
       condition: 'new',
       owner: {
         id: 3,
@@ -411,12 +426,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 45,
-      title: 'sample pad 6',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '모코코 생일축하 장패드',
+      description: `
+      모코코 생일축하 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/FanArt/Views/7413409?page=6&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=122541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/pad-1433925_1920.jpeg',
-      price: 70000,
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/43ae2ad8771a46dfa927ba0628227311/a093d46107204e79a6edccab24571a6f_1649155528.png',
+      price: 35000,
       condition: 'new',
       owner: {
         id: 3,
@@ -430,31 +448,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 46,
-      title: 'sample pad 7',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '모코코 & 코니 장패드',
+      description: `
+      모코코 코니 마우스 패드
+      출처: https://lostark.game.onstove.com/Community/Free/Views/9660757?page=4&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=541
+      `,
       category: 'pad',
-      imageUrl: '/products/pad/pad-2216498_1920.jpeg',
+      imageUrl:
+        'https://d2x8kymwjom7h7.cloudfront.net/live/application_no/96001/default/COMMUNITY/c2e5042748814b3cacb636047efe24b8/3d4fec3a96ff41ebb2a7f3fec4a6f7c1.jpg',
       price: 20000,
-      condition: 'new',
-      owner: {
-        id: 3,
-        username: 'jinho',
-        displayName: 'Jinho Yoon',
-        email: 'jinho.yoon@example.com',
-        profileImageUrl: '/users/3.png',
-        description:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-      },
-    },
-    {
-      id: 47,
-      title: 'sample pad 8',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      category: 'pad',
-      imageUrl: '/products/pad/pad-153310_1280.png',
-      price: 60000,
       condition: 'new',
       owner: {
         id: 3,

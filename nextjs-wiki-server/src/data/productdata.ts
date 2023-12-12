@@ -12,7 +12,7 @@ const dummyProducts: ProductsData = {
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       category: 'emoji',
-      imageUrl: '/products/emojis/emoji-1867195_1920.jpeg',
+      imageUrl: '/products/emojis/emoji-637523259763204055.png',
       price: 50000,
       condition: 'new',
       owner: {

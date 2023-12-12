@@ -184,12 +184,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 20,
-      title: 'sample figures 1',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '군단장: 발탄',
+      description: `
+      군단장: 발탄 피규어
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/3152?page=1&boardType=102&parentNo=3&category=0&searchtype=0&searchtext=&ordertype=random
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/blank-1886001_1920.png',
-      price: 10000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2022/09/06/637980258298638090.png',
+      price: 50000,
       condition: 'used',
       owner: {
         id: 1,
@@ -203,12 +206,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 21,
-      title: 'sample figures 2',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '군단장: 일리아칸',
+      description: `
+      군단장: 일리아칸 피규어
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/3067?page=1&boardType=102&parentNo=3&category=0&searchtype=0&searchtext=&ordertype=random
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/black-shirts.jpeg',
-      price: 20000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2022/09/03/637978442200709196.jpg',
+      price: 50000,
       condition: 'used',
       owner: {
         id: 1,
@@ -222,12 +228,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 22,
-      title: 'sample figures 3',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen emoji.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '가디언: 칼엘리고스',
+      description: `
+      가디언: 칼엘리고스 피규어
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/2943?page=2&boardType=102&parentNo=3&category=0&searchtype=2&searchtext=%ED%94%BC%EA%B7%9C%EC%96%B4&ordertype=random
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/blank-1886008_1920.png',
-      price: 50000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2022/08/29/637973814827035564.jpg',
+      price: 25000,
       condition: 'new',
       owner: {
         id: 1,
@@ -241,12 +250,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 23,
-      title: 'sample figures 4',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '군단장: 아브렐슈드',
+      description: `
+      군단장: 아브렐슈드 피규어
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/851?page=15&boardType=100&parentNo=3&category=0&searchtype=0&searchtext=&ordertype=latest
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/fashion-1283863_1920.jpeg',
-      price: 20000,
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2021/04/04/637531619661243339.jpg',
+      price: 60000,
       condition: 'new',
       owner: {
         id: 2,
@@ -260,12 +272,15 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 24,
-      title: 'sample figures 5',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '디스트로이어',
+      description: `
+      디스트로이어 피규어
+      출처: https://lostark.game.onstove.com/Community/FanArt/Views/3265185?page=1&searchtype=0&searchtext=&ordertype=latest&category=0&communityNo=1225
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/man-407095_1920.jpeg',
-      price: 30000,
+      imageUrl:
+        'https://d3kxs6kpbh59hp.cloudfront.net/community/COMMUNITY/572ca9168c4c48fb989e35d2727d7628/3581ea6a0e6f41feb7110a78b4134284_1559386749.jpg',
+      price: 100000,
       condition: 'new',
       owner: {
         id: 2,
@@ -279,11 +294,14 @@ const dummyProducts: ProductsData = {
     },
     {
       id: 25,
-      title: 'sample figures 6',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      title: '에스더: 니나브',
+      description: `
+      에스더: 니나브 피규어
+      출처: https://lostark.game.onstove.com/ContestBoard/Views/3060
+      `,
       category: 'figures',
-      imageUrl: '/products/figures/shirt-2878932_1920.jpeg',
+      imageUrl:
+        'https://cdn-lostark.game.onstove.com/uploadfiles/user/2022/09/03/637978341991669715.jpg',
       price: 30000,
       condition: 'new',
       owner: {

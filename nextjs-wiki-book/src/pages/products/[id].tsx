@@ -16,19 +16,14 @@ import Breadcrumb from '@/components/molecules/Breadcrumb';
 import ProductCard from '@/components/organisms/ProductCard';
 import UserProfile from '@/components/organisms/UserProfile';
 import Layout from '@/components/templates/Layout';
-import getAllProducts from '@/services/products/get-all-products';
-import getProduct from '@/services/products/get-product';
-import useProduct from '@/services/products/use-product';
-import { ApiContext, Category, Product } from '@/types';
+import { ProductsDocument, useProductQuery } from '@/generated/graphql';
+import { Category, Product } from '@/types';
+import { fetcher } from '@/utils';
 
 const categoryNameDict: Record<Category, string> = {
   emoji: '이모티콘',
   figures: '피규어',
   pad: '마우스 패드',
-};
-
-const context: ApiContext = {
-  apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || '/api/proxy',
 };
 
 type ProductPageProps = InferGetStaticPropsType<typeof getStaticProps>;
@@ -38,17 +33,24 @@ const ProductPage: NextPage<ProductPageProps> = ({
   product: initial,
 }: ProductPageProps) => {
   const router = useRouter();
-  const data = useProduct(context, { id, initial });
+
+  const { data, error, loading } = useProductQuery({
+    variables: { productId: id },
+  });
+
+  const product = (data?.product as Product) ?? initial;
 
   const handleAddToCartButtonClick = () => {
     router.push('/cart');
   };
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
+  if (error) {
+    throw new Error(JSON.stringify(error));
   }
 
-  const product = (data.product as Product) ?? initial;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Layout>
@@ -124,12 +126,8 @@ const ProductPage: NextPage<ProductPageProps> = ({
 };
 
 export const getStaticPaths = async () => {
-  const context: ApiContext = {
-    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
-  };
-
-  const products = await getAllProducts(context);
-  const paths = products.map((product) => `/products/${product.id}`);
+  const { products } = await fetcher(ProductsDocument);
+  const paths = products.map((product: Product) => `/products/${product.id}`);
 
   return { paths, fallback: true };
 };
@@ -137,16 +135,15 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const context: ApiContext = {
-    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
-  };
-
+  const { products } = await fetcher(ProductsDocument);
   if (!params) {
     throw new Error('products params is undefined');
   }
 
   const productId = Number(params.id);
-  const product = await getProduct(context, { id: productId });
+  const product = products.filter(
+    (product: Product) => product.id === productId,
+  );
 
   return {
     props: {

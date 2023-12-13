@@ -1,0 +1,20 @@
+query product($productId: Int!) {
+  product(productId: $productId) {
+    id
+    category
+    title
+    description
+    imageUrl
+    blurDataUrl
+    price
+    condition
+    owner {
+      id
+      username
+      displayName
+      email
+      profileImageUrl
+      description
+    }
+  }
+}

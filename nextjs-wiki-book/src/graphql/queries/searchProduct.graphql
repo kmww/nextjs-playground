@@ -1,4 +1,4 @@
-query SearchProducts($conditions: String, $category: String) {
+query SearchProducts($conditions: [String!], $category: String) {
   searchProducts(conditions: $conditions, category: $category) {
     id
     category

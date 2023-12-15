@@ -53,7 +53,7 @@ export type QueryProductArgs = {
 
 export type QuerySearchProductsArgs = {
   category?: InputMaybe<Scalars['String']>;
-  conditions?: InputMaybe<Scalars['String']>;
+  conditions?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export type User = {
@@ -85,7 +85,7 @@ export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
 
 export type SearchProductsQueryVariables = Exact<{
-  conditions?: InputMaybe<Scalars['String']>;
+  conditions?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
   category?: InputMaybe<Scalars['String']>;
 }>;
 
@@ -193,7 +193,7 @@ export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
 export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
 export const SearchProductsDocument = gql`
-    query SearchProducts($conditions: String, $category: String) {
+    query SearchProducts($conditions: [String!], $category: String) {
   searchProducts(conditions: $conditions, category: $category) {
     id
     category

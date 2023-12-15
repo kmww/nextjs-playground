@@ -19,17 +19,17 @@ export class ProductResolver {
   @Query(() => [Product])
   searchProducts(
     @Arg('category', { nullable: true })
-    category: Category,
-    @Arg('conditions', { nullable: true })
-    conditions: Condition,
+    category?: Category,
+    @Arg('conditions', () => [String], { nullable: true })
+    conditions?: Condition[],
   ): Product[] | [] {
     if (category) {
       let products = dummyProducts.products.filter(
         (product) => product.category === category,
       );
-      if (conditions) {
-        products = products.filter(
-          (product) => product.condition === conditions,
+      if (conditions && conditions.length > 0) {
+        products = products.filter((product) =>
+          conditions.includes(product.condition as Condition),
         );
         return products;
       } else {

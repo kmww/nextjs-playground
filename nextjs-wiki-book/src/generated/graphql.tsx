@@ -42,11 +42,18 @@ export type Query = {
   __typename?: 'Query';
   product?: Maybe<Product>;
   products: Array<Product>;
+  searchProducts: Array<Product>;
 };
 
 
 export type QueryProductArgs = {
   productId: Scalars['Int'];
+};
+
+
+export type QuerySearchProductsArgs = {
+  category?: InputMaybe<Scalars['String']>;
+  conditions?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
@@ -76,6 +83,14 @@ export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
+
+export type SearchProductsQueryVariables = Exact<{
+  conditions?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SearchProductsQuery = { __typename?: 'Query', searchProducts: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
 
 
 export const ProductDocument = gql`
@@ -177,3 +192,54 @@ export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
 export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
 export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const SearchProductsDocument = gql`
+    query SearchProducts($conditions: String, $category: String) {
+  searchProducts(conditions: $conditions, category: $category) {
+    id
+    category
+    title
+    description
+    imageUrl
+    blurDataUrl
+    price
+    condition
+    owner {
+      id
+      username
+      displayName
+      email
+      profileImageUrl
+      description
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchProductsQuery__
+ *
+ * To run a query within a React component, call `useSearchProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchProductsQuery({
+ *   variables: {
+ *      conditions: // value for 'conditions'
+ *      category: // value for 'category'
+ *   },
+ * });
+ */
+export function useSearchProductsQuery(baseOptions?: Apollo.QueryHookOptions<SearchProductsQuery, SearchProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchProductsQuery, SearchProductsQueryVariables>(SearchProductsDocument, options);
+      }
+export function useSearchProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchProductsQuery, SearchProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchProductsQuery, SearchProductsQueryVariables>(SearchProductsDocument, options);
+        }
+export type SearchProductsQueryHookResult = ReturnType<typeof useSearchProductsQuery>;
+export type SearchProductsLazyQueryHookResult = ReturnType<typeof useSearchProductsLazyQuery>;
+export type SearchProductsQueryResult = Apollo.QueryResult<SearchProductsQuery, SearchProductsQueryVariables>;

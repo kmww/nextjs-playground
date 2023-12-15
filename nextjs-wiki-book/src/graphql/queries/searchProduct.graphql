@@ -1,0 +1,20 @@
+query SearchProducts($conditions: String, $category: String) {
+  searchProducts(conditions: $conditions, category: $category) {
+    id
+    category
+    title
+    description
+    imageUrl
+    blurDataUrl
+    price
+    condition
+    owner {
+      id
+      username
+      displayName
+      email
+      profileImageUrl
+      description
+    }
+  }
+}

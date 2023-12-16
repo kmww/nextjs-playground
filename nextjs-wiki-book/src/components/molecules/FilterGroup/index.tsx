@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import uuid from 'react-uuid';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import CheckBox from '@/components/molecules/CheckBox';
@@ -23,20 +24,16 @@ const FilterGroup = ({
   defaultValue = [],
   onChange,
 }: FilterGroupProps) => {
-  const [selected, SetSelected] = useState(value ?? defaultValue);
+  const [selected, setSelected] = useState(value ?? defaultValue);
 
-  useEffect(() => {
-    SetSelected(value);
-  }, [value]);
-
-  const handleChnage = useCallback(
+  const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.name;
       const newSelected = e.target.checked
         ? [...selected, value]
         : selected.filter((v) => v !== value);
 
-      SetSelected(newSelected);
+      setSelected(newSelected);
       onChange && onChange(newSelected);
     },
     [onChange, selected],
@@ -49,12 +46,12 @@ const FilterGroup = ({
       </Text>
       <Box marginTop={2}>
         {items.map(({ label, name }, index) => (
-          <Box key={index} marginTop={index === 0 ? 0 : '4px'}>
+          <Box key={uuid()} marginTop={index === 0 ? 0 : '4px'}>
             <CheckBox
               name={name}
               label={label}
               checked={!!selected.find((e) => e === name)}
-              onChange={handleChnage}
+              onChange={handleChange}
             />
           </Box>
         ))}

@@ -7,7 +7,7 @@ interface ProductCardProps {
   title: string;
   price: number;
   imageUrl: string;
-  blurDataUrl?: string;
+  blurDataUrl?: string | null;
   variant?: 'listing' | 'small' | 'detail';
 }
 

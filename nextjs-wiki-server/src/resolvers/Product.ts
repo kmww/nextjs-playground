@@ -24,18 +24,19 @@ export class ProductResolver {
     conditions?: Condition[],
   ): Product[] | [] {
     if (category) {
-      let products = dummyProducts.products.filter(
+      const products = dummyProducts.products.filter(
         (product) => product.category === category,
       );
-      if (conditions && conditions.length > 0) {
-        products = products.filter((product) =>
-          conditions.includes(product.condition as Condition),
-        );
-        return products;
-      } else {
-        return products;
-      }
+      return conditions && conditions.length > 0
+        ? products.filter((product) =>
+            conditions.includes(product.condition as Condition),
+          )
+        : products;
     }
-    return [];
+    return conditions && conditions.length > 0
+      ? dummyProducts.products.filter((product) =>
+          conditions.includes(product.condition as Condition),
+        )
+      : dummyProducts.products;
   }
 }

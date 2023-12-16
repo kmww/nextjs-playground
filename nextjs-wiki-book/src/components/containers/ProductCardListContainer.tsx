@@ -1,14 +1,11 @@
 import Link from 'next/link';
+import uuid from 'react-uuid';
 import RectLoader from '@/components/atoms/RectLoader';
 import Box from '@/components/layout/Box';
 import ProductCard from '@/components/organisms/ProductCard';
 import ProductCardList from '@/components/organisms/ProductCardList';
-import useSearch from '@/services/products/use-search';
-import { ApiContext, Category, Condition } from '@/types';
-
-const context: ApiContext = {
-  apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || 'api/porxy',
-};
+import { useSearchProductsQuery } from '@/generated/graphql';
+import { Category, Condition } from '@/types';
 
 interface ProductCardListContainerProps {
   category?: Category;
@@ -19,16 +16,23 @@ const ProductCardListContainer = ({
   category,
   conditions,
 }: ProductCardListContainerProps) => {
-  const { products, isLoading } = useSearch(context, {
-    category,
-    conditions,
+  const { data, loading, error } = useSearchProductsQuery({
+    variables: {
+      category,
+      conditions,
+    },
   });
+
+  if (error) {
+    console.error(`${error}`);
+    return;
+  }
 
   return (
     <ProductCardList>
-      {isLoading &&
-        Array.from(Array(16), (_, index) => (
-          <Box key={index}>
+      {loading &&
+        Array.from(Array(16), () => (
+          <Box key={uuid()}>
             <Box display={{ base: 'none', md: 'block' }}>
               <RectLoader width={240} height={240} />
             </Box>
@@ -37,9 +41,9 @@ const ProductCardListContainer = ({
             </Box>
           </Box>
         ))}
-      {!!isLoading &&
-        products.map((product) => (
-          <Box key={product.id}>
+      {!loading &&
+        data?.searchProducts.map((product) => (
+          <Box key={`${uuid()}${product.id}`}>
             <Link href={`/products/${product.id}`} passHref>
               <ProductCard
                 variant="listing"

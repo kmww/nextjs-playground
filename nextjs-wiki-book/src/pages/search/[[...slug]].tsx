@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import uuid from 'react-uuid';
 import styled from 'styled-components';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Text from '@/components/atoms/Text';
@@ -32,10 +33,10 @@ const SearchPage: NextPage = () => {
     : [];
 
   const conditions = () => {
-    if (Array.isArray(router.query.condition)) {
-      return router.query.conditon as Condition[];
-    } else if (router.query.conditon) {
-      return [router.query.conditon as Condition];
+    if (Array.isArray(router.query.conditions)) {
+      return router.query.conditions as Condition[];
+    } else if (router.query.conditions) {
+      return [router.query.conditions as Condition];
     } else {
       return [];
     }
@@ -68,7 +69,7 @@ const SearchPage: NextPage = () => {
               <Link href="/serach">검색</Link>
             </BreadcrumbItem>
             {slug.slice(0, slug.length - 1).map((category, index) => (
-              <BreadcrumbItem key={index}>
+              <BreadcrumbItem key={uuid()}>
                 <Link href={`/search/${slug.slice(0, index + 1).join('/')}`}>
                   {categoryNameDict[category] ?? 'Unknown'}
                 </Link>
@@ -82,51 +83,51 @@ const SearchPage: NextPage = () => {
             )}
           </Breadcrumb>
         </Box>
-        <Flex flexDirection={{ base: 'column', md: 'row' }}>
-          <Box as="aside" minWidth="200px" marginBottom={{ base: 2, md: 0 }}>
-            <FilterGroup
-              title="상품 상태"
-              items={[
-                { label: '새 상품', name: 'new' },
-                { label: '중고 상품', name: 'used' },
-              ]}
-              value={conditions()}
-              onChange={handleChange}
-            />
-            <Box paddingTop={1}>
-              <Text as="h2" fontWeight="bold" variant="mediumLarge">
-                카테고리
-              </Text>
-              <Box>
-                <Link href="/search/">
-                  <Anchor>모두</Anchor>
-                </Link>
-              </Box>
-              {Object.keys(categoryNameDict).map(
-                (category: string, index: number) => (
-                  <Box key={index} marginTop={1}>
+        <Flex>
+          <Flex flexDirection={{ base: 'column', md: 'row' }}>
+            <Box as="aside" minWidth="200px" marginBottom={{ base: 2, md: 0 }}>
+              <FilterGroup
+                title="상품 상태"
+                items={[
+                  { label: '새 상품', name: 'new' },
+                  { label: '중고 상품', name: 'used' },
+                ]}
+                value={conditions()}
+                onChange={handleChange}
+              />
+              <Box paddingTop={1}>
+                <Text as="h2" fontWeight="bold" variant="mediumLarge">
+                  카테고리
+                </Text>
+                <Box>
+                  <Link href="/search/">
+                    <Anchor>모두</Anchor>
+                  </Link>
+                </Box>
+                {Object.keys(categoryNameDict).map((category: string) => (
+                  <Box key={uuid()} marginTop={1}>
                     <Link href={`/search/${category}`} passHref>
                       <Anchor>{categoryNameDict[category as Category]}</Anchor>
                     </Link>
                   </Box>
-                ),
-              )}
+                ))}
+              </Box>
             </Box>
-          </Box>
-          <Box>
-            <Text
-              as="h2"
-              display={{ base: 'block', md: 'none' }}
-              fontWeight="bold"
-              variant="mediumLarge"
-            >
-              상품 목록
-            </Text>
-            <ProductCardListContainer
-              category={slug.length > 0 ? slug[slug.length - 1] : undefined}
-              conditions={conditions()}
-            />
-          </Box>
+            <Box>
+              <Text
+                as="h2"
+                display={{ base: 'block', md: 'none' }}
+                fontWeight="bold"
+                variant="mediumLarge"
+              >
+                상품 목록
+              </Text>
+              <ProductCardListContainer
+                category={slug.length > 0 ? slug[slug.length - 1] : undefined}
+                conditions={conditions()}
+              />
+            </Box>
+          </Flex>
         </Flex>
       </Box>
     </Layout>

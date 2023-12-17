@@ -5,8 +5,10 @@ import express from 'express';
 import http from 'http';
 import { buildSchema } from 'type-graphql';
 import { ProductResolver } from './resolvers/Product';
+import { createDB } from './db/db-client';
 
 async function main() {
+  await createDB();
   const app = express();
 
   const apolloServer = new ApolloServer({

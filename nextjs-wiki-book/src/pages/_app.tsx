@@ -41,7 +41,7 @@ const context: ApiContext = {
   apiRootUrl: process.env.NEXT_PUBLIC_BASE_PATH || '/api/proxy',
 };
 
-const apolloClient = createApolloClient();
+export const apolloClient = createApolloClient();
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

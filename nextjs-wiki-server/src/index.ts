@@ -6,6 +6,7 @@ import http from 'http';
 import { buildSchema } from 'type-graphql';
 import { ProductResolver } from './resolvers/Product';
 import { createDB } from './db/db-client';
+import { UserResolver } from './resolvers/User';
 
 async function main() {
   await createDB();
@@ -13,7 +14,7 @@ async function main() {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [ProductResolver],
+      resolvers: [ProductResolver, UserResolver],
     }),
     plugins: [ApolloServerPluginLandingPageLocalDefault()],
   });

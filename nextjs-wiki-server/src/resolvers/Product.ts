@@ -1,6 +1,6 @@
 import dummyProducts from '../data/productdata';
 import { Product } from '../entities/Product';
-import { Arg, Field, Int, ObjectType, Query, Resolver } from 'type-graphql';
+import { Arg, Int, Query, Resolver } from 'type-graphql';
 
 type Category = 'emoji' | 'figures' | 'pad';
 type Condition = 'new' | 'used';

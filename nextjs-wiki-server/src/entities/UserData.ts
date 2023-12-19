@@ -15,7 +15,7 @@ export default class UserData extends BaseEntity {
   id!: number;
 
   @Field({ description: '유저 이름' })
-  @Column({ unique: true, comment: '유저 이름' })
+  @Column({ unique: false, comment: '유저 이름' })
   username: string;
 
   @Field({ description: '유저 닉네임' })

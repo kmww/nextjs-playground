@@ -1,23 +1,14 @@
-import { FormControl, FormLabel } from '@mui/material';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FormLabel } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
-
-interface SignUpFormData {
-  email: string;
-  username: string;
-  password: string;
-  displayName: string;
-}
+import Box from '@/components/layout/Box';
+import { SignUpMutationVariables } from '@/generated/graphql';
 
 interface SignUpFormProps {
-  onSignUp?: (
-    email: string,
-    username: string,
-    password: string,
-    displayName: string,
-  ) => void;
+  onSignUp: ({ variables }: any) => void;
 }
 
 const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
@@ -25,76 +16,76 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpFormData>();
+  } = useForm<SignUpMutationVariables>();
 
-  const onSubmit = (data: SignUpFormData) => {
-    const { email, username, password, displayName } = data;
+  const onSubmit = async (formData: SignUpMutationVariables) => {
+    const { signUpInput } = formData;
 
-    onSignUp && onSignUp(email, username, password, displayName);
+    onSignUp({ variables: { signUpInput } });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl fullWidth sx={{ paddingBottom: 1 }}>
+      <Box paddingBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>이메일</FormLabel>
         <Input
-          {...register('email', { required: true })}
-          name="email"
-          type="text"
+          {...register('signUpInput.email', { required: true })}
+          name="signUpInput.email"
+          type="email"
           placeholder="example@example.com"
-          hasError={!!errors.email}
+          hasError={!!errors.signUpInput?.email}
         />
-        {errors.email && (
+        {errors.signUpInput?.email?.message && (
           <Text color="danger" variant="small" paddingLeft={1}>
             이메일을 입력해주세요
           </Text>
         )}
-      </FormControl>
-      <FormControl fullWidth sx={{ paddingBottom: 1 }}>
+      </Box>
+      <Box paddingBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>비밀번호</FormLabel>
         <Input
-          {...register('password', { required: true })}
-          name="password"
+          {...register('signUpInput.password', { required: true })}
+          name="signUpInput.password"
           type="password"
           placeholder="8자 이상의 영문,숫자,특문"
-          hasError={!!errors.password}
+          hasError={!!errors.signUpInput?.password}
         />
-        {errors.password && (
+        {errors.signUpInput?.password && (
           <Text color="danger" variant="small" paddingLeft={1}>
             비밀번호를 입력해주세요
           </Text>
         )}
-      </FormControl>
-      <FormControl fullWidth sx={{ marginBottom: 1 }}>
+      </Box>
+      <Box marginBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>이름</FormLabel>
         <Input
-          {...register('username', { required: true })}
-          name="username"
+          {...register('signUpInput.username', { required: true })}
+          name="signUpInput.username"
           type="text"
           placeholder="홍길동"
-          hasError={!!errors.username}
+          hasError={!!errors.signUpInput?.username}
         />
-        {errors.username && (
+        {errors.signUpInput?.username && (
           <Text color="danger" variant="small" paddingLeft={1}>
             실명을 입력해주세요
           </Text>
         )}
-      </FormControl>
-      <FormControl fullWidth sx={{ marginBottom: 2 }}>
+      </Box>
+      <Box marginBottom={2}>
         <FormLabel sx={{ fontWeight: 'bold' }}>닉네임</FormLabel>
         <Input
-          {...register('displayName', { required: true })}
-          name="displayName"
+          {...register('signUpInput.displayName', { required: true })}
+          name="signUpInput.displayName"
           type="text"
           placeholder="닉네임"
-          hasError={!!errors.displayName}
+          hasError={!!errors.signUpInput?.displayName}
         />
-        {errors.displayName && (
+        {errors.signUpInput?.displayName && (
           <Text color="danger" variant="small" paddingLeft={1}>
             닉네임을 입력해주세요
           </Text>
         )}
-      </FormControl>
+      </Box>
       <Button width="100%" type="submit">
         회원가입
       </Button>

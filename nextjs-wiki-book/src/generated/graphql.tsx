@@ -16,6 +16,16 @@ export type Scalars = {
   Float: number;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  signUp: UserData;
+};
+
+
+export type MutationSignUpArgs = {
+  signUpInput: SignUpInput;
+};
+
 export type Product = {
   __typename?: 'Product';
   /** blurDataUrl */
@@ -56,6 +66,13 @@ export type QuerySearchProductsArgs = {
   conditions?: InputMaybe<Array<Scalars['String']>>;
 };
 
+export type SignUpInput = {
+  displayName: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
   /** 유저 소개 */
@@ -71,6 +88,28 @@ export type User = {
   /** 유저 이름 */
   username: Scalars['String'];
 };
+
+export type UserData = {
+  __typename?: 'UserData';
+  /** 생성 일자 */
+  createdAt: Scalars['String'];
+  /** 유저 닉네임 */
+  displayName: Scalars['String'];
+  /** 이메일 */
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  /** 업데이트 일자 */
+  updatedAt: Scalars['String'];
+  /** 유저 이름 */
+  username: Scalars['String'];
+};
+
+export type SignUpMutationVariables = Exact<{
+  signUpInput: SignUpInput;
+}>;
+
+
+export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'UserData', id: number, email: string, username: string, displayName: string, createdAt: string, updatedAt: string } };
 
 export type ProductQueryVariables = Exact<{
   productId: Scalars['Int'];
@@ -93,6 +132,44 @@ export type SearchProductsQueryVariables = Exact<{
 export type SearchProductsQuery = { __typename?: 'Query', searchProducts: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
 
 
+export const SignUpDocument = gql`
+    mutation signUp($signUpInput: SignUpInput!) {
+  signUp(signUpInput: $signUpInput) {
+    id
+    email
+    username
+    displayName
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+
+/**
+ * __useSignUpMutation__
+ *
+ * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ *   variables: {
+ *      signUpInput: // value for 'signUpInput'
+ *   },
+ * });
+ */
+export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+      }
+export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
+export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const ProductDocument = gql`
     query product($productId: Int!) {
   product(productId: $productId) {

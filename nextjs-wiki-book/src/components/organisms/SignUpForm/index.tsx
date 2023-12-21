@@ -4,37 +4,24 @@ import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
-import {
-  SignUpMutationVariables,
-  useSignUpMutation,
-} from '@/generated/graphql';
+import { SignUpInput, SignUpMutationVariables } from '@/generated/graphql';
 
 interface SignUpFormProps {
-  onSignUp: ReturnType<typeof useSignUpMutation>[0];
+  onSignUp: (signUpInput: SignUpInput) => Promise<void>;
+  isLoading: boolean;
 }
 
-const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
+const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpMutationVariables>();
 
-  const onSubmit = async (formData: SignUpMutationVariables) => {
+  const onSubmit = (formData: SignUpMutationVariables) => {
     const { signUpInput } = formData;
 
-    return onSignUp({ variables: { signUpInput } })
-      .then((res) => {
-        if (res.data?.signUp) {
-          console.log(' 회원가입이 완료되었습니다.');
-        } else {
-          console.log('회원가입 도중 문제가 발생했습니다.');
-        }
-      })
-      .catch((error) => {
-        console.error(error.message);
-        return;
-      });
+    onSignUp(signUpInput);
   };
 
   return (
@@ -44,11 +31,11 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
         <Input
           {...register('signUpInput.email', { required: true })}
           name="signUpInput.email"
-          type="email"
+          type="text"
           placeholder="example@example.com"
           hasError={!!errors.signUpInput?.email}
         />
-        {errors.signUpInput?.email?.message && (
+        {errors.signUpInput?.email && (
           <Text color="danger" variant="small" paddingLeft={1}>
             이메일을 입력해주세요
           </Text>
@@ -99,7 +86,7 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
           </Text>
         )}
       </Box>
-      <Button width="100%" type="submit">
+      <Button width="100%" type="submit" disabled={isLoading}>
         회원가입
       </Button>
     </form>

@@ -1,14 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormLabel } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
-import { SignUpMutationVariables } from '@/generated/graphql';
+import {
+  SignUpMutationVariables,
+  useSignUpMutation,
+} from '@/generated/graphql';
 
 interface SignUpFormProps {
-  onSignUp: ({ variables }: any) => void;
+  onSignUp: ReturnType<typeof useSignUpMutation>[0];
 }
 
 const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
@@ -21,7 +23,18 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
   const onSubmit = async (formData: SignUpMutationVariables) => {
     const { signUpInput } = formData;
 
-    onSignUp({ variables: { signUpInput } });
+    return onSignUp({ variables: { signUpInput } })
+      .then((res) => {
+        if (res.data?.signUp) {
+          console.log(' 회원가입이 완료되었습니다.');
+        } else {
+          console.log('회원가입 도중 문제가 발생했습니다.');
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+        return;
+      });
   };
 
   return (

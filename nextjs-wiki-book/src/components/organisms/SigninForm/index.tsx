@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
@@ -56,9 +57,16 @@ const SigninForm = ({ onSignin }: SigninFormProps) => {
           </Text>
         )}
       </Box>
-      <Button width="100%" type="submit">
-        로그인
-      </Button>
+      <Box>
+        <Button width="100%" type="submit" marginBottom={1}>
+          로그인
+        </Button>
+        <Link href="/signup">
+          <Button width="100%" variant="secondary">
+            회원가입
+          </Button>
+        </Link>
+      </Box>
     </form>
   );
 };

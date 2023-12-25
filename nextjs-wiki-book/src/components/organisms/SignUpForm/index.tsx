@@ -51,15 +51,23 @@ const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
       <Box paddingBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>비밀번호</FormLabel>
         <Input
-          {...register('signUpInput.password', { required: true })}
+          {...register('signUpInput.password', {
+            required: '비밀번호를 입력해주세요',
+            min: { value: 8, message: '비밀번호는 8자 이상이어야 합니다.' },
+            pattern: {
+              value:
+                /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+{}[\]:;<>,.?~\\/-]{8,}$/,
+              message: '영문,숫자를 포함한 8자 이상이어야 합니다.',
+            },
+          })}
           name="signUpInput.password"
           type="password"
-          placeholder="8자 이상의 영문,숫자,특문"
+          placeholder="8자 이상의 영문,숫자"
           hasError={!!errors.signUpInput?.password}
         />
         {errors.signUpInput?.password && (
           <Text color="danger" variant="small" paddingLeft={1}>
-            비밀번호를 입력해주세요
+            {errors.signUpInput.password.message}
           </Text>
         )}
       </Box>

@@ -29,7 +29,14 @@ const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
       <Box paddingBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>이메일</FormLabel>
         <Input
-          {...register('signUpInput.email', { required: true })}
+          {...register('signUpInput.email', {
+            required: '이메일을 입력해주세요',
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/,
+              message: '이메일의 형식이 올바르지 않습니다.',
+            },
+          })}
           name="signUpInput.email"
           type="text"
           placeholder="example@example.com"
@@ -37,7 +44,7 @@ const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
         />
         {errors.signUpInput?.email && (
           <Text color="danger" variant="small" paddingLeft={1}>
-            이메일을 입력해주세요
+            {errors.signUpInput.email.message}
           </Text>
         )}
       </Box>

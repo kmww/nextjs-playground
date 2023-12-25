@@ -74,7 +74,13 @@ const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
       <Box marginBottom={1}>
         <FormLabel sx={{ fontWeight: 'bold' }}>이름</FormLabel>
         <Input
-          {...register('signUpInput.username', { required: true })}
+          {...register('signUpInput.username', {
+            required: '성함을 입력해주세요',
+            pattern: {
+              value: /^[가-힣]{2,4}$/,
+              message: '특수한 경우 고객센터에 문의해주세요.',
+            },
+          })}
           name="signUpInput.username"
           type="text"
           placeholder="홍길동"
@@ -82,7 +88,7 @@ const SignUpForm = ({ onSignUp, isLoading }: SignUpFormProps) => {
         />
         {errors.signUpInput?.username && (
           <Text color="danger" variant="small" paddingLeft={1}>
-            실명을 입력해주세요
+            {errors.signUpInput.username.message}
           </Text>
         )}
       </Box>

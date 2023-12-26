@@ -27,6 +27,12 @@ export class LoginInput {
   @Field() @IsString() password: string;
 }
 
+@ObjectType({ description: '필드 에러 타입' })
+class FieldError {
+  @Field() field: string;
+  @Field() message: string;
+}
+
 @Resolver(UserData)
 export class UserResolver {
   @Mutation(() => UserData)

@@ -33,6 +33,18 @@ class FieldError {
   @Field() message: string;
 }
 
+@ObjectType({ description: '로그인 반환 데이터' })
+class LoginResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => UserData, { nullable: true })
+  user?: UserData;
+
+  @Field({ nullable: true })
+  accessToken?: string;
+}
+
 @Resolver(UserData)
 export class UserResolver {
   @Mutation(() => UserData)

@@ -1,6 +1,13 @@
 import { IsEmail, IsString } from 'class-validator';
 import UserData from '../entities/UserData';
-import { Arg, Field, InputType, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg,
+  Field,
+  InputType,
+  Mutation,
+  ObjectType,
+  Resolver,
+} from 'type-graphql';
 import argon2 from 'argon2';
 
 @InputType()
@@ -11,6 +18,12 @@ export class SignUpInput {
 
   @Field() @IsString() displayName: string;
 
+  @Field() @IsString() password: string;
+}
+
+@InputType({ description: '로그인 인풋 데이터' })
+export class LoginInput {
+  @Field() @IsString() emailOrDisplayName: string;
   @Field() @IsString() password: string;
 }
 

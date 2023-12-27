@@ -6,7 +6,7 @@ import {
   screen,
 } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import SigninForm from './';
+import SigninForm from '.';
 import { theme } from '@/styles/themes';
 
 describe('SigninForm', () => {

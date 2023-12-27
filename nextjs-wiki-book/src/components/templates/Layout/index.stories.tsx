@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Layout from './';
 import ProductForm from '@/components/organisms/ProductForm';
-import SigninForm from '@/components/organisms/SigninForm';
+import SignInForm from '@/components/organisms/SignInForm';
 
 const meta: Meta<typeof Layout> = {
   title: 'Templates/Layout',
@@ -26,7 +26,7 @@ const Template: Story = {
 export const SigninPage = {
   ...Template,
   args: {
-    children: <SigninForm />,
+    children: <SignInForm />,
   },
 };
 

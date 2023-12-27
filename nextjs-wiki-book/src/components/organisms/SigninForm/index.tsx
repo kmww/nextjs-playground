@@ -4,61 +4,36 @@ import Button from '@/components/atoms/Button';
 import Input from '@/components/atoms/Input';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
-
-export interface SigninFormData {
-  username: string;
-  password: string;
-}
+import { LoginInput, LoginMutationVariables } from '@/generated/graphql';
 
 interface SigninFormProps {
-  onSignin?: (username: string, password: string) => void;
+  onSignIn: (signInInput: LoginInput) => Promise<void>;
+  isLoading: boolean;
 }
 
-const SigninForm = ({ onSignin }: SigninFormProps) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const SigninForm = ({ onSignIn, isLoading }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SigninFormData>();
+  } = useForm<LoginMutationVariables>();
 
-  const onSubmit = (data: SigninFormData) => {
-    const { username, password } = data;
+  const onSubmit = (formData: LoginMutationVariables) => {
+    const { loginInput } = formData;
 
-    onSignin && onSignin(username, password);
+    console.log(loginInput);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box marginBottom={1}>
-        <Input
-          {...register('username', { required: true })}
-          name="username"
-          type="text"
-          placeholder="사용자명"
-          hasError={!!errors.username}
-        />
-        {errors.username && (
-          <Text color="danger" variant="small" paddingLeft={1}>
-            사용자명을 입력해주세요
-          </Text>
-        )}
-      </Box>
-      <Box marginBottom={2}>
-        <Input
-          {...register('password', { required: true })}
-          name="password"
-          type="password"
-          placeholder="비밀번호"
-          hasError={!!errors.password}
-        />
-        {errors.password && (
-          <Text color="danger" variant="small" paddingLeft={1}>
-            비밀번호를 입력해주세요
-          </Text>
-        )}
-      </Box>
       <Box>
-        <Button width="100%" type="submit" marginBottom={1}>
+        <Button
+          width="100%"
+          type="submit"
+          marginBottom={1}
+          disabled={isLoading}
+        >
           로그인
         </Button>
         <Link href="/signup">

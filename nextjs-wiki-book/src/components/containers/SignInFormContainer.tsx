@@ -12,11 +12,16 @@ const SignInFormContainer = () => {
     try {
       setGlobalSpinner(true);
       const res = await login({ variables: { loginInput } });
-      if (res.data?.login) {
+
+      if (res.data?.login.user) {
         const redirectTo = (router.query['redirect_to'] as string) ?? '/';
 
         console.log('Redirection', redirectTo);
         await router.push(redirectTo);
+
+        return res;
+      } else if (res.data?.login.errors) {
+        window.alert(res.data.login.errors[0].message);
       }
     } catch (err: unknown) {
       if (err instanceof Error) {

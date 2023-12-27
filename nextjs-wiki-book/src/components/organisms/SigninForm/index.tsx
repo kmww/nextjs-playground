@@ -27,6 +27,38 @@ const SigninForm = ({ onSignIn, isLoading }: SigninFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Box marginBottom={1}>
+        <Input
+          {...register('loginInput.emailOrDisplayName', {
+            required: '이메일 또는 닉네임을 입력해주세요.',
+          })}
+          name="loginInput.emailOrDisplayName"
+          type="text"
+          placeholder="이메일 또는 닉네임"
+          hasError={!!errors.loginInput?.emailOrDisplayName}
+        />
+        {errors.loginInput?.emailOrDisplayName && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            {errors.loginInput.emailOrDisplayName.message}
+          </Text>
+        )}
+      </Box>
+      <Box marginBottom={2}>
+        <Input
+          {...register('loginInput.password', {
+            required: '비밀번호를 입력해주세요.',
+          })}
+          name="loginInput.password"
+          type="password"
+          placeholder="********"
+          hasError={!!errors.loginInput?.password}
+        />
+        {errors.loginInput?.password && (
+          <Text color="danger" variant="small" paddingLeft={1}>
+            {errors.loginInput.password.message}
+          </Text>
+        )}
+      </Box>
       <Box>
         <Button
           width="100%"

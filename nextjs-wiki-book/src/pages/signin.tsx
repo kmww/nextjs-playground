@@ -1,23 +1,11 @@
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import AppLogo from '@/components/atoms/AppLogo';
-import SigninFormContainer from '@/components/containers/SigninFormContainer';
+import SignInFormContainer from '@/components/containers/SignInFormContainer';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Layout from '@/components/templates/Layout';
 
 const SigninPage: NextPage = () => {
-  const router = useRouter();
-
-  const handleSignin = async (err?: Error) => {
-    if (!err) {
-      const redirectTo = (router.query['redirect_to'] as string) ?? '/';
-
-      console.log('Redirection', redirectTo);
-      await router.push(redirectTo);
-    }
-  };
-
   return (
     <Layout>
       <Flex
@@ -37,7 +25,7 @@ const SigninPage: NextPage = () => {
             <AppLogo />
           </Box>
           <Box width="100%">
-            <SigninFormContainer onSignin={handleSignin} />
+            <SignInFormContainer />
           </Box>
         </Flex>
       </Flex>

@@ -12,7 +12,7 @@ interface SigninFormProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SigninForm = ({ onSignIn, isLoading }: SigninFormProps) => {
+const SignInForm = ({ onSignIn, isLoading }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
@@ -78,4 +78,4 @@ const SigninForm = ({ onSignIn, isLoading }: SigninFormProps) => {
   );
 };
 
-export default SigninForm;
+export default SignInForm;

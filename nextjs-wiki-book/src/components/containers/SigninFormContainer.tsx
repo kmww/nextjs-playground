@@ -1,31 +1,34 @@
-import SigninForm from '@/components/organisms/SigninForm';
-import { useAuthContext } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
+import SignInForm from '@/components/organisms/SignInForm';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { LoginInput, useLoginMutation } from '@/generated/graphql';
 
-interface SigninFormContainerProps {
-  onSignin: (error?: Error) => void;
-}
-
-const SigninFormContainer = ({ onSignin }: SigninFormContainerProps) => {
-  const { signin } = useAuthContext();
+const SignInFormContainer = () => {
+  const [login, { loading }] = useLoginMutation();
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const router = useRouter();
 
-  const handleSignin = async (username: string, password: string) => {
+  const handleSignin = async (loginInput: LoginInput) => {
     try {
       setGlobalSpinner(true);
-      await signin(username, password);
-      onSignin && onSignin();
+      const res = await login({ variables: { loginInput } });
+      if (res.data?.login) {
+        const redirectTo = (router.query['redirect_to'] as string) ?? '/';
+
+        console.log('Redirection', redirectTo);
+        await router.push(redirectTo);
+      }
     } catch (err: unknown) {
       if (err instanceof Error) {
-        window.alert(err.message);
-        onSignin && onSignin(err);
+        window.alert(`로그인 도중 문제가 발생했습니다.
+errors:${err.message}`);
       }
     } finally {
       setGlobalSpinner(false);
     }
   };
 
-  return <SigninForm onSignin={handleSignin} />;
+  return <SignInForm onSignIn={handleSignin} isLoading={loading} />;
 };
 
-export default SigninFormContainer;
+export default SignInFormContainer;

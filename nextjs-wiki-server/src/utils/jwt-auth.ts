@@ -1,4 +1,4 @@
-import UserData from 'src/entities/UserData';
+import UserData from '../entities/UserData';
 import jwt from 'jsonwebtoken';
 
 export const DEFAULT_JWT_SECRET_KEY = 'secret-key';

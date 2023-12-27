@@ -9,6 +9,7 @@ import {
   Resolver,
 } from 'type-graphql';
 import argon2 from 'argon2';
+import { createAccessToken } from '../utils/jwt-auth';
 
 @InputType()
 export class SignUpInput {
@@ -97,6 +98,8 @@ export class UserResolver {
       };
     }
 
-    return { user };
+    const accessToken = createAccessToken(user);
+
+    return { user, accessToken };
   }
 }

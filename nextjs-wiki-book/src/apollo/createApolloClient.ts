@@ -28,3 +28,7 @@ Message: ${message}, Query: ${path}, Location: ${JSON.stringify(locations)}`,
 Message: ${networkError.message}`);
   }
 });
+
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000/graphql',
+});

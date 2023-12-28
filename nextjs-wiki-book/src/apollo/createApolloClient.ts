@@ -1,4 +1,5 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { createApolloCache } from './createApolloCache';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -11,3 +12,19 @@ export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
 
   return apolloClient;
 };
+
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: -> ${operation.operationName}
+Message: ${message}, Query: ${path}, Location: ${JSON.stringify(locations)}`,
+      ),
+    );
+  }
+
+  if (networkError) {
+    console.log(`[networkError]: -> ${operation.operationName}
+Message: ${networkError.message}`);
+  }
+});

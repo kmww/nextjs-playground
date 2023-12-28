@@ -1,24 +1,14 @@
 import 'reflect-metadata';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import http from 'http';
-import { buildSchema } from 'type-graphql';
-import { ProductResolver } from './resolvers/Product';
 import { createDB } from './db/db-client';
-import { UserResolver } from './resolvers/User';
+import createApolloServer from './apollo/createApolloServer';
 
 async function main() {
   await createDB();
   const app = express();
 
-  const apolloServer = new ApolloServer({
-    schema: await buildSchema({
-      resolvers: [ProductResolver, UserResolver],
-    }),
-    plugins: [ApolloServerPluginLandingPageLocalDefault()],
-  });
-
+  const apolloServer = await createApolloServer();
   await apolloServer.start();
   apolloServer.applyMiddleware({ app });
 
@@ -31,8 +21,7 @@ async function main() {
         graphql playground => http://localhost:4000/graphql
       `);
     } else {
-      console.log(`
-      Production server Started...`);
+      console.log(`Production server Started...`);
     }
   });
 }

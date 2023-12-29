@@ -2,14 +2,17 @@ import { IsEmail, IsString } from 'class-validator';
 import UserData from '../entities/UserData';
 import {
   Arg,
+  Ctx,
   Field,
   InputType,
   Mutation,
   ObjectType,
+  Query,
   Resolver,
 } from 'type-graphql';
 import argon2 from 'argon2';
 import { createAccessToken } from '../utils/jwt-auth';
+import { MyContext } from 'src/apollo/createApolloServer';
 
 @InputType()
 export class SignUpInput {
@@ -50,6 +53,12 @@ class LoginResponse {
 
 @Resolver(UserData)
 export class UserResolver {
+  @Query(() => UserData, { nullable: true })
+  async me(@Ctx() ctx: MyContext): Promise<UserData | undefined> {
+    if (!ctx.verifiedUser) return undefined;
+    return UserData.findOne({ where: { id: ctx.verifiedUser.userId } });
+  }
+
   @Mutation(() => UserData)
   async signUp(
     @Arg('signUpInput') signUpInput: SignUpInput,

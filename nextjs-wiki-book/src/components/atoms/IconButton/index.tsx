@@ -9,6 +9,7 @@ import {
   PersonOutline,
   Search,
   ShoppingCart,
+  Logout,
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import styled from 'styled-components';
@@ -91,3 +92,5 @@ export const GitHubIcon = withIconStyle(GitHub);
 export const PersonOutlineIcon = withIconStyle(PersonOutline);
 
 export const ShoppingCartIcon = withIconStyle(ShoppingCart);
+
+export const LogoutIcon = withIconStyle(Logout);

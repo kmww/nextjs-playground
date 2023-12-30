@@ -128,11 +128,13 @@ const Header = () => {
                 return <Spinner size={20} strokeWidth={2} />;
               } else {
                 return (
-                  <Link href="/signin" passHref>
-                    <Anchor fontSize="30px">
-                      <PersonIcon size={24} />
-                    </Anchor>
-                  </Link>
+                  <NavLink>
+                    <Link href="/signin" passHref>
+                      <Anchor fontSize="30px">
+                        <PersonIcon size={24} />
+                      </Anchor>
+                    </Link>
+                  </NavLink>
                 );
               }
             })()}

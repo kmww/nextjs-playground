@@ -29,6 +29,14 @@ export default class UserData extends BaseEntity {
   @Column({ comment: '비밀번호' })
   password: string;
 
+  @Column({ comment: '프로필 사진 경로', nullable: true })
+  @Field({ description: '프로필 사진 경로', nullable: true })
+  profileImageUrl: string;
+
+  @Column({ comment: '유저 소개', nullable: true })
+  @Field({ description: '유저 소개', nullable: true })
+  description: string;
+
   @Field(() => String, { description: '생성 일자' })
   @CreateDateColumn({ comment: '생성 일자' })
   createdAt: Date;

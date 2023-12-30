@@ -4,6 +4,8 @@ query me {
     username
     email
     displayName
+    profileImageUrl
+    description
     createdAt
     updatedAt
   }

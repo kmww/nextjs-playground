@@ -121,11 +121,15 @@ export type UserData = {
   __typename?: 'UserData';
   /** 생성 일자 */
   createdAt: Scalars['String'];
+  /** 유저 소개 */
+  description?: Maybe<Scalars['String']>;
   /** 유저 닉네임 */
   displayName: Scalars['String'];
   /** 이메일 */
   email: Scalars['String'];
   id: Scalars['Int'];
+  /** 프로필 사진 경로 */
+  profileImageUrl?: Maybe<Scalars['String']>;
   /** 업데이트 일자 */
   updatedAt: Scalars['String'];
   /** 유저 이름 */
@@ -149,7 +153,7 @@ export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: '
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserData', id: number, username: string, email: string, displayName: string, createdAt: string, updatedAt: string } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserData', id: number, username: string, email: string, displayName: string, profileImageUrl?: string | null, description?: string | null, createdAt: string, updatedAt: string } | null };
 
 export type ProductQueryVariables = Exact<{
   productId: Scalars['Int'];
@@ -260,6 +264,8 @@ export const MeDocument = gql`
     username
     email
     displayName
+    profileImageUrl
+    description
     createdAt
     updatedAt
   }

@@ -9,10 +9,12 @@ import {
   ObjectType,
   Query,
   Resolver,
+  UseMiddleware,
 } from 'type-graphql';
 import argon2 from 'argon2';
 import { createAccessToken } from '../utils/jwt-auth';
-import { MyContext } from 'src/apollo/createApolloServer';
+import { MyContext } from '../apollo/createApolloServer';
+import { isAuthenticated } from '../middlewares/isAuthenticated';
 
 @InputType()
 export class SignUpInput {
@@ -53,6 +55,7 @@ class LoginResponse {
 
 @Resolver(UserData)
 export class UserResolver {
+  @UseMiddleware(isAuthenticated)
   @Query(() => UserData, { nullable: true })
   async me(@Ctx() ctx: MyContext): Promise<UserData | undefined> {
     if (!ctx.verifiedUser) return undefined;

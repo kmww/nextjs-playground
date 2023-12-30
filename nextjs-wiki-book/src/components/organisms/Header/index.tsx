@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
 import Button from '@/components/atoms/Button';
 import {
@@ -7,14 +9,13 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@/components/atoms/IconButton';
-import ShapeImage from '@/components/atoms/ShapeImage';
 import Spinner from '@/components/atoms/Spinner';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import BadgeIconButton from '@/components/molecules/BadgeIconButton';
-import { useAuthContext } from '@/contexts/AuthContext';
 import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
+import { useMeQuery } from '@/generated/graphql';
 
 const HeaderRoot = styled.header`
   height: 88px;
@@ -28,11 +29,11 @@ const Nav = styled(Flex)`
   }
 `;
 
-const NavLink = styled.span`
+export const NavLink = styled.span`
   display: inline;
 `;
 
-const Anchor = styled(Text)`
+export const Anchor = styled(Text)`
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -40,8 +41,22 @@ const Anchor = styled(Text)`
 `;
 
 const Header = () => {
+  const [isAuth, setIsAuth] = useState(false);
   const { cart } = useShoppingCartContext();
-  const { authUser, isLoading } = useAuthContext();
+  const { data, loading } = useMeQuery({ skip: !isAuth });
+
+  useEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, []);
+
+  const isLoggedIn = useMemo(() => {
+    if (isAuth) return data?.me?.id;
+    return false;
+  }, [isAuth, data?.me?.id]);
 
   return (
     <HeaderRoot>
@@ -85,7 +100,7 @@ const Header = () => {
         </Nav>
         <Nav as="nav" height="56px" alignItems="center">
           <NavLink>
-            <Box display={{ base: 'none', md: 'none' }}>
+            <Box display={{ base: 'block', md: 'none' }}>
               <Link href="/search" passHref>
                 <Anchor>
                   <SearchIcon />
@@ -105,36 +120,23 @@ const Header = () => {
               </Anchor>
             </Link>
           </NavLink>
-          <NavLink>
+          <>
             {(() => {
-              if (authUser) {
-                return (
-                  <Link href={`/users/${authUser.id}`} passHref>
-                    <Anchor>
-                      <ShapeImage
-                        shape="circle"
-                        src={authUser.profileImageUrl}
-                        width={24}
-                        height={24}
-                        data-testid="profile-shape-image"
-                        alt={authUser.username}
-                      />
-                    </Anchor>
-                  </Link>
-                );
-              } else if (isLoading) {
+              if (isLoggedIn) {
+                return <LoggedInMenu isAuth={isAuth} />;
+              } else if (loading) {
                 return <Spinner size={20} strokeWidth={2} />;
               } else {
                 return (
                   <Link href="/signin" passHref>
-                    <Anchor>
+                    <Anchor fontSize="30px">
                       <PersonIcon size={24} />
                     </Anchor>
                   </Link>
                 );
               }
             })()}
-          </NavLink>
+          </>
           <NavLink>
             <Link href="sell">
               <Button>등록</Button>

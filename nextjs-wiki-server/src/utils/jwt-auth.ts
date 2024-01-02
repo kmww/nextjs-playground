@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { IncomingHttpHeaders } from 'http';
 
 export const DEFAULT_JWT_SECRET_KEY = 'secret-key';
+export const REFRESH_JWT_SECRET_KEY = 'secret-key2';
 
 export interface JwtVerifiedUser {
   userId: UserData['id'];
@@ -48,4 +49,13 @@ export const verifyAccessTokenFromReqHeaders = (
   } catch {
     return null;
   }
+};
+
+export const createRefreshToken = (user: UserData): string => {
+  const userData: JwtVerifiedUser = { userId: user.id };
+  return jwt.sign(
+    userData,
+    process.env.JWT_REFRESH_SECRET_KEY || REFRESH_JWT_SECRET_KEY,
+    { expiresIn: '14d' },
+  );
 };

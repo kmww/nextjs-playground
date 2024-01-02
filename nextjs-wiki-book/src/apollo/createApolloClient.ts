@@ -37,6 +37,7 @@ Message: ${networkError.message}`);
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql',
+  credentials: 'include',
 });
 
 const authLink = setContext((request, prevContext) => {

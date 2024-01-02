@@ -12,7 +12,7 @@ import {
   UseMiddleware,
 } from 'type-graphql';
 import argon2 from 'argon2';
-import { createAccessToken } from '../utils/jwt-auth';
+import { createAccessToken, createRefreshToken } from '../utils/jwt-auth';
 import { MyContext } from '../apollo/createApolloServer';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
 
@@ -83,6 +83,7 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   public async login(
     @Arg('loginInput') loginInput: LoginInput,
+    @Ctx() { res }: MyContext,
   ): Promise<LoginResponse> {
     const { emailOrDisplayName, password } = loginInput;
 
@@ -111,6 +112,13 @@ export class UserResolver {
     }
 
     const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
+
+    res.cookie('refreshtoken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    });
 
     return { user, accessToken };
   }

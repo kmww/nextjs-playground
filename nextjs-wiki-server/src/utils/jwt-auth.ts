@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server-core';
 import UserData from '../entities/UserData';
 import jwt from 'jsonwebtoken';
 import { IncomingHttpHeaders } from 'http';
+import { Response } from 'express';
 
 export const DEFAULT_JWT_SECRET_KEY = 'secret-key';
 export const REFRESH_JWT_SECRET_KEY = 'secret-key2';
@@ -58,4 +59,15 @@ export const createRefreshToken = (user: UserData): string => {
     process.env.JWT_REFRESH_SECRET_KEY || REFRESH_JWT_SECRET_KEY,
     { expiresIn: '14d' },
   );
+};
+
+export const setRefreshTokenHeader = (
+  res: Response,
+  refreshToken: string,
+): void => {
+  res.cookie('refreshtoken', refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  });
 };

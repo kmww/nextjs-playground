@@ -127,7 +127,7 @@ export class UserResolver {
 
     await redis.set(String(user.id), refreshToken);
 
-    setRefreshTokenHeader(res, refreshToken);
+    setRefreshTokenHeader(res, refreshToken, false);
 
     return { user, accessToken };
   }
@@ -137,7 +137,9 @@ export class UserResolver {
     @Ctx() { req, res, redis }: MyContext,
   ): Promise<RefreshAccessTokenResponse | null> {
     const refreshToken = req.cookies.refreshtoken;
-    if (!refreshToken) return null;
+    if (!refreshToken) {
+      return null;
+    }
 
     let tokenData: any = null;
     try {
@@ -162,7 +164,7 @@ export class UserResolver {
 
     await redis.set(String(user.id), newRefreshToken);
 
-    setRefreshTokenHeader(res, newRefreshToken);
+    setRefreshTokenHeader(res, newRefreshToken, true);
 
     return { accessToken: newAccessToken };
   }

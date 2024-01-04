@@ -16,7 +16,7 @@ export const createAccessToken = (user: UserData): string => {
   const accessToken = jwt.sign(
     userData,
     process.env.JWT_SECRET_KEY || DEFAULT_JWT_SECRET_KEY,
-    { expiresIn: '30m' },
+    { expiresIn: '10s' },
   );
 
   return accessToken;
@@ -64,10 +64,11 @@ export const createRefreshToken = (user: UserData): string => {
 export const setRefreshTokenHeader = (
   res: Response,
   refreshToken: string,
+  IsSecure: boolean,
 ): void => {
   res.cookie('refreshtoken', refreshToken, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: IsSecure ? true : process.env.NODE_ENV === 'production',
     sameSite: 'lax',
   });
 };

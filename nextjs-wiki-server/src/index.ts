@@ -3,10 +3,12 @@ import express from 'express';
 import http from 'http';
 import { createDB } from './db/db-client';
 import createApolloServer from './apollo/createApolloServer';
+import cookieParser from 'cookie-parser';
 
 async function main() {
   await createDB();
   const app = express();
+  app.use(cookieParser());
 
   const apolloServer = await createApolloServer();
   await apolloServer.start();

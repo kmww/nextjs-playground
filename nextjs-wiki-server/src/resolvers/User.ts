@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { IsEmail, IsString } from 'class-validator';
 import UserData from '../entities/UserData';
 import {
@@ -13,6 +14,7 @@ import {
 } from 'type-graphql';
 import argon2 from 'argon2';
 import {
+  REFRESH_JWT_SECRET_KEY,
   createAccessToken,
   createRefreshToken,
   setRefreshTokenHeader,
@@ -128,5 +130,40 @@ export class UserResolver {
     setRefreshTokenHeader(res, refreshToken);
 
     return { user, accessToken };
+  }
+
+  @Mutation(() => RefreshAccessTokenResponse, { nullable: true })
+  async refreshAccessToken(
+    @Ctx() { req, res, redis }: MyContext,
+  ): Promise<RefreshAccessTokenResponse | null> {
+    const refreshToken = req.cookies.refreshtoken;
+    if (!refreshToken) return null;
+
+    let tokenData: any = null;
+    try {
+      tokenData = jwt.verify(refreshToken, REFRESH_JWT_SECRET_KEY);
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+
+    if (!tokenData) return null;
+
+    // 레디스의 user.id 로 저장된 토큰 조회
+    const storedRefreshToken = await redis.get(String(tokenData.userId));
+    if (!storedRefreshToken) return null;
+    if (storedRefreshToken !== refreshToken) return null;
+
+    const user = await UserData.findOne({ where: tokenData.userId });
+    if (!user) return null;
+
+    const newAccessToken = createAccessToken(user);
+    const newRefreshToken = createRefreshToken(user);
+
+    await redis.set(String(user.id), newRefreshToken);
+
+    setRefreshTokenHeader(res, newRefreshToken);
+
+    return { accessToken: newAccessToken };
   }
 }

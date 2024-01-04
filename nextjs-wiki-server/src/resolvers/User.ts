@@ -57,6 +57,11 @@ class LoginResponse {
   accessToken?: string;
 }
 
+@ObjectType({ description: '액세스 토큰 새로고침 반환 데이터' })
+class RefreshAccessTokenResponse {
+  @Field() accessToken: string;
+}
+
 @Resolver(UserData)
 export class UserResolver {
   @UseMiddleware(isAuthenticated)

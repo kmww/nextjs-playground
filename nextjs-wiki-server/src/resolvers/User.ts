@@ -156,7 +156,7 @@ export class UserResolver {
     if (!storedRefreshToken) return null;
     if (storedRefreshToken !== refreshToken) return null;
 
-    const user = await UserData.findOne({ where: tokenData.userId });
+    const user = await UserData.findOne({ where: { id: tokenData.userId } });
     if (!user) return null;
 
     const newAccessToken = createAccessToken(user);

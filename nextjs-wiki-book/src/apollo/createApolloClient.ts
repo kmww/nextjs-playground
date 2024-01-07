@@ -7,7 +7,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { refreshAccessToekn } from './auth';
+import { refreshAccessToken } from './auth';
 import { createApolloCache } from './createApolloCache';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -27,7 +27,7 @@ const errorLink = onError(
       if (
         graphQLErrors.find((error) => error.message === 'access token expired')
       ) {
-        return fromPromise(refreshAccessToekn(apolloClient, operation))
+        return fromPromise(refreshAccessToken(apolloClient, operation))
           .filter((result) => !!result)
           .flatMap(() => forward(operation));
       }

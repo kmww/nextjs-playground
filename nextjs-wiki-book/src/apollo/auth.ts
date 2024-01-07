@@ -4,7 +4,7 @@ import {
   RefreshAccessTokenMutation,
 } from '@/generated/graphql';
 
-export const refreshAccessToekn = (
+export const refreshAccessToken = (
   _apolloClient: ApolloClient<NormalizedCacheObject>,
   operation: Operation,
 ): Promise<boolean> =>
@@ -13,6 +13,8 @@ export const refreshAccessToekn = (
       mutation: RefreshAccessTokenDocument,
     })
     .then(({ data }) => {
+      console.log('123');
+      console.log(data);
       const newAccessToken = data?.refreshAccessToken?.accessToken;
       if (!newAccessToken) {
         localStorage.setItem('access_token', '');

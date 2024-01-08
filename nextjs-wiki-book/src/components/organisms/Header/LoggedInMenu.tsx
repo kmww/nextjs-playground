@@ -1,16 +1,19 @@
+import { useApolloClient } from '@apollo/client';
 import Link from 'next/link';
 import { useMemo } from 'react';
 import { Anchor, NavLink } from './';
 import { LogoutIcon } from '@/components/atoms/IconButton';
 import ShapeImage from '@/components/atoms/ShapeImage';
-import { useMeQuery } from '@/generated/graphql';
+import { useLogoutMutation, useMeQuery } from '@/generated/graphql';
 
 interface LoggedInMenuProps {
   isAuth: boolean;
 }
 
 const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
+  const client = useApolloClient();
   const { data } = useMeQuery({ skip: !isAuth });
+  const [logout, { loading: logoutLoading }] = useLogoutMutation();
 
   const profileImage = useMemo(() => {
     if (data?.me?.profileImageUrl) {
@@ -18,6 +21,16 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
     }
     return '';
   }, [data]);
+
+  const onLogoutClick = async () => {
+    try {
+      await logout();
+      localStorage.removeItem('access_token');
+      await client.resetStore();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>

@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { Anchor, NavLink } from './';
 import { LogoutIcon } from '@/components/atoms/IconButton';
 import ShapeImage from '@/components/atoms/ShapeImage';
+import Spinner from '@/components/atoms/Spinner';
 import { useLogoutMutation, useMeQuery } from '@/generated/graphql';
 
 interface LoggedInMenuProps {
@@ -50,7 +51,11 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
       </NavLink>
       <NavLink>
         <Anchor>
-          <LogoutIcon />
+          {!logoutLoading ? (
+            <LogoutIcon onClick={onLogoutClick} />
+          ) : (
+            <Spinner size={24} />
+          )}
         </Anchor>
       </NavLink>
     </>

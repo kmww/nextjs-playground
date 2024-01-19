@@ -1,3 +1,4 @@
+import { graphqlUploadExpress } from 'graphql-upload';
 import 'reflect-metadata';
 import express from 'express';
 import http from 'http';
@@ -9,6 +10,8 @@ async function main() {
   await createDB();
   const app = express();
   app.use(cookieParser());
+  app.use(express.static('public'));
+  app.use(graphqlUploadExpress({ maxFileSize: 1024 * 1000 * 5, maxFiles: 1 }));
 
   const apolloServer = await createApolloServer();
   await apolloServer.start();

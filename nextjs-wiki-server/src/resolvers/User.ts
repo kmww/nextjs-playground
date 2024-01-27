@@ -1,3 +1,4 @@
+import { createWriteStream } from 'fs';
 import jwt from 'jsonwebtoken';
 import { IsEmail, IsString } from 'class-validator';
 import UserData from '../entities/UserData';
@@ -21,6 +22,7 @@ import {
 } from '../utils/jwt-auth';
 import { MyContext } from '../apollo/createApolloServer';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
+import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
 @InputType()
 export class SignUpInput {
@@ -179,5 +181,31 @@ export class UserResolver {
     setRefreshTokenHeader(res, newRefreshToken, true);
 
     return { accessToken: newAccessToken };
+  }
+
+  @UseMiddleware(isAuthenticated)
+  @Mutation(() => Boolean)
+  async uploadProfileImage(
+    @Ctx() { verifiedUser }: MyContext,
+    @Arg('file', () => GraphQLUpload)
+    { createReadStream, filename }: FileUpload,
+  ): Promise<boolean> {
+    const realFileName = verifiedUser.userId + filename;
+    const filePath = `public/${realFileName}`;
+
+    return new Promise((resolve, reject) =>
+      createReadStream()
+        .pipe(createWriteStream(filePath))
+        .on('finish', async () => {
+          await UserData.update(
+            { id: verifiedUser.userId },
+            {
+              profileImageUrl: realFileName,
+            },
+          );
+          return resolve(true);
+        })
+        .on('error', () => reject(Error('file upload failed'))),
+    );
   }
 }

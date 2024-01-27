@@ -1,12 +1,12 @@
 import {
   ApolloClient,
-  HttpLink,
   NormalizedCacheObject,
   from,
   fromPromise,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+import { createUploadLink } from 'apollo-upload-client';
 import { refreshAccessToken } from './auth';
 import { createApolloCache } from './createApolloCache';
 
@@ -15,7 +15,8 @@ let apolloClient: ApolloClient<NormalizedCacheObject>;
 export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   apolloClient = new ApolloClient({
     cache: createApolloCache(),
-    link: from([authLink, errorLink, httpLink]),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    link: from([authLink, errorLink, httpUploadLink as any]),
   });
 
   return apolloClient;
@@ -47,9 +48,9 @@ Message: ${networkError.message}`);
   },
 );
 
-const httpLink = new HttpLink({
+const httpUploadLink = createUploadLink({
   uri: 'http://localhost:4000/graphql',
-  credentials: 'include',
+  fetchOptions: 'include',
 });
 
 const authLink = setContext((request, prevContext) => {

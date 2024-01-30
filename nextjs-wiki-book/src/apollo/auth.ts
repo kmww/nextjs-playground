@@ -13,8 +13,6 @@ export const refreshAccessToken = (
       mutation: RefreshAccessTokenDocument,
     })
     .then(({ data }) => {
-      console.log('123');
-      console.log(data);
       const newAccessToken = data?.refreshAccessToken?.accessToken;
       if (!newAccessToken) {
         localStorage.setItem('access_token', '');

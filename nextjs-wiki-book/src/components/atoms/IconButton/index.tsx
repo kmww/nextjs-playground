@@ -10,6 +10,7 @@ import {
   Search,
   ShoppingCart,
   Logout,
+  Settings,
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import styled from 'styled-components';
@@ -94,3 +95,5 @@ export const PersonOutlineIcon = withIconStyle(PersonOutline);
 export const ShoppingCartIcon = withIconStyle(ShoppingCart);
 
 export const LogoutIcon = withIconStyle(Logout);
+
+export const SettingIcon = withIconStyle(Settings);

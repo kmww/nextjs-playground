@@ -1,11 +1,17 @@
 import { useApolloClient } from '@apollo/client';
-import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
+import {
+  IconButton,
+  InputLabel,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from '@mui/material';
 import { useMemo, useState } from 'react';
-import { Anchor, NavLink } from './';
-import { LogoutIcon } from '@/components/atoms/IconButton';
+import { NavLink } from './';
+import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import ShapeImage from '@/components/atoms/ShapeImage';
-import Spinner from '@/components/atoms/Spinner';
-import Box from '@/components/layout/Box';
+import Separator from '@/components/atoms/Sparator';
 import {
   useLogoutMutation,
   useMeQuery,
@@ -21,7 +27,7 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const { data } = useMeQuery({ skip: !isAuth });
-  const [logout, { loading: logoutLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const [upload] = useUploadProfileImageMutation();
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -62,17 +68,69 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
   };
 
   return (
-    <>
-      <NavLink>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
+    <NavLink>
+      <Tooltip title="Account settings">
+        <IconButton
+          onClick={handleClick}
+          size="small"
+          aria-controls={open ? 'account-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          <ShapeImage
+            shape="circle"
+            src={profileImage}
+            width={24}
+            height={24}
+            data-testid="profile-shape-image"
+            alt={profileImage}
+          />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&::before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <InputLabel htmlFor="upload-profile-image">
+          <MenuItem onClick={handleClose}>
+            <input
+              id="upload-profile-image"
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleImageUpload}
+            />
             <ShapeImage
               shape="circle"
               src={profileImage}
@@ -81,54 +139,24 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
               data-testid="profile-shape-image"
               alt={profileImage}
             />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: 'visible',
-              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              mt: 1.5,
-              '& .MuiAvatar-root': {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              '&::before': {
-                content: '""',
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: 'background.paper',
-                transform: 'translateY(-50%) rotate(45deg)',
-                zIndex: 0,
-              },
-            },
-          }}
-          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        ></Menu>
-      </NavLink>
-      <NavLink>
-        <Anchor>
-          {!logoutLoading ? (
+            Profile
+          </MenuItem>
+        </InputLabel>
+        <Separator />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <SettingIcon />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
             <LogoutIcon onClick={onLogoutClick} />
-          ) : (
-            <Spinner size={24} />
-          )}
-        </Anchor>
-      </NavLink>
-    </>
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+    </NavLink>
   );
 };
 

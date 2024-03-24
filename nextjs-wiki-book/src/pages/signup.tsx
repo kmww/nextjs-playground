@@ -44,7 +44,7 @@ const SignUpPage: NextPage = () => {
           </Box>
           <Box>
             <Text as="h2" variant="medium">
-              LOA C2C에서 마음에 드는 아이템을 찾아보세요
+              LoaWiki에서 마음에 드는 아이템을 찾아보세요
             </Text>
           </Box>
           <Box width="100%">

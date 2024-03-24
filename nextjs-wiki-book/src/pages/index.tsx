@@ -48,7 +48,7 @@ const Home = ({
         >
           <Box width="100%">
             <Text as="h1" marginBottom={0} color="white" variant="extraLarge">
-              LOA C2C에서
+              LOA WIKI에서
             </Text>
             <Text as="h1" marginTop={0} color="white" variant="extraLarge">
               마음에 드는 아이템을 찾자
@@ -56,7 +56,7 @@ const Home = ({
           </Box>
           <Box width="100%">
             <Text as="p" color="white" variant="mediumLarge">
-              LOA C@C는 데모 애플리케이션 입니다. 목 서버를 사용하며 소스코드는
+              LOA WIKI는 데모 애플리케이션 입니다. 목 서버를 사용하며 소스코드는
               <Text
                 as="a"
                 style={{ textDecoration: 'underline' }}

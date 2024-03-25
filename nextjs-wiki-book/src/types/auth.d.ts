@@ -10,4 +10,6 @@ export interface User {
   email: string;
   profileImageUrl: string;
   description: string;
+  createdAt: Date;
+  pdatedAt: Date;
 }

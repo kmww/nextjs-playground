@@ -42,4 +42,30 @@ export class ShoppingCartResolver {
     if (!user) return null;
     return CartItem.find({ where: { user }, relations: ['product'] });
   }
+  @Mutation(() => CartItemResponse)
+  @UseMiddleware(isAuthenticated)
+  async addToCart(
+    @Arg('cartItemInput') { productId, quantity }: CartItemInput,
+    @Ctx() { verifiedUser }: MyContext,
+  ): Promise<CartItemResponse> {
+    const user = await UserData.findOne({ where: { id: verifiedUser.userId } });
+    if (!user) {
+      return { message: 'User not found' };
+    }
+
+    let cartItem = await CartItem.findOne({ where: { productId, user } });
+
+    if (cartItem) {
+      cartItem.quantity += quantity;
+    } else {
+      cartItem = CartItem.create({ productId, quantity, user });
+    }
+
+    await cartItem.save();
+
+    return {
+      message: 'Item added to cart successfully',
+      cartItems: await CartItem.find({ where: { user } }),
+    };
+  }
 }

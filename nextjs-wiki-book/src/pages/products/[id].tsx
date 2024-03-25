@@ -5,7 +5,6 @@ import {
   NextPage,
 } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Separator from '@/components/atoms/Sparator';
 import Text from '@/components/atoms/Text';
@@ -32,17 +31,11 @@ const ProductPage: NextPage<ProductPageProps> = ({
   id,
   product: initial,
 }: ProductPageProps) => {
-  const router = useRouter();
-
   const { data, error, loading } = useProductQuery({
     variables: { productId: id },
   });
 
   const product = (data?.product as Product) ?? initial;
-
-  const handleAddToCartButtonClick = () => {
-    router.push('/cart');
-  };
 
   if (error) {
     throw new Error(JSON.stringify(error));
@@ -114,10 +107,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
                   </Text>
                 ))}
             </Box>
-            <AddToCartButtonContainer
-              product={product}
-              onAddToCartButtonClick={handleAddToCartButtonClick}
-            />
+            <AddToCartButtonContainer product={product} />
           </Flex>
         </Box>
       </Flex>

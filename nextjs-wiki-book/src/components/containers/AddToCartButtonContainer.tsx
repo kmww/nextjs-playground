@@ -1,27 +1,23 @@
 import Button from '@/components/atoms/Button';
-import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
+import { useAddTocartMutation } from '@/generated/graphql';
 import { Product } from '@/types';
 
 interface AddToCartButtonContainerProps {
   product: Product;
-  onAddToCartButtonClick?: (product: Product) => void;
 }
 
 const AddToCartButtonContainer = ({
   product,
-  onAddToCartButtonClick,
 }: AddToCartButtonContainerProps) => {
-  const { cart, addProductToCart } = useShoppingCartContext();
+  const [addToCart] = useAddTocartMutation();
 
   const handleAddToCartButtonClick = () => {
     const productId = Number(product.id);
-    const result = cart.findIndex((item) => item.id === productId);
-
-    if (result === -1) {
-      addProductToCart(product);
-    }
-
-    onAddToCartButtonClick && onAddToCartButtonClick(product);
+    addToCart({
+      variables: {
+        cartItemInput: { productId: productId, quantity: 1 },
+      },
+    });
   };
 
   return (

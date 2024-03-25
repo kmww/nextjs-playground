@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import { ProductResolver } from '../resolvers/Product';
 import { UserResolver } from '../resolvers/User';
+import { ShoppingCartResolver } from '../resolvers/Cart';
 import { buildSchema } from 'type-graphql';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { Request, Response } from 'express';
@@ -19,7 +20,7 @@ export interface MyContext {
 const createApolloServer = async (): Promise<ApolloServer> => {
   return new ApolloServer<MyContext>({
     schema: await buildSchema({
-      resolvers: [ProductResolver, UserResolver],
+      resolvers: [ProductResolver, UserResolver, ShoppingCartResolver],
     }),
     plugins: [ApolloServerPluginLandingPageLocalDefault()],
     context: ({ req, res }) => {

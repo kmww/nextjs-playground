@@ -93,4 +93,19 @@ export class ShoppingCartResolver {
       cartItems: await CartItem.find({ where: { user } }),
     };
   }
+
+  @Mutation(() => CartItemResponse)
+  @UseMiddleware(isAuthenticated)
+  async clearCart(
+    @Ctx() { verifiedUser }: MyContext,
+  ): Promise<CartItemResponse> {
+    const user = await UserData.findOne({ where: { id: verifiedUser.userId } });
+    if (!user) {
+      return { message: 'User not found' };
+    }
+
+    await CartItem.delete({ user });
+
+    return { message: 'Cart cleared successfully' };
+  }
 }

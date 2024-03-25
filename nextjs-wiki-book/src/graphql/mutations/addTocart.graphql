@@ -1,0 +1,10 @@
+mutation addTocart($cartItemInput: CartItemInput!) {
+  addToCart(cartItemInput: $cartItemInput) {
+    message
+    cartItems {
+      id
+      quantity
+      productId
+    }
+  }
+}

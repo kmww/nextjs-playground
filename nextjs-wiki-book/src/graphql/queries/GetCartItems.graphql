@@ -1,0 +1,13 @@
+query GetCartItems {
+  getCartItems {
+    id
+    quantity
+    productId
+    product {
+      id
+      imageUrl
+      title
+      price
+    }
+  }
+}

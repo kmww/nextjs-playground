@@ -1,0 +1,10 @@
+mutation ClearCart {
+  clearCart {
+    message
+    cartItems {
+      id
+      quantity
+      productId
+    }
+  }
+}

@@ -1,0 +1,10 @@
+mutation RemoveFromCart($productId: Int!) {
+  removeFromCart(productId: $productId) {
+    message
+    cartItems {
+      id
+      quantity
+      productId
+    }
+  }
+}

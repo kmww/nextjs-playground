@@ -1,9 +1,12 @@
 import { Field, Int, ObjectType } from 'type-graphql';
 import { User } from './User';
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @ObjectType()
+@Entity()
 export class Product {
   @Field(() => Int, { description: '제품 아이디' })
+  @PrimaryColumn()
   id: number;
 
   @Field({ description: '카테고리' })

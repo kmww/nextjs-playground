@@ -1,27 +1,40 @@
+import Spinner from '../atoms/Spinner';
 import CartProduct from '@/components/organisms/CartProduct';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
-import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
-import purchase from '@/services/purchases/purchase';
-import { ApiContext } from '@/types';
-
-const context: ApiContext = {
-  apiRootUrl: process.env.NEXT_PUBLIC_API_BASE_PATH || '/api/proxy',
-};
+import {
+  useGetCartItemsQuery,
+  useRemoveFromCartMutation,
+} from '@/generated/graphql';
+// import purchase from '@/services/purchases/purchase';
 
 const CartContainer = () => {
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
-  const { cart, removeProductFromCart } = useShoppingCartContext();
+  const { data, loading, error } = useGetCartItemsQuery();
+  const [removeFromCart] = useRemoveFromCartMutation();
 
-  const handleRemoveButtonClick = (id: number) => {
-    removeProductFromCart(id);
-  };
-
-  const handleBuyButtonClick = async (id: number) => {
+  const handleRemoveButtonClick = async (productId: number) => {
     try {
       setGlobalSpinner(true);
-      await purchase(context, { productId: id });
+      await removeFromCart({
+        variables: { productId },
+      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      }
+    } finally {
+      setGlobalSpinner(false);
+    }
+  };
+
+  const handleBuyButtonClick = async (productId: number) => {
+    try {
+      setGlobalSpinner(true);
+      // await purchase(context, { productId });
       window.alert('구매 완료');
-      removeProductFromCart(id);
+      removeFromCart({
+        variables: { productId },
+      });
     } catch (error: unknown) {
       if (error instanceof Error) {
         window.alert(error.message);
@@ -31,19 +44,27 @@ const CartContainer = () => {
     }
   };
 
+  if (error) {
+    console.error(error);
+    return;
+  }
+
   return (
     <>
-      {cart.map((product) => (
-        <CartProduct
-          key={product.id}
-          id={product.id}
-          imageUrl={product.imageUrl}
-          title={product.title}
-          price={product.price}
-          onRemoveButtonClick={handleRemoveButtonClick}
-          onBuyButtonClick={handleBuyButtonClick}
-        />
-      ))}
+      {loading && <Spinner />}
+      {!loading &&
+        data?.getCartItems &&
+        data.getCartItems.map(({ product }) => (
+          <CartProduct
+            key={product.id}
+            id={product.id}
+            imageUrl={product.imageUrl}
+            title={product.title}
+            price={product.price}
+            onRemoveButtonClick={handleRemoveButtonClick}
+            onBuyButtonClick={handleBuyButtonClick}
+          />
+        ))}
     </>
   );
 };

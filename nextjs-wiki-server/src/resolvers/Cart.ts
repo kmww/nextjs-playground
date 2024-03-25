@@ -68,4 +68,29 @@ export class ShoppingCartResolver {
       cartItems: await CartItem.find({ where: { user } }),
     };
   }
+
+  @Mutation(() => CartItemResponse)
+  @UseMiddleware(isAuthenticated)
+  async removeFromCart(
+    @Arg('productId', () => Int) productId: number,
+    @Ctx() { verifiedUser }: MyContext,
+  ): Promise<CartItemResponse> {
+    const user = await UserData.findOne({ where: { id: verifiedUser.userId } });
+    if (!user) {
+      return { message: 'User not found' };
+    }
+
+    const cartItem = await CartItem.findOne({ where: { productId, user } });
+
+    if (!cartItem) {
+      return { message: 'Item not found in cart' };
+    }
+
+    await cartItem.remove();
+
+    return {
+      message: 'Item removed from cart successfully',
+      cartItems: await CartItem.find({ where: { user } }),
+    };
+  }
 }

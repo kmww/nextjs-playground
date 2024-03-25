@@ -9,7 +9,6 @@ import {
   SearchIcon,
   ShoppingCartIcon,
 } from '@/components/atoms/IconButton';
-import Spinner from '@/components/atoms/Spinner';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
@@ -41,22 +40,21 @@ export const Anchor = styled(Text)`
 `;
 
 const Header = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [accessToken, setAccessToken] = useState<string | undefined>();
   const { cart } = useShoppingCartContext();
-  const { data, loading } = useMeQuery({ skip: !isAuth });
+  const { data } = useMeQuery({ skip: !accessToken });
 
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
+      const token = localStorage.getItem('access_token');
+      setAccessToken(token !== null ? token : undefined);
     }
-  }, []);
+  }, [data]);
 
   const isLoggedIn = useMemo(() => {
-    if (isAuth) return data?.me?.id;
+    if (accessToken) return data?.me?.id;
     return false;
-  }, [isAuth, data?.me?.id]);
+  }, [accessToken, data?.me?.id]);
 
   return (
     <HeaderRoot>
@@ -121,23 +119,17 @@ const Header = () => {
             </Link>
           </NavLink>
           <>
-            {(() => {
-              if (isLoggedIn) {
-                return <LoggedInMenu isAuth={isAuth} />;
-              } else if (loading) {
-                return <Spinner size={20} strokeWidth={2} />;
-              } else {
-                return (
-                  <NavLink>
-                    <Link href="/signin" passHref>
-                      <Anchor fontSize="30px">
-                        <PersonIcon size={24} />
-                      </Anchor>
-                    </Link>
-                  </NavLink>
-                );
-              }
-            })()}
+            {isLoggedIn ? (
+              <LoggedInMenu meData={data} />
+            ) : (
+              <NavLink>
+                <Link href="/signin" passHref>
+                  <Anchor fontSize="30px">
+                    <PersonIcon size={24} />
+                  </Anchor>
+                </Link>
+              </NavLink>
+            )}
           </>
           <NavLink>
             <Link href="sell">

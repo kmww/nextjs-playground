@@ -13,20 +13,19 @@ import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import ShapeImage from '@/components/atoms/ShapeImage';
 import Separator from '@/components/atoms/Sparator';
 import {
+  MeQuery,
   useLogoutMutation,
-  useMeQuery,
   useUploadProfileImageMutation,
 } from '@/generated/graphql';
 
 interface LoggedInMenuProps {
-  isAuth: boolean;
+  meData: MeQuery | undefined;
 }
 
-const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
+const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const client = useApolloClient();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { data } = useMeQuery({ skip: !isAuth });
   const [logout] = useLogoutMutation();
   const [upload] = useUploadProfileImageMutation();
 
@@ -39,11 +38,11 @@ const LoggedInMenu = ({ isAuth }: LoggedInMenuProps) => {
   };
 
   const profileImage = useMemo(() => {
-    if (data?.me?.profileImageUrl) {
-      return `http://localhost:4000/${data?.me?.profileImageUrl}`;
+    if (meData?.me?.profileImageUrl) {
+      return `http://localhost:4000/${meData?.me?.profileImageUrl}`;
     }
     return '';
-  }, [data]);
+  }, [meData]);
 
   const onLogoutClick = async () => {
     try {

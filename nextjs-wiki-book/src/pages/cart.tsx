@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Text from '@/components/atoms/Text';
 import CartContainer from '@/components/containers/CartContainer';
@@ -7,10 +8,18 @@ import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Breadcrumb from '@/components/molecules/Breadcrumb';
 import Layout from '@/components/templates/Layout';
-import { useAuthGuard } from '@/utils/hooks';
+import { useMeQuery } from '@/generated/graphql';
 
 const CartPage: NextPage = () => {
-  useAuthGuard();
+  const [accessToken, setAccessToken] = useState<string | undefined>();
+  const { data } = useMeQuery({ skip: !accessToken });
+
+  useEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      const token = localStorage.getItem('access_token');
+      setAccessToken(token !== null ? token : undefined);
+    }
+  }, [data]);
 
   return (
     <Layout>

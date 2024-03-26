@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import CartItem from './CartItem';
+import Product from './Product';
 
 @ObjectType()
 @Entity()
@@ -50,4 +51,7 @@ export default class UserData extends BaseEntity {
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
   @Field(() => [CartItem])
   cartItems: CartItem[];
+
+  @OneToMany(() => Product, (product) => product.owner)
+  products: Product[];
 }

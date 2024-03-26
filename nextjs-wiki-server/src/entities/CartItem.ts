@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import UserData from './UserData';
-import { Product } from './Product';
+import Product from './Product';
 
 @ObjectType()
 @Entity()

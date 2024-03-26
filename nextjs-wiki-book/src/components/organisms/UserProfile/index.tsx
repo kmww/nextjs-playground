@@ -26,7 +26,7 @@ const UserProfile = ({
         <ShapeImage
           shape="circle"
           quality="85"
-          src={profileImageUrl}
+          src={profileImageUrl !== null ? profileImageUrl : ''}
           alt={username}
           height={profileImageSize}
           width={profileImageSize}

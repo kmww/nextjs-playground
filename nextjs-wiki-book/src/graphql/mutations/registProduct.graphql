@@ -1,0 +1,36 @@
+mutation registSale(
+  $condition: String!
+  $price: Float!
+  $blurDataUrl: String!
+  $imageUrl: String!
+  $description: String!
+  $category: String!
+  $title: String!
+) {
+  registSale(
+    condition: $condition
+    price: $price
+    blurDataUrl: $blurDataUrl
+    imageUrl: $imageUrl
+    description: $description
+    category: $category
+    title: $title
+  ) {
+    blurDataUrl
+    category
+    condition
+    description
+    id
+    imageUrl
+    owner {
+      description
+      displayName
+      email
+      id
+      profileImageUrl
+      username
+    }
+    price
+    title
+  }
+}

@@ -67,6 +67,7 @@ export type Mutation = {
   login: LoginResponse;
   logout: Scalars['Boolean'];
   refreshAccessToken?: Maybe<RefreshAccessTokenResponse>;
+  registSale: Product;
   removeFromCart: CartItemResponse;
   signUp: UserData;
   uploadProfileImage: Scalars['Boolean'];
@@ -80,6 +81,17 @@ export type MutationAddToCartArgs = {
 
 export type MutationLoginArgs = {
   loginInput: LoginInput;
+};
+
+
+export type MutationRegistSaleArgs = {
+  blurDataUrl: Scalars['String'];
+  category: Scalars['String'];
+  condition: Scalars['String'];
+  description: Scalars['String'];
+  imageUrl: Scalars['String'];
+  price: Scalars['Float'];
+  title: Scalars['String'];
 };
 
 
@@ -209,6 +221,19 @@ export type RefreshAccessTokenMutationVariables = Exact<{ [key: string]: never; 
 
 
 export type RefreshAccessTokenMutation = { __typename?: 'Mutation', refreshAccessToken?: { __typename?: 'RefreshAccessTokenResponse', accessToken: string } | null };
+
+export type RegistSaleMutationVariables = Exact<{
+  condition: Scalars['String'];
+  price: Scalars['Float'];
+  blurDataUrl: Scalars['String'];
+  imageUrl: Scalars['String'];
+  description: Scalars['String'];
+  category: Scalars['String'];
+  title: Scalars['String'];
+}>;
+
+
+export type RegistSaleMutation = { __typename?: 'Mutation', registSale: { __typename?: 'Product', blurDataUrl?: string | null, category: string, condition: string, description: string, id: number, imageUrl: string, price: number, title: string, owner: { __typename?: 'User', description: string, displayName: string, email: string, id: number, profileImageUrl?: string | null, username: string } } };
 
 export type RemoveFromCartMutationVariables = Exact<{
   productId: Scalars['Int'];
@@ -406,6 +431,68 @@ export function useRefreshAccessTokenMutation(baseOptions?: Apollo.MutationHookO
 export type RefreshAccessTokenMutationHookResult = ReturnType<typeof useRefreshAccessTokenMutation>;
 export type RefreshAccessTokenMutationResult = Apollo.MutationResult<RefreshAccessTokenMutation>;
 export type RefreshAccessTokenMutationOptions = Apollo.BaseMutationOptions<RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables>;
+export const RegistSaleDocument = gql`
+    mutation registSale($condition: String!, $price: Float!, $blurDataUrl: String!, $imageUrl: String!, $description: String!, $category: String!, $title: String!) {
+  registSale(
+    condition: $condition
+    price: $price
+    blurDataUrl: $blurDataUrl
+    imageUrl: $imageUrl
+    description: $description
+    category: $category
+    title: $title
+  ) {
+    blurDataUrl
+    category
+    condition
+    description
+    id
+    imageUrl
+    owner {
+      description
+      displayName
+      email
+      id
+      profileImageUrl
+      username
+    }
+    price
+    title
+  }
+}
+    `;
+export type RegistSaleMutationFn = Apollo.MutationFunction<RegistSaleMutation, RegistSaleMutationVariables>;
+
+/**
+ * __useRegistSaleMutation__
+ *
+ * To run a mutation, you first call `useRegistSaleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegistSaleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registSaleMutation, { data, loading, error }] = useRegistSaleMutation({
+ *   variables: {
+ *      condition: // value for 'condition'
+ *      price: // value for 'price'
+ *      blurDataUrl: // value for 'blurDataUrl'
+ *      imageUrl: // value for 'imageUrl'
+ *      description: // value for 'description'
+ *      category: // value for 'category'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useRegistSaleMutation(baseOptions?: Apollo.MutationHookOptions<RegistSaleMutation, RegistSaleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegistSaleMutation, RegistSaleMutationVariables>(RegistSaleDocument, options);
+      }
+export type RegistSaleMutationHookResult = ReturnType<typeof useRegistSaleMutation>;
+export type RegistSaleMutationResult = Apollo.MutationResult<RegistSaleMutation>;
+export type RegistSaleMutationOptions = Apollo.BaseMutationOptions<RegistSaleMutation, RegistSaleMutationVariables>;
 export const RemoveFromCartDocument = gql`
     mutation RemoveFromCart($productId: Int!) {
   removeFromCart(productId: $productId) {

@@ -5,20 +5,20 @@ import ProductFormContainer from '@/components/containers/ProductFormContainer';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Layout from '@/components/templates/Layout';
-import { useAuthContext } from '@/contexts/AuthContext';
-import { useAuthGuard } from '@/utils/hooks';
+import { useMeQuery } from '@/generated/graphql';
 
 const SellPage: NextPage = () => {
+  const { data, loading } = useMeQuery();
   const router = useRouter();
-  const { authUser } = useAuthContext();
+  if (!data) {
+    window.alert('로그인이 필요합니다.');
+    router.push('/');
+    return null;
+  }
 
-  const handleSave = (error?: Error) => {
-    if (authUser && !error) {
-      router.push(`/users/${authUser.id}`);
-    }
-  };
-
-  useAuthGuard();
+  if (loading) {
+    <div>loading...</div>;
+  }
 
   return (
     <Layout>
@@ -39,7 +39,7 @@ const SellPage: NextPage = () => {
             <AppLogo />
           </Box>
           <Box width="100%">
-            <ProductFormContainer onSave={handleSave} />
+            <ProductFormContainer authUser={data} />
           </Box>
         </Flex>
       </Flex>

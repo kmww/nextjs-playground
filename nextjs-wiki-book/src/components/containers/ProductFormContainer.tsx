@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import ProductForm, {
   ProductFormData,
 } from '@/components/organisms/ProductForm';
@@ -9,21 +10,23 @@ interface ProductFormContainerProps {
 }
 
 const ProductFormContainer = ({ authUser }: ProductFormContainerProps) => {
+  const router = useRouter();
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
   const [registSale] = useRegistSaleMutation();
 
   const handleSave = async (data: ProductFormData) => {
+    const image = data.image[0]['file'];
+
     const product = {
       title: data.title,
       description: data.description,
       category: data.category,
       condition: data.condition,
       price: Number(data.price),
-      imageUrl: '/products/emoji/emoji-cant-stand.jpeg', //더미
+      imageUrl: image,
       blurDataUrl: '',
       owner: authUser?.me,
     };
-
     try {
       setGlobalSpinner(true);
       await registSale({
@@ -31,6 +34,8 @@ const ProductFormContainer = ({ authUser }: ProductFormContainerProps) => {
           ...product,
         },
       });
+      window.alert('등록이 완료되었습니다.');
+      router.push('/');
     } catch (error: unknown) {
       if (error instanceof Error) {
         window.alert(error.message);

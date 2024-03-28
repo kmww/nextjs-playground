@@ -13,7 +13,6 @@ import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import BadgeIconButton from '@/components/molecules/BadgeIconButton';
-import { useShoppingCartContext } from '@/contexts/ShoppingCartContext';
 import { useMeQuery } from '@/generated/graphql';
 
 const HeaderRoot = styled.header`
@@ -41,7 +40,7 @@ export const Anchor = styled(Text)`
 
 const Header = () => {
   const [accessToken, setAccessToken] = useState<string | undefined>();
-  const { cart } = useShoppingCartContext();
+  // const { cart } = useShoppingCartContext();
   const { data } = useMeQuery({ skip: !accessToken });
 
   useEffect(() => {
@@ -112,7 +111,7 @@ const Header = () => {
                 <BadgeIconButton
                   icon={<ShoppingCartIcon size={24} />}
                   size="24px"
-                  badgeContent={cart.length === 0 ? undefined : cart.length}
+                  // badgeContent={cart.length === 0 ? undefined : cart.length}
                   badgeBackgroundColor="#ed9f28"
                 />
               </Anchor>

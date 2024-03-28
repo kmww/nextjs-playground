@@ -89,7 +89,7 @@ export type MutationRegistSaleArgs = {
   category: Scalars['String'];
   condition: Scalars['String'];
   description: Scalars['String'];
-  imageUrl: Scalars['String'];
+  imageUrl: Scalars['Upload'];
   price: Scalars['Float'];
   title: Scalars['String'];
 };
@@ -135,7 +135,7 @@ export type Query = {
   __typename?: 'Query';
   getCartItems?: Maybe<Array<CartItem>>;
   me?: Maybe<UserData>;
-  product?: Maybe<Product>;
+  product: Product;
   products: Array<Product>;
   searchProducts: Array<Product>;
 };
@@ -226,7 +226,7 @@ export type RegistSaleMutationVariables = Exact<{
   condition: Scalars['String'];
   price: Scalars['Float'];
   blurDataUrl: Scalars['String'];
-  imageUrl: Scalars['String'];
+  imageUrl: Scalars['Upload'];
   description: Scalars['String'];
   category: Scalars['String'];
   title: Scalars['String'];
@@ -278,7 +278,7 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } } | null };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } } };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -432,7 +432,7 @@ export type RefreshAccessTokenMutationHookResult = ReturnType<typeof useRefreshA
 export type RefreshAccessTokenMutationResult = Apollo.MutationResult<RefreshAccessTokenMutation>;
 export type RefreshAccessTokenMutationOptions = Apollo.BaseMutationOptions<RefreshAccessTokenMutation, RefreshAccessTokenMutationVariables>;
 export const RegistSaleDocument = gql`
-    mutation registSale($condition: String!, $price: Float!, $blurDataUrl: String!, $imageUrl: String!, $description: String!, $category: String!, $title: String!) {
+    mutation registSale($condition: String!, $price: Float!, $blurDataUrl: String!, $imageUrl: Upload!, $description: String!, $category: String!, $title: String!) {
   registSale(
     condition: $condition
     price: $price

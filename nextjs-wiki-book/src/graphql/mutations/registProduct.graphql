@@ -2,7 +2,7 @@ mutation registSale(
   $condition: String!
   $price: Float!
   $blurDataUrl: String!
-  $imageUrl: String!
+  $imageUrl: Upload!
   $description: String!
   $category: String!
   $title: String!

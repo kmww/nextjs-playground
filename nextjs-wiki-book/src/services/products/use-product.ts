@@ -1,30 +1,30 @@
-import useSWR from 'swr';
-import { ApiContext, Product } from '@/types';
+// import useSWR from 'swr';
+// import { ApiContext, Product } from '@/types';
 
-export interface UseProductProps {
-  id: number;
-  initial?: Product;
-}
+// export interface UseProductProps {
+//   id: number;
+//   initial?: Product;
+// }
 
-export type UseProduct = {
-  product?: Product;
-  isLoading: boolean;
-  isError: boolean;
-};
+// export type UseProduct = {
+//   product?: Product;
+//   isLoading: boolean;
+//   isError: boolean;
+// };
 
-const useProduct = (
-  context: ApiContext,
-  { id, initial }: UseProductProps,
-): UseProduct => {
-  const { data, error } = useSWR<Product>(
-    `${context.apiRootUrl.replace(/\/$/g, '')}/products/${id}`,
-  );
+// const useProduct = (
+//   context: ApiContext,
+//   { id, initial }: UseProductProps,
+// ): UseProduct => {
+//   const { data, error } = useSWR<Product>(
+//     `${context.apiRootUrl.replace(/\/$/g, '')}/products/${id}`,
+//   );
 
-  return {
-    product: data ?? initial,
-    isLoading: !error && !data,
-    isError: error,
-  };
-};
+//   return {
+//     product: data ?? initial,
+//     isLoading: !error && !data,
+//     isError: error,
+//   };
+// };
 
-export default useProduct;
+// export default useProduct;

@@ -5,11 +5,8 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { SWRConfig } from 'swr';
 import { createApolloClient } from '@/apollo/createApolloClient';
 import GlobalSpinner from '@/components/organisms/GlobalSpinner';
-import { AuthContextProvider } from '@/contexts/AuthContext';
 import GlobalSpinnerContextProvider from '@/contexts/GlobalSpinnerContext';
-import { ShoppingCartContextProvider } from '@/contexts/ShoppingCartContext';
 import { theme } from '@/styles/themes';
-import { ApiContext } from '@/types';
 import { fetcher } from '@/utils';
 
 const GlobalStyle = createGlobalStyle`
@@ -37,10 +34,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const context: ApiContext = {
-  apiRootUrl: process.env.NEXT_PUBLIC_BASE_PATH || '/api/proxy',
-};
-
 export const apolloClient = createApolloClient();
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -66,12 +59,8 @@ const App = ({ Component, pageProps }: AppProps) => {
             }}
           >
             <GlobalSpinnerContextProvider>
-              <ShoppingCartContextProvider>
-                <AuthContextProvider context={context}>
-                  <GlobalSpinner />
-                  <Component {...pageProps} />
-                </AuthContextProvider>
-              </ShoppingCartContextProvider>
+              <GlobalSpinner />
+              <Component {...pageProps} />
             </GlobalSpinnerContextProvider>
           </SWRConfig>
         </ApolloProvider>

@@ -1,24 +1,24 @@
-import { ApiContext } from '@/types';
-import { fetcher } from '@/utils';
+// import { ApiContext } from '@/types';
+// import { fetcher } from '@/utils';
 
-export interface PurchaseParams {
-  productId: number;
-}
+// export interface PurchaseParams {
+//   productId: number;
+// }
 
-const purchase = async (
-  context: ApiContext,
-  params: PurchaseParams,
-): Promise<{ message: string }> => {
-  return await fetcher(`${context.apiRootUrl.replace(/\/$/g, '')}/purchases`, {
-    method: 'POST',
-    headers: {
-      Origin: '*',
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      credentials: 'include',
-    },
-    body: JSON.stringify(params),
-  });
-};
+// const purchase = async (
+//   context: ApiContext,
+//   params: PurchaseParams,
+// ): Promise<{ message: string }> => {
+//   return await fetcher(`${context.apiRootUrl.replace(/\/$/g, '')}/purchases`, {
+//     method: 'POST',
+//     headers: {
+//       Origin: '*',
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//       credentials: 'include',
+//     },
+//     body: JSON.stringify(params),
+//   });
+// };
 
-export default purchase;
+// export default purchase;

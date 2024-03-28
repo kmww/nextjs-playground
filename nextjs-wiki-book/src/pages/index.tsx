@@ -8,7 +8,6 @@ import ProductCardCrousel from '@/components/organisms/ProductCardCarousel';
 import Layout from '@/components/templates/Layout';
 import { ProductsDocument } from '@/generated/graphql';
 import { Product } from '@/types';
-import { fetcher } from '@/utils';
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -114,7 +113,15 @@ const Home = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await fetcher(ProductsDocument);
+  const { data } = await fetch('http://localhost:4000/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: ProductsDocument.loc?.source.body,
+    }),
+  }).then((res) => res.json());
 
   const emojiProducts = data.products
     .filter((product: Product) => product.category === 'emoji')

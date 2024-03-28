@@ -9,8 +9,8 @@ import cookieParser from 'cookie-parser';
 async function main() {
   await createDB();
   const app = express();
-  app.use(cookieParser());
   app.use(express.static('public'));
+  app.use(cookieParser());
   app.use(graphqlUploadExpress({ maxFileSize: 1024 * 1000 * 5, maxFiles: 1 }));
 
   const apolloServer = await createApolloServer();

@@ -1,3 +1,4 @@
+import { createWriteStream } from 'fs';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
 import Product from '../entities/Product';
 import {
@@ -11,6 +12,7 @@ import {
 } from 'type-graphql';
 import { MyContext } from '../apollo/createApolloServer';
 import UserData from '../entities/UserData';
+import { FileUpload, GraphQLUpload } from 'graphql-upload';
 
 type Category = 'emoji' | 'figures' | 'pad';
 type Condition = 'new' | 'used';
@@ -59,30 +61,40 @@ export class ProductResolver {
     @Arg('title') title: string,
     @Arg('category') category: Category,
     @Arg('description') description: string,
-    @Arg('imageUrl') imageUrl: string,
+    @Arg('imageUrl', () => GraphQLUpload) imageUrl: FileUpload,
     @Arg('blurDataUrl') blurDataUrl: string,
     @Arg('price') price: number,
     @Arg('condition') condition: Condition,
     @Ctx() { verifiedUser }: MyContext,
   ): Promise<Product> {
     const user = await UserData.findOne({ where: { id: verifiedUser.userId } });
-
     if (!user) {
       throw new Error('User not found');
     }
+
+    const { createReadStream, filename } = imageUrl;
+    const realFileName = `${verifiedUser.userId}-${Date.now()}-${filename}`;
+    const filePath = `public/${realFileName}`;
+
+    await new Promise((resolve, reject) =>
+      createReadStream()
+        .pipe(createWriteStream(filePath))
+        .on('finish', resolve)
+        .on('error', () => reject(Error('file upload failed'))),
+    );
 
     const product = Product.create({
       title,
       category,
       description,
-      imageUrl,
+      imageUrl: filePath,
       blurDataUrl,
       price,
       condition,
       owner: user,
     });
 
-    await product.save();
+    await Product.save(product);
 
     return product;
   }

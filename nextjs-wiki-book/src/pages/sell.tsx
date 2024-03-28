@@ -10,8 +10,8 @@ import { useMeQuery } from '@/generated/graphql';
 const SellPage: NextPage = () => {
   const { data, loading } = useMeQuery();
   const router = useRouter();
-  if (!data) {
-    window.alert('로그인이 필요합니다.');
+
+  if (!data && typeof window !== 'undefined') {
     router.push('/');
     return null;
   }

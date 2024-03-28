@@ -58,7 +58,13 @@ const CartContainer = () => {
           <CartProduct
             key={product.id}
             id={product.id}
-            imageUrl={product.imageUrl}
+            imageUrl={
+              product.imageUrl &&
+              `http://localhost:4000/${product.imageUrl.replace(
+                /^public\//,
+                '',
+              )}`
+            }
             title={product.title}
             price={product.price}
             onRemoveButtonClick={handleRemoveButtonClick}

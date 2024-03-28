@@ -15,6 +15,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>;
 export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   apolloClient = new ApolloClient({
     cache: createApolloCache(),
+    uri: 'http://localhost:4000/graphql',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     link: from([authLink, errorLink, httpUploadLink as any]),
   });

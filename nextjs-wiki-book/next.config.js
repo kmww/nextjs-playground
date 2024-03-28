@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
+      'localhost',
       'cdn-lostark.game.onstove.com',
       'd3kxs6kpbh59hp.cloudfront.net',
       'd2x8kymwjom7h7.cloudfront.net',

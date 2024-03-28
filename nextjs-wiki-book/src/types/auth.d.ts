@@ -11,5 +11,5 @@ export interface User {
   profileImageUrl: string;
   description: string;
   createdAt: Date;
-  pdatedAt: Date;
+  updatedAt: Date;
 }

@@ -17,7 +17,7 @@ describe('SigninForm', () => {
     handleSignin = jest.fn();
     renderResult = render(
       <ThemeProvider theme={theme}>
-        <SigninForm onSignin={handleSignin} />
+        <SigninForm onSignIn={handleSignin} isLoading={false} />
       </ThemeProvider>,
     );
   });
@@ -30,13 +30,13 @@ describe('SigninForm', () => {
     await act(async () => {
       // 사용자 명
       const inputUsernameNode = screen.getByPlaceholderText(
-        /사용자명/,
+        /이메일 또는 닉네임/,
       ) as HTMLInputElement;
       fireEvent.change(inputUsernameNode, { target: { value: 'user' } });
 
       // 비밀번호
       const inputPasswordNode = screen.getByPlaceholderText(
-        /비밀번호/,
+        /\*{8}/,
       ) as HTMLInputElement;
       fireEvent.change(inputPasswordNode, { target: { value: 'password' } });
 
@@ -50,7 +50,7 @@ describe('SigninForm', () => {
   it('비밀번호 미입력시 onSignin이 호출되지 않는다.', async () => {
     await act(async () => {
       const inputUsernameNode = screen.getByPlaceholderText(
-        /사용자명/,
+        /이메일 또는 닉네임/,
       ) as HTMLInputElement;
       fireEvent.change(inputUsernameNode, { target: { value: 'user' } });
 
@@ -63,7 +63,7 @@ describe('SigninForm', () => {
   it('사용자명 미입력시 onSignin이 호출되지 않는다.', async () => {
     await act(async () => {
       const inputPasswordNode = screen.getByPlaceholderText(
-        /비밀번호/,
+        /\*{8}/,
       ) as HTMLInputElement;
       fireEvent.change(inputPasswordNode, { target: { value: 'password' } });
 

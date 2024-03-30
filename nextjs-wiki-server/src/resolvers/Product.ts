@@ -40,7 +40,7 @@ export class ProductResolver {
     @Arg('conditions', () => [String], { nullable: true })
     conditions?: Condition[],
   ): Promise<Product[] | []> {
-    let products = await Product.find();
+    let products = await Product.find({ relations: ['owner'] });
 
     if (category) {
       products = products.filter((product) => product.category === category);

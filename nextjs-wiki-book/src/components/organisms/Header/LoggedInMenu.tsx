@@ -1,17 +1,15 @@
 import { useApolloClient } from '@apollo/client';
-import {
-  IconButton,
-  InputLabel,
-  ListItemIcon,
-  Menu,
-  MenuItem,
-  Tooltip,
-} from '@mui/material';
-import { useMemo, useState } from 'react';
-import { NavLink } from './';
-import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+import { LogoutIcon } from '@/components/atoms/IconButton';
+import MenuButton from '@/components/atoms/MenuButton/indext';
 import ShapeImage from '@/components/atoms/ShapeImage';
 import Separator from '@/components/atoms/Sparator';
+import Text from '@/components/atoms/Text';
+import Flex from '@/components/layout/Flex';
+import MenuItem from '@/components/molecules/MenuItem';
+import MenuList from '@/components/molecules/MenuList.tsx';
+import Menu from '@/components/organisms/Menu';
 import {
   MeQuery,
   useLogoutMutation,
@@ -24,18 +22,9 @@ interface LoggedInMenuProps {
 
 const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const client = useApolloClient();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const [logout] = useLogoutMutation();
+  const router = useRouter();
+  const [logout, { loading: logoutLoading }] = useLogoutMutation();
   const [upload] = useUploadProfileImageMutation();
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(e.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const profileImage = useMemo(() => {
     if (meData?.me?.profileImageUrl) {
@@ -46,9 +35,12 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
 
   const onLogoutClick = async () => {
     try {
-      await logout();
-      localStorage.removeItem('access_token');
-      await client.resetStore();
+      if (!logoutLoading) {
+        await logout();
+        await client.resetStore();
+        localStorage.removeItem('access_token');
+        router.push('/').then(() => router.reload());
+      }
     } catch (error) {
       console.error(error);
     }
@@ -67,95 +59,66 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   };
 
   return (
-    <NavLink>
-      <Tooltip title="Account settings">
-        <IconButton
-          onClick={handleClick}
-          size="small"
-          aria-controls={open ? 'account-menu' : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-        >
+    <>
+      <Menu>
+        <MenuButton paddingRight={0}>
           <ShapeImage
             shape="circle"
+            width={30}
+            height={30}
             src={profileImage}
-            width={24}
-            height={24}
-            data-testid="profile-shape-image"
             alt={profileImage}
           />
-        </IconButton>
-      </Tooltip>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&::before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        <InputLabel htmlFor="upload-profile-image">
-          <MenuItem onClick={handleClose}>
-            <input
-              id="upload-profile-image"
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={handleImageUpload}
-            />
-            <ShapeImage
-              shape="circle"
-              src={profileImage}
-              width={24}
-              height={24}
-              data-testid="profile-shape-image"
-              alt={profileImage}
-            />
-            Profile
+        </MenuButton>
+        <MenuList isOpen={false}>
+          <MenuItem>
+            <Flex paddingTop={1} paddingBottom={1} alignItems="center">
+              <label htmlFor="upload-profile-image">
+                <input
+                  id="upload-profile-image"
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={handleImageUpload}
+                />
+                <ShapeImage
+                  shape="circle"
+                  width={60}
+                  height={60}
+                  src={profileImage}
+                  alt={profileImage}
+                  style={{ cursor: 'pointer' }}
+                />
+              </label>
+              <Flex flexDirection="column" paddingLeft={1}>
+                <Text
+                  fontWeight="bold"
+                  fontSize="mediumLarge"
+                  marginBottom="5px"
+                >
+                  {meData?.me?.displayName}
+                </Text>
+                <Text fontSize="medium">{meData?.me?.email}</Text>
+              </Flex>
+            </Flex>
           </MenuItem>
-        </InputLabel>
-        <Separator />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <SettingIcon />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <LogoutIcon onClick={onLogoutClick} />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+          <Separator />
+          <div
+            onClick={!logoutLoading ? onLogoutClick : () => {}}
+            style={{ cursor: 'pointer' }}
+          >
+            <MenuItem>
+              <Flex>
+                <LogoutIcon color="danger" />
+                <Text fontWeight="bold" color="danger" marginLeft="5px">
+                  로그아웃
+                </Text>
+              </Flex>
+            </MenuItem>
+          </div>
+        </MenuList>
       </Menu>
-    </NavLink>
+    </>
   );
 };
 

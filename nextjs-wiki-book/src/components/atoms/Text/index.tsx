@@ -98,6 +98,7 @@ const Text = styled.span<TextProps>`
     }
   }}
   ${(props) => toPropValue('font-size', props.fontSize, props.theme)}
+  ${(props) => toPropValue('font-weight', props.fontWeight, props.theme)}
   ${(props) => toPropValue('letter-spacing', props.letterSpacing, props.theme)}
   ${(props) => toPropValue('line-height', props.lineHeight, props.theme)}
   ${(props) => toPropValue('color', props.color, props.theme)}

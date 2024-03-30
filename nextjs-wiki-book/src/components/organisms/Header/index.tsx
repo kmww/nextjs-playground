@@ -12,7 +12,6 @@ import {
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import BadgeIconButton from '@/components/molecules/BadgeIconButton';
 import { useMeQuery } from '@/generated/graphql';
 
 const HeaderRoot = styled.header`
@@ -40,7 +39,6 @@ export const Anchor = styled(Text)`
 
 const Header = () => {
   const [accessToken, setAccessToken] = useState<string | undefined>();
-  // const { cart } = useShoppingCartContext();
   const { data } = useMeQuery({ skip: !accessToken });
 
   useEffect(() => {
@@ -96,38 +94,27 @@ const Header = () => {
           </NavLink>
         </Nav>
         <Nav as="nav" height="56px" alignItems="center">
-          <NavLink>
-            <Box display={{ base: 'block', md: 'none' }}>
-              <Link href="/search" passHref>
-                <Anchor>
-                  <SearchIcon />
-                </Anchor>
-              </Link>
-            </Box>
-          </NavLink>
-          <NavLink>
-            <Link href="/cart" passHref>
+          <Box display={{ base: 'block', md: 'none' }}>
+            <Link href="/search" passHref>
               <Anchor>
-                <BadgeIconButton
-                  icon={<ShoppingCartIcon size={24} />}
-                  size="24px"
-                  // badgeContent={cart.length === 0 ? undefined : cart.length}
-                  badgeBackgroundColor="#ed9f28"
-                />
+                <SearchIcon size={30} />
               </Anchor>
             </Link>
-          </NavLink>
+          </Box>
+          <Link href="/cart" style={{ marginLeft: 10 }} passHref>
+            <Anchor>
+              <ShoppingCartIcon size={28} />
+            </Anchor>
+          </Link>
           <>
             {isLoggedIn ? (
               <LoggedInMenu meData={data} />
             ) : (
-              <NavLink>
-                <Link href="/signin" passHref>
-                  <Anchor fontSize="30px">
-                    <PersonIcon size={24} />
-                  </Anchor>
-                </Link>
-              </NavLink>
+              <Link href="/signin" style={{ marginLeft: 10 }} passHref>
+                <Anchor>
+                  <PersonIcon size={30} />
+                </Anchor>
+              </Link>
             )}
           </>
           <NavLink>

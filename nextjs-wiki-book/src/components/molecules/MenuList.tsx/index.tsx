@@ -10,8 +10,10 @@ const StyledList = styled.ul<MenuListProps>`
   min-width: 300px;
   list-style-type: none;
   padding: 0;
+  padding-left: 0px;
   position: absolute;
   background-color: #f9f9f9;
+  border-radius: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};

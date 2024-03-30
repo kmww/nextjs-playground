@@ -49,7 +49,13 @@ const ProductCardListContainer = ({
                 variant="listing"
                 title={product.title}
                 price={product.price}
-                imageUrl={product.imageUrl}
+                imageUrl={
+                  product.imageUrl &&
+                  `http://localhost:4000/${product.imageUrl.replace(
+                    /^public\//,
+                    '',
+                  )}`
+                }
                 blurDataUrl={product.blurDataUrl}
               />
             </Link>

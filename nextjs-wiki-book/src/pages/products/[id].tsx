@@ -5,6 +5,7 @@ import {
   NextPage,
 } from 'next';
 import Link from 'next/link';
+import { useMemo } from 'react';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Separator from '@/components/atoms/Sparator';
 import Text from '@/components/atoms/Text';
@@ -36,6 +37,13 @@ const ProductPage: NextPage<ProductPageProps> = ({
   });
 
   const product = (data?.product as Product) ?? initial;
+
+  const profileImage = useMemo(() => {
+    if (data?.product.owner.profileImageUrl) {
+      return `http://localhost:4000/${data?.product.owner.profileImageUrl}`;
+    }
+    return '';
+  }, [data]);
 
   if (error) {
     throw new Error(JSON.stringify(error));
@@ -92,7 +100,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
               <UserProfile
                 variant="small"
                 username={product.owner.username}
-                profileImageUrl={product.owner.profileImageUrl}
+                profileImageUrl={profileImage}
                 numberOfProducts={100}
               />
             </Link>

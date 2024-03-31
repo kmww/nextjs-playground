@@ -2,12 +2,10 @@ import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { SWRConfig } from 'swr';
 import { createApolloClient } from '@/apollo/createApolloClient';
 import GlobalSpinner from '@/components/organisms/GlobalSpinner';
 import GlobalSpinnerContextProvider from '@/contexts/GlobalSpinnerContext';
 import { theme } from '@/styles/themes';
-import { fetcher } from '@/utils';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -52,17 +50,10 @@ const App = ({ Component, pageProps }: AppProps) => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apolloClient}>
-          <SWRConfig
-            value={{
-              shouldRetryOnError: false,
-              fetcher,
-            }}
-          >
-            <GlobalSpinnerContextProvider>
-              <GlobalSpinner />
-              <Component {...pageProps} />
-            </GlobalSpinnerContextProvider>
-          </SWRConfig>
+          <GlobalSpinnerContextProvider>
+            <GlobalSpinner />
+            <Component {...pageProps} />
+          </GlobalSpinnerContextProvider>
         </ApolloProvider>
       </ThemeProvider>
     </>

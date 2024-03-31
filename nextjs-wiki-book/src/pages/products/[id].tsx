@@ -18,7 +18,6 @@ import UserProfile from '@/components/organisms/UserProfile';
 import Layout from '@/components/templates/Layout';
 import { ProductsDocument, useProductQuery } from '@/generated/graphql';
 import { Category, Product } from '@/types';
-import { fetcher } from '@/utils';
 
 const categoryNameDict: Record<Category, string> = {
   emoji: '이모티콘',
@@ -126,8 +125,19 @@ const ProductPage: NextPage<ProductPageProps> = ({
 };
 
 export const getStaticPaths = async () => {
-  const { products } = await fetcher(ProductsDocument);
-  const paths = products.map((product: Product) => `/products/${product.id}`);
+  const { data } = await fetch('http://localhost:4000/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: ProductsDocument.loc?.source.body,
+    }),
+  }).then((res) => res.json());
+
+  const paths = data.products.map(
+    (product: Product) => `/products/${product.id}`,
+  );
 
   return { paths, fallback: true };
 };
@@ -135,13 +145,22 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const { products } = await fetcher(ProductsDocument);
+  const { data } = await fetch('http://localhost:4000/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: ProductsDocument.loc?.source.body,
+    }),
+  }).then((res) => res.json());
+
   if (!params) {
     throw new Error('products params is undefined');
   }
 
   const productId = Number(params.id);
-  const product = products.filter(
+  const product = data.products.filter(
     (product: Product) => product.id === productId,
   );
 
@@ -150,7 +169,7 @@ export const getStaticProps: GetStaticProps = async ({
       id: productId,
       product,
     },
-    revalidate: 10,
+    revalidate: 60,
   };
 };
 

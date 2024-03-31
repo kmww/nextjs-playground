@@ -5,15 +5,15 @@ import ProductFormContainer from '@/components/containers/ProductFormContainer';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Layout from '@/components/templates/Layout';
-import { useMeQuery } from '@/generated/graphql';
+import { UseAuth } from '@/utils/hooks/useAuth';
 
 const SellPage: NextPage = () => {
-  const { data, loading } = useMeQuery();
+  const { data, error, loading } = UseAuth();
   const router = useRouter();
 
-  if (!data && typeof window !== 'undefined') {
+  if (error && typeof window !== 'undefined') {
+    window.alert('로그인이 필요합니다.');
     router.push('/');
-    return null;
   }
 
   if (loading) {

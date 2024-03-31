@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Text from '@/components/atoms/Text';
 import CartContainer from '@/components/containers/CartContainer';
@@ -8,18 +9,18 @@ import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
 import Breadcrumb from '@/components/molecules/Breadcrumb';
 import Layout from '@/components/templates/Layout';
-import { useMeQuery } from '@/generated/graphql';
+import { UseAuth } from '@/utils/hooks/useAuth';
 
 const CartPage: NextPage = () => {
-  const [accessToken, setAccessToken] = useState<string | undefined>();
-  const { data } = useMeQuery({ skip: !accessToken });
+  const { error } = UseAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      const token = localStorage.getItem('access_token');
-      setAccessToken(token !== null ? token : undefined);
+    if (error && typeof window !== 'undefined') {
+      window.alert('로그인이 필요합니다.');
+      router.push('/');
     }
-  }, [data]);
+  }, [error, router]);
 
   return (
     <Layout>

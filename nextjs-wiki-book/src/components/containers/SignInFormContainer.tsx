@@ -16,8 +16,7 @@ const SignInFormContainer = () => {
       if (res.data?.login.user) {
         const redirectTo = (router.query['redirect_to'] as string) ?? '/';
 
-        console.log('Redirection', redirectTo);
-        await router.push(redirectTo);
+        await router.push(redirectTo).then(() => router.reload());
 
         return res;
       } else if (res.data?.login.errors) {

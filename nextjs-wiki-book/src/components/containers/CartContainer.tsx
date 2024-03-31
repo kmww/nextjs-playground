@@ -1,23 +1,30 @@
+import { useEffect } from 'react';
 import Spinner from '../atoms/Spinner';
 import CartProduct from '@/components/organisms/CartProduct';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
 import {
+  GetCartItemsDocument,
   useGetCartItemsQuery,
   useRemoveFromCartMutation,
 } from '@/generated/graphql';
-// import purchase from '@/services/purchases/purchase';
 
 const CartContainer = () => {
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
-  const { data, loading, error } = useGetCartItemsQuery();
+  const { data, loading, error, refetch } = useGetCartItemsQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const handleRemoveButtonClick = async (productId: number) => {
     try {
       setGlobalSpinner(true);
       await removeFromCart({
         variables: { productId },
+        refetchQueries: [{ query: GetCartItemsDocument }],
       });
+      window.alert('삭제 완료');
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -30,11 +37,11 @@ const CartContainer = () => {
   const handleBuyButtonClick = async (productId: number) => {
     try {
       setGlobalSpinner(true);
-      // await purchase(context, { productId });
-      window.alert('구매 완료');
-      removeFromCart({
+      await removeFromCart({
         variables: { productId },
+        refetchQueries: [{ query: GetCartItemsDocument }],
       });
+      window.alert('구매 완료');
     } catch (error: unknown) {
       if (error instanceof Error) {
         window.alert(error.message);

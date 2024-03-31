@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
@@ -12,7 +12,7 @@ import {
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import { useMeQuery } from '@/generated/graphql';
+import { UseAuth } from '@/utils/hooks/useAuth';
 
 const HeaderRoot = styled.header`
   height: 88px;
@@ -38,15 +38,7 @@ export const Anchor = styled(Text)`
 `;
 
 const Header = () => {
-  const [accessToken, setAccessToken] = useState<string | undefined>();
-  const { data } = useMeQuery({ skip: !accessToken });
-
-  useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      const token = localStorage.getItem('access_token');
-      setAccessToken(token !== null ? token : undefined);
-    }
-  }, [data]);
+  const { accessToken, data } = UseAuth();
 
   const isLoggedIn = useMemo(() => {
     if (accessToken) return data?.me?.id;
@@ -108,7 +100,14 @@ const Header = () => {
           </Link>
           <>
             {isLoggedIn ? (
-              <LoggedInMenu meData={data} />
+              <>
+                <LoggedInMenu meData={data} />
+                <NavLink>
+                  <Link href="/sell">
+                    <Button>등록</Button>
+                  </Link>
+                </NavLink>
+              </>
             ) : (
               <Link href="/signin" style={{ marginLeft: 10 }} passHref>
                 <Anchor>
@@ -117,11 +116,6 @@ const Header = () => {
               </Link>
             )}
           </>
-          <NavLink>
-            <Link href="/sell">
-              <Button>등록</Button>
-            </Link>
-          </NavLink>
         </Nav>
       </Flex>
     </HeaderRoot>

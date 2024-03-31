@@ -17,6 +17,6 @@ export class User {
   @Field({ nullable: true, description: '프로필 사진' })
   profileImageUrl?: string;
 
-  @Field({ description: '유저 소개' })
+  @Field({ description: '유저 소개', nullable: true })
   description: string;
 }

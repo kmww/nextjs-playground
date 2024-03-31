@@ -29,7 +29,7 @@ export default class CartItem extends BaseEntity {
   @JoinColumn({ name: 'user' })
   user: UserData;
 
-  @ManyToOne(() => Product)
+  @ManyToOne(() => Product, () => { onDelete: 'CASEADE'})
   @JoinColumn({ name: 'productId' })
   @Field(() => Product)
   product: Product;

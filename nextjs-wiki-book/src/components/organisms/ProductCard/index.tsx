@@ -40,7 +40,7 @@ const ProductCard = ({
       case 'listing':
         return { size: { base: '160px', md: '240px' }, imgSize: 240 };
       default:
-        return { size: { base: '160px' }, imgSize: 160 };
+        return { size: { base: '300px' }, imgSize: 300 };
     }
   })();
 
@@ -90,7 +90,7 @@ const ProductCard = ({
             placeholder="blur"
             blurDataURL={blurDataUrl}
             alt={imageUrl}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'fill' }}
           />
         )}
         {!blurDataUrl && (
@@ -101,7 +101,7 @@ const ProductCard = ({
             containerWidth={size}
             containerHeight={size}
             alt={imageUrl}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'fill' }}
           />
         )}
       </ProductCardImageContainer>

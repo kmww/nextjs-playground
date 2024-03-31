@@ -83,11 +83,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
               title={product.title}
               price={product.price}
               imageUrl={
-                product.imageUrl &&
-                `http://localhost:4000/${product.imageUrl.replace(
-                  /^public\//,
-                  '',
-                )}`
+                product.imageUrl && `http://localhost:4000/${product.imageUrl}`
               }
             />
           </Flex>

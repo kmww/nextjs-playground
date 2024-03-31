@@ -87,7 +87,7 @@ export class ProductResolver {
       title,
       category,
       description,
-      imageUrl: filePath,
+      imageUrl: realFileName,
       blurDataUrl,
       price,
       condition,

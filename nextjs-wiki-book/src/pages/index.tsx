@@ -30,10 +30,7 @@ const Home = ({
                 price={product.price}
                 imageUrl={
                   product.imageUrl &&
-                  `http://localhost:4000/${product.imageUrl.replace(
-                    /^public\//,
-                    '',
-                  )}`
+                  `http://localhost:4000/${product.imageUrl}`
                 }
                 blurDataUrl={product.blurDataUrl}
               />

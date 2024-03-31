@@ -59,11 +59,7 @@ const CartContainer = () => {
             key={product.id}
             id={product.id}
             imageUrl={
-              product.imageUrl &&
-              `http://localhost:4000/${product.imageUrl.replace(
-                /^public\//,
-                '',
-              )}`
+              product.imageUrl && `http://localhost:4000/${product.imageUrl}`
             }
             title={product.title}
             price={product.price}

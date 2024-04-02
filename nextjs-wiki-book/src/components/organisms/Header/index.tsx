@@ -4,11 +4,7 @@ import styled from 'styled-components';
 import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
 import Button from '@/components/atoms/Button';
-import {
-  PersonIcon,
-  SearchIcon,
-  ShoppingCartIcon,
-} from '@/components/atoms/IconButton';
+import { SearchIcon, ShoppingCartIcon } from '@/components/atoms/IconButton';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
@@ -93,14 +89,14 @@ const Header = () => {
               </Anchor>
             </Link>
           </Box>
-          <Link href="/cart" style={{ marginLeft: 10 }} passHref>
-            <Anchor>
-              <ShoppingCartIcon size={28} />
-            </Anchor>
-          </Link>
           <>
             {isLoggedIn ? (
               <>
+                <Link href="/cart" style={{ marginLeft: 10 }} passHref>
+                  <Anchor>
+                    <ShoppingCartIcon size={28} />
+                  </Anchor>
+                </Link>
                 <LoggedInMenu meData={data} />
                 <NavLink>
                   <Link href="/sell">
@@ -111,7 +107,7 @@ const Header = () => {
             ) : (
               <Link href="/signin" style={{ marginLeft: 10 }} passHref>
                 <Anchor>
-                  <PersonIcon size={30} />
+                  <Button>로그인</Button>
                 </Anchor>
               </Link>
             )}

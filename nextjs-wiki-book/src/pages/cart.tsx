@@ -12,15 +12,15 @@ import Layout from '@/components/templates/Layout';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const CartPage: NextPage = () => {
-  const { error } = UseAuth();
+  const { data } = UseAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (error && typeof window !== 'undefined') {
+    if (!data && typeof window !== 'undefined') {
       window.alert('로그인이 필요합니다.');
       router.push('/');
     }
-  }, [error, router]);
+  }, [data, router]);
 
   return (
     <Layout>

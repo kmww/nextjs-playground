@@ -41,7 +41,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
     if (data?.product.owner.profileImageUrl) {
       return `http://localhost:4000/${data?.product.owner.profileImageUrl}`;
     }
-    return '';
+    return 'http://localhost:4000/DefaultUser.png';
   }, [data]);
 
   if (error) {

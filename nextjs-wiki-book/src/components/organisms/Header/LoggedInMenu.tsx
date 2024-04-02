@@ -30,7 +30,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
     if (meData?.me?.profileImageUrl) {
       return `http://localhost:4000/${meData?.me?.profileImageUrl}`;
     }
-    return '';
+    return 'http://localhost:4000/DefaultUser.png';
   }, [meData]);
 
   const onLogoutClick = async () => {

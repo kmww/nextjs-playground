@@ -8,16 +8,12 @@ import Layout from '@/components/templates/Layout';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const SellPage: NextPage = () => {
-  const { data, error, loading } = UseAuth();
+  const { data, error } = UseAuth();
   const router = useRouter();
 
   if (error && typeof window !== 'undefined') {
     window.alert('로그인이 필요합니다.');
     router.push('/');
-  }
-
-  if (loading) {
-    <div>loading...</div>;
   }
 
   return (

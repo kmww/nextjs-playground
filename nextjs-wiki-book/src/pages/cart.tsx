@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Text from '@/components/atoms/Text';
 import CartContainer from '@/components/containers/CartContainer';
@@ -12,15 +11,13 @@ import Layout from '@/components/templates/Layout';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const CartPage: NextPage = () => {
-  const { data } = UseAuth();
+  const { error } = UseAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!data && typeof window !== 'undefined') {
-      window.alert('로그인이 필요합니다.');
-      router.push('/');
-    }
-  }, [data, router]);
+  if (error && typeof window !== 'undefined') {
+    window.alert('로그인이 필요합니다.');
+    router.push('/');
+  }
 
   return (
     <Layout>

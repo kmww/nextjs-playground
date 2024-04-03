@@ -13,6 +13,8 @@ const Anchor = styled(Text)`
 `;
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <footer>
       <Flex flexDirection={{ base: 'column', md: 'row' }}>
@@ -73,7 +75,7 @@ const Footer = () => {
         </Box>
       </Flex>
       <Box paddingTop={3} paddingBottom={2}>
-        <Text>© 2023 Cojet Co., Ltd.. All rights reserved.</Text>
+        <Text>© {year} Cojet Co., Ltd.. All rights reserved.</Text>
       </Box>
     </footer>
   );

@@ -5,8 +5,10 @@ import {
   NextPage,
 } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
+import Button from '@/components/atoms/Button';
 import Separator from '@/components/atoms/Sparator';
 import Text from '@/components/atoms/Text';
 import AddToCartButtonContainer from '@/components/containers/AddToCartButtonContainer';
@@ -16,8 +18,15 @@ import Breadcrumb from '@/components/molecules/Breadcrumb';
 import ProductCard from '@/components/organisms/ProductCard';
 import UserProfile from '@/components/organisms/UserProfile';
 import Layout from '@/components/templates/Layout';
-import { ProductsDocument, useProductQuery } from '@/generated/graphql';
+import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import {
+  ProductsDocument,
+  ProductsQueryResult,
+  useProductQuery,
+  useRemoveProductMutation,
+} from '@/generated/graphql';
 import { Category, Product } from '@/types';
+import { UseAuth } from '@/utils/hooks/useAuth';
 
 const categoryNameDict: Record<Category, string> = {
   emoji: '이모티콘',
@@ -34,15 +43,40 @@ const ProductPage: NextPage<ProductPageProps> = ({
   const { data, error, loading } = useProductQuery({
     variables: { productId: id },
   });
+  const { data: meData } = UseAuth();
+  const [removeProduct] = useRemoveProductMutation();
+  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const router = useRouter();
 
-  const product = (data?.product as Product) ?? initial;
+  const product = data?.product ?? initial;
 
   const profileImage = useMemo(() => {
-    if (data?.product.owner.profileImageUrl) {
-      return `http://localhost:4000/${data?.product.owner.profileImageUrl}`;
+    if (product.owner.profileImageUrl) {
+      return `http://localhost:4000/${product.owner.profileImageUrl}`;
     }
     return 'http://localhost:4000/DefaultUser.png';
-  }, [data]);
+  }, [product]);
+
+  const isMine = useMemo(() => {
+    return product.owner.id === meData?.me?.id ? true : false;
+  }, [meData, product]);
+
+  const handleRemove = async () => {
+    try {
+      setGlobalSpinner(true);
+      await removeProduct({
+        variables: { productId: id },
+      });
+      window.alert('삭제 완료');
+      router.push('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      }
+    } finally {
+      setGlobalSpinner(false);
+    }
+  };
 
   if (error) {
     throw new Error(JSON.stringify(error));
@@ -116,7 +150,17 @@ const ProductPage: NextPage<ProductPageProps> = ({
                   </Text>
                 ))}
             </Box>
-            <AddToCartButtonContainer product={product} />
+            {isMine ? (
+              <Button
+                width={{ base: '100%', md: '400px' }}
+                height="66px"
+                onClick={handleRemove}
+              >
+                제품 삭제
+              </Button>
+            ) : (
+              <AddToCartButtonContainer product={product} />
+            )}
           </Flex>
         </Box>
       </Flex>
@@ -145,15 +189,22 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const { data } = await fetch('http://localhost:4000/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const { data }: ProductsQueryResult = await fetch(
+    'http://localhost:4000/graphql',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: ProductsDocument.loc?.source.body,
+      }),
     },
-    body: JSON.stringify({
-      query: ProductsDocument.loc?.source.body,
-    }),
-  }).then((res) => res.json());
+  ).then((res) => res.json());
+
+  if (!data) {
+    throw new Error('products data is undefined');
+  }
 
   if (!params) {
     throw new Error('products params is undefined');
@@ -161,8 +212,8 @@ export const getStaticProps: GetStaticProps = async ({
 
   const productId = Number(params.id);
   const product = data.products.filter(
-    (product: Product) => product.id === productId,
-  );
+    (product) => product.id === productId,
+  )[0];
 
   return {
     props: {

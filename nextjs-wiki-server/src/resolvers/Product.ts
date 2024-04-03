@@ -13,6 +13,7 @@ import {
 import { MyContext } from '../apollo/createApolloServer';
 import UserData from '../entities/UserData';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
+import CartItem from '../entities/CartItem';
 
 type Category = 'emoji' | 'figures' | 'pad';
 type Condition = 'new' | 'used';
@@ -97,5 +98,32 @@ export class ProductResolver {
     await Product.save(product);
 
     return product;
+  }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuthenticated)
+  async removeProduct(
+    @Arg('productId', () => Int) productId: number,
+    @Ctx() { verifiedUser }: MyContext,
+  ): Promise<boolean> {
+    try {
+      const product = await Product.findOne(productId, {
+        relations: ['owner'],
+      });
+      if (!product) {
+        throw new Error('Product not found');
+      }
+
+      if (product.owner.id !== verifiedUser.userId) {
+        throw new Error('You are not authorized to delete');
+      }
+
+      await CartItem.delete({ productId });
+      await Product.delete(productId);
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   }
 }

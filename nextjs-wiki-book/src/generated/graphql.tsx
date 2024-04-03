@@ -69,6 +69,7 @@ export type Mutation = {
   refreshAccessToken?: Maybe<RefreshAccessTokenResponse>;
   registSale: Product;
   removeFromCart: CartItemResponse;
+  removeProduct: Scalars['Boolean'];
   signUp: UserData;
   uploadProfileImage: Scalars['Boolean'];
 };
@@ -96,6 +97,11 @@ export type MutationRegistSaleArgs = {
 
 
 export type MutationRemoveFromCartArgs = {
+  productId: Scalars['Int'];
+};
+
+
+export type MutationRemoveProductArgs = {
   productId: Scalars['Int'];
 };
 
@@ -167,7 +173,7 @@ export type SignUpInput = {
 export type User = {
   __typename?: 'User';
   /** 유저 소개 */
-  description: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   /** 유저 닉네임 */
   displayName: Scalars['String'];
   /** 이메일 */
@@ -233,7 +239,7 @@ export type RegistSaleMutationVariables = Exact<{
 }>;
 
 
-export type RegistSaleMutation = { __typename?: 'Mutation', registSale: { __typename?: 'Product', blurDataUrl?: string | null, category: string, condition: string, description: string, id: number, imageUrl: string, price: number, title: string, owner: { __typename?: 'User', description: string, displayName: string, email: string, id: number, profileImageUrl?: string | null, username: string } } };
+export type RegistSaleMutation = { __typename?: 'Mutation', registSale: { __typename?: 'Product', blurDataUrl?: string | null, category: string, condition: string, description: string, id: number, imageUrl: string, price: number, title: string, owner: { __typename?: 'User', description?: string | null, displayName: string, email: string, id: number, profileImageUrl?: string | null, username: string } } };
 
 export type RemoveFromCartMutationVariables = Exact<{
   productId: Scalars['Int'];
@@ -241,6 +247,13 @@ export type RemoveFromCartMutationVariables = Exact<{
 
 
 export type RemoveFromCartMutation = { __typename?: 'Mutation', removeFromCart: { __typename?: 'CartItemResponse', message: string, cartItems?: Array<{ __typename?: 'CartItem', id: number, quantity: number, productId: number }> | null } };
+
+export type RemoveProductMutationVariables = Exact<{
+  productId: Scalars['Int'];
+}>;
+
+
+export type RemoveProductMutation = { __typename?: 'Mutation', removeProduct: boolean };
 
 export type LoginMutationVariables = Exact<{
   loginInput: LoginInput;
@@ -278,12 +291,12 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description?: string | null } } };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description?: string | null } }> };
 
 export type SearchProductsQueryVariables = Exact<{
   conditions?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
@@ -291,7 +304,7 @@ export type SearchProductsQueryVariables = Exact<{
 }>;
 
 
-export type SearchProductsQuery = { __typename?: 'Query', searchProducts: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description: string } }> };
+export type SearchProductsQuery = { __typename?: 'Query', searchProducts: Array<{ __typename?: 'Product', id: number, category: string, title: string, description: string, imageUrl: string, blurDataUrl?: string | null, price: number, condition: string, owner: { __typename?: 'User', id: number, username: string, displayName: string, email: string, profileImageUrl?: string | null, description?: string | null } }> };
 
 
 export const AddTocartDocument = gql`
@@ -531,6 +544,37 @@ export function useRemoveFromCartMutation(baseOptions?: Apollo.MutationHookOptio
 export type RemoveFromCartMutationHookResult = ReturnType<typeof useRemoveFromCartMutation>;
 export type RemoveFromCartMutationResult = Apollo.MutationResult<RemoveFromCartMutation>;
 export type RemoveFromCartMutationOptions = Apollo.BaseMutationOptions<RemoveFromCartMutation, RemoveFromCartMutationVariables>;
+export const RemoveProductDocument = gql`
+    mutation removeProduct($productId: Int!) {
+  removeProduct(productId: $productId)
+}
+    `;
+export type RemoveProductMutationFn = Apollo.MutationFunction<RemoveProductMutation, RemoveProductMutationVariables>;
+
+/**
+ * __useRemoveProductMutation__
+ *
+ * To run a mutation, you first call `useRemoveProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeProductMutation, { data, loading, error }] = useRemoveProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useRemoveProductMutation(baseOptions?: Apollo.MutationHookOptions<RemoveProductMutation, RemoveProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RemoveProductMutation, RemoveProductMutationVariables>(RemoveProductDocument, options);
+      }
+export type RemoveProductMutationHookResult = ReturnType<typeof useRemoveProductMutation>;
+export type RemoveProductMutationResult = Apollo.MutationResult<RemoveProductMutation>;
+export type RemoveProductMutationOptions = Apollo.BaseMutationOptions<RemoveProductMutation, RemoveProductMutationVariables>;
 export const LoginDocument = gql`
     mutation login($loginInput: LoginInput!) {
   login(loginInput: $loginInput) {

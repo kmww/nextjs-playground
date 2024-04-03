@@ -56,7 +56,7 @@ export class ShoppingCartResolver {
     let cartItem = await CartItem.findOne({ where: { productId, user } });
 
     if (cartItem) {
-      cartItem.quantity += quantity;
+      return { message: 'Product already exists in cart' };
     } else {
       cartItem = CartItem.create({ productId, quantity, user });
     }

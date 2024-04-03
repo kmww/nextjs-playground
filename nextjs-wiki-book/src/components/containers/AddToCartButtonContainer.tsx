@@ -25,7 +25,11 @@ const AddToCartButtonContainer = ({
       window.alert('장바구니에 상품이 담겼습니다!');
     } catch (error) {
       if (error instanceof Error) {
-        console.error(error.message);
+        if (error.message === 'unAuthenticated') {
+          window.alert('로그인이 필요합니다.');
+        } else {
+          console.error(error.message);
+        }
       }
     } finally {
       setGlobalSpinner(false);

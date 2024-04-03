@@ -17,12 +17,17 @@ const AddToCartButtonContainer = ({
     try {
       setGlobalSpinner(true);
       const productId = Number(product.id);
-      await addToCart({
+      const res = await addToCart({
         variables: {
           cartItemInput: { productId: productId, quantity: 1 },
         },
       });
-      window.alert('장바구니에 상품이 담겼습니다!');
+
+      if (res.data?.addToCart.message === 'Product already exists in cart') {
+        window.alert('이미 장바구니에 추가한 상품입니다.');
+      } else {
+        window.alert('장바구니에 상품이 담겼습니다!');
+      }
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'unAuthenticated') {

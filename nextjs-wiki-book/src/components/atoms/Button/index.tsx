@@ -127,6 +127,7 @@ const Button = styled.button<ButtonProps>`
     }
   }}
   ${(props) => toPropValue('font-size', props.fontSize, props.theme)}
+  ${(props) => toPropValue('font-weight', props.fontWeight, props.theme)}
   ${(props) => toPropValue('letter-spacing', props.letterSpacing, props.theme)}
   ${(props) => toPropValue('line-height', props.lineHeight, props.theme)}
   ${(props) => toPropValue('color', props.color, props.theme)}
@@ -177,11 +178,12 @@ Button.defaultProps = {
   paddingRight: 2,
   paddingTop: 1,
   paddingBottom: 1,
-  color: 'white',
+  color: 'text',
   display: 'inline-block',
   textAlign: 'center',
   lineHeight: 'inherit',
   fontSize: 'inherit',
+  fontWeight: 'bold',
 };
 
 export default Button;

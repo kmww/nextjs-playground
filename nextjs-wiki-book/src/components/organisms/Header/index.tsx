@@ -12,6 +12,7 @@ import { UseAuth } from '@/utils/hooks/useAuth';
 
 const HeaderRoot = styled.header`
   height: 88px;
+  background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.space[2]} 0px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
@@ -69,7 +70,7 @@ const Header = () => {
           <NavLink>
             <Box display={{ base: 'none', md: 'block' }}>
               <Link href="/search/figures" passHref>
-                피규어
+                <Anchor>피규어</Anchor>
               </Link>
             </Box>
           </NavLink>
@@ -94,7 +95,7 @@ const Header = () => {
               <>
                 <Link href="/cart" style={{ marginLeft: 10 }} passHref>
                   <Anchor>
-                    <ShoppingCartIcon size={28} />
+                    <ShoppingCartIcon size={28} color="primaryDark" />
                   </Anchor>
                 </Link>
                 <LoggedInMenu meData={data} />

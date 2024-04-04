@@ -9,7 +9,7 @@ const getMargin = ({ children }: SeparatorProps) =>
 
 const Separator = styled.div<SeparatorProps>`
   height: 22px;
-  color: #e5e7eb;
+  color: ${({ theme }) => theme.colors.seperate};
   display: flex;
   align-items: center;
 
@@ -17,7 +17,7 @@ const Separator = styled.div<SeparatorProps>`
   &::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.seperate};
   }
 
   &::before {

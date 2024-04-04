@@ -1,17 +1,18 @@
 const colors = {
-  primary: '#3f51b5',
-  primaryDark: '#2c387e',
-  primaryLight: '#6573c3',
-  secondary: '#f50057',
-  secondaryDark: '#ab003c',
-  secondaryLight: '#f73378',
+  primary: '#CFE28F',
+  primaryDark: '#afc661',
+  primaryLight: '#edf2db',
+  secondary: '#8ec78f',
+  secondaryDark: '#68a86a',
+  secondaryLight: '#cae0ca',
   border: '#cdced2',
   danger: '#ed1c24',
   dangerDark: '#a50d12',
   gray: '#6b6b6b',
   black: '#000000',
   white: '#ffffff',
-  text: '#000000',
+  text: '#392f31',
+  seperate: '#e5e7eb58',
 } as const;
 
 export default colors;

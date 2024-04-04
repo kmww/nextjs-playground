@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { CloudUploadIcon } from '@/components/atoms/IconButton';
+import Text from '@/components/atoms/Text';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isDragEvent = (value: any): value is React.DragEvent => {
@@ -49,7 +50,7 @@ interface DropzoneRootProps {
 }
 
 const DropzoneRoot = styled.div<DropzoneRootProps>`
-  border: 1px dashed
+  border: 3px dashed
     ${({ theme, isFocused, hasError }) => {
       if (hasError) {
         return theme.colors.danger;
@@ -183,8 +184,8 @@ const Dropzone = (props: DropzoneProps) => {
           multiple
         />
         <DropzoneContent width={width} height={height}>
-          <CloudUploadIcon size={24} />
-          <span style={{ textAlign: 'center' }}>업로드</span>
+          <CloudUploadIcon size={24} color="text" />
+          <Text textAlign="center">업로드</Text>
         </DropzoneContent>
       </DropzoneRoot>
     </>

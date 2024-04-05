@@ -4,6 +4,7 @@ import AppLogo from '@/components/atoms/AppLogo';
 import ProductFormContainer from '@/components/containers/ProductFormContainer';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
+import Wrapper from '@/components/layout/Wrapper';
 import Layout from '@/components/templates/Layout';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
@@ -25,19 +26,14 @@ const SellPage: NextPage = () => {
         paddingRight={{ base: 2, md: 0 }}
         justifyContent="center"
       >
-        <Flex
-          width="800px"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Wrapper width="800px" backgroundColor="secondaryLight">
           <Box display={{ base: 'none', md: 'block' }} marginBottom={2}>
             <AppLogo />
           </Box>
           <Box width="100%">
             <ProductFormContainer authUser={data} />
           </Box>
-        </Flex>
+        </Wrapper>
       </Flex>
     </Layout>
   );

@@ -37,6 +37,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   paddingRight?: Responsive<Space>;
   paddingBottom?: Responsive<Space>;
   paddingLeft?: Responsive<Space>;
+  textDecoration?: Responsive<string>;
   pseudoClass?: {
     hover?: {
       backgroundColor?: Responsive<Color>;
@@ -150,6 +151,8 @@ const Button = styled.button<ButtonProps>`
   ${(props) => toPropValue('padding-right', props.paddingRight, props.theme)}
   ${(props) => toPropValue('padding-bottom', props.paddingBottom, props.theme)}
   ${(props) => toPropValue('padding-left', props.paddingLeft, props.theme)}
+  ${(props) =>
+    toPropValue('text-decoration', props.textDecoration, props.theme)}
   &:hover {
     ${(props) =>
       toPropValue(

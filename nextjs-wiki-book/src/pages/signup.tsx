@@ -1,8 +1,10 @@
 import { NextPage } from 'next';
+import BackgroundImage from '@/components/atoms/BackgroundImage';
 import Text from '@/components/atoms/Text';
 import SignUpFormContainer from '@/components/containers/SignUpFormContainer';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
+import Wrapper from '@/components/layout/Wrapper';
 import Layout from '@/components/templates/Layout';
 
 const SignUpPage: NextPage = () => {
@@ -15,19 +17,20 @@ const SignUpPage: NextPage = () => {
         paddingLeft={{ base: 2, md: 0 }}
         justifyContent="center"
       >
-        <Flex
-          width="450px"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
+        <Wrapper
+          width="500px"
+          height="600px"
+          backgroundColor="secondaryLightOp"
         >
+          <BackgroundImage
+            imageUrl="/bg/FooterBG.png"
+            width="100%"
+            height="30%"
+            bottom="0"
+            right="0"
+          />
           <Box>
-            <Text
-              as="h1"
-              variant="extraLarge"
-              fontWeight="bold"
-              color="primary"
-            >
+            <Text as="h1" variant="extraLarge" fontWeight="bold">
               계정 생성
             </Text>
           </Box>
@@ -50,7 +53,7 @@ const SignUpPage: NextPage = () => {
           <Box width="100%">
             <SignUpFormContainer />
           </Box>
-        </Flex>
+        </Wrapper>
       </Flex>
     </Layout>
   );

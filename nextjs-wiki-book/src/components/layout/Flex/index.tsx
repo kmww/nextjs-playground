@@ -13,7 +13,7 @@ import type {
 } from '@/types/styles';
 import { toPropValue } from '@/utils/styles';
 
-type FlexProps = BoxProps & {
+export type FlexProps = BoxProps & {
   alignItems?: Responsive<CSSPropertyAlignItems>;
   alignContent?: Responsive<CSSPropertyAlignContent>;
   justifyContent?: Responsive<CSSPropertyJustifyContent>;

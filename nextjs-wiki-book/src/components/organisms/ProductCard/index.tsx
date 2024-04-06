@@ -40,7 +40,6 @@ const ProductCard = ({
           placeholder="blur"
           blurDataURL={blurDataUrl}
           alt={imageUrl}
-          style={{ objectFit: 'fill' }}
         />
       )}
       {!blurDataUrl && (
@@ -51,7 +50,6 @@ const ProductCard = ({
           containerWidth={size}
           containerHeight={size}
           alt={imageUrl}
-          style={{ objectFit: 'fill' }}
         />
       )}
       {variant === 'small' && (

@@ -12,6 +12,7 @@ const ScaleEffectImageContainer = styled.div<{
   width: Responsive<string>;
   height: Responsive<string>;
 }>`
+  position: relative;
   overflow: hidden;
   ${({ width, theme }) => toPropValue('width', width, theme)}
   ${({ height, theme }) => toPropValue('height', height, theme)}
@@ -39,9 +40,9 @@ const ScaleImage = ({
       <ScaleEffectImage
         quality="85"
         alt={alt ?? 'Product Image'}
-        height={props.height ?? 320}
-        width={props.width ?? 320}
-        {...props}
+        src={props.src}
+        fill
+        objectFit="fill"
       />
     </ScaleEffectImageContainer>
   );

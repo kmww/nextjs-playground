@@ -152,15 +152,15 @@ const ProductPage: NextPage<ProductPageProps> = ({
             flexDirection="column"
             height={{ base: '', md: '100%' }}
           >
-            <Flex flexDirection="column">
-              <Text as="h2" variant="extraLarge">
-                {product?.title}
-              </Text>
-              <Text as="h2" variant="large" margin={0}>
-                {product?.price}원
-              </Text>
-            </Flex>
             <StyledDescription>
+              <Flex flexDirection="column">
+                <Text as="h2" variant="extraLarge">
+                  {product?.title}
+                </Text>
+                <Text as="h2" variant="large" margin={0}>
+                  {product?.price}원
+                </Text>
+              </Flex>
               {product?.description
                 .split('\n')
                 .map((text: string, index: number) => (

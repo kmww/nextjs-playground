@@ -1,7 +1,6 @@
 import Button from '@/components/atoms/Button';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
-import { useAddTocartMutation } from '@/generated/graphql';
-import { Product } from '@/types';
+import { Product, useAddTocartMutation } from '@/generated/graphql';
 
 interface AddToCartButtonContainerProps {
   product: Product;

@@ -166,7 +166,7 @@ export const getStaticProps: GetStaticProps = async () => {
       figuresProducts,
       padProducts,
     },
-    revalidate: 60,
+    revalidate: 30,
   };
 };
 

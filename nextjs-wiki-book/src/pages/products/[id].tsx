@@ -7,6 +7,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
+import styled from 'styled-components';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Button from '@/components/atoms/Button';
 import Separator from '@/components/atoms/Sparator';
@@ -35,6 +36,15 @@ const categoryNameDict: Record<Category, string> = {
   figures: '피규어',
   pad: '마우스 패드',
 };
+
+const StyledDescription = styled(Box)`
+  background-color: ${({ theme }) => theme.colors.secondaryLight};
+  border-radius: 20px;
+  height: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`;
 
 type ProductPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -104,7 +114,12 @@ const ProductPage: NextPage<ProductPageProps> = ({
               </Link>
             </BreadcrumbItem>
           </Breadcrumb>
-          <Flex paddingTop={2} paddingBottom={1} justifyContent="center">
+          <Flex
+            paddingTop={2}
+            paddingBottom={1}
+            paddingLeft={1}
+            flexDirection="column"
+          >
             <ProductCard
               variant="detail"
               title={product?.title}
@@ -114,37 +129,52 @@ const ProductPage: NextPage<ProductPageProps> = ({
                 `http://localhost:4000/${product?.imageUrl}`
               }
             />
+            <Separator />
+            <Box paddingTop={1}>
+              <Text as="h2" variant="large" marginTop={0}>
+                게시자
+              </Text>
+              <Link href={`users/${product?.owner.id}`}>
+                <UserProfile
+                  variant="small"
+                  username={product?.owner.username}
+                  profileImageUrl={profileImage}
+                  numberOfProducts={100}
+                />
+              </Link>
+            </Box>
           </Flex>
-          <Separator />
-          <Box paddingTop={1}>
-            <Text as="h2" variant="large" marginTop={0}>
-              게시자
-            </Text>
-            <Link href={`users/${product?.owner.id}`}>
-              <UserProfile
-                variant="small"
-                username={product?.owner.username}
-                profileImageUrl={profileImage}
-                numberOfProducts={100}
-              />
-            </Link>
-          </Box>
         </Box>
+
         <Box padding={2} width={{ base: '100%', md: '700px' }}>
           <Flex
             justifyContent="space-between"
             flexDirection="column"
             height={{ base: '', md: '100%' }}
           >
-            <Box>
+            <Flex flexDirection="column">
+              <Text as="h2" variant="extraLarge">
+                {product?.title}
+              </Text>
+              <Text as="h2" variant="large" margin={0}>
+                {product?.price}원
+              </Text>
+            </Flex>
+            <StyledDescription>
               {product?.description
                 .split('\n')
                 .map((text: string, index: number) => (
-                  <Text key={index} as="p">
+                  <Text
+                    key={index}
+                    as="p"
+                    fontSize="mediumLarge"
+                    wordBreak="break-all"
+                  >
                     {text}
                   </Text>
                 ))}
-            </Box>
+            </StyledDescription>
+
             {isMine ? (
               <Button
                 width={{ base: '100%', md: '400px' }}

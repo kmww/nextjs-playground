@@ -145,7 +145,6 @@ const ProductPage: NextPage<ProductPageProps> = ({
             </Box>
           </Flex>
         </Box>
-
         <Box padding={2} width={{ base: '100%', md: '700px' }}>
           <Flex
             justifyContent="space-between"
@@ -154,7 +153,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
           >
             <StyledDescription>
               <Flex flexDirection="column">
-                <Text as="h2" variant="extraLarge">
+                <Text as="h2" variant="extraLarge" marginBottom={1}>
                   {product?.title}
                 </Text>
                 <Text as="h2" variant="large" margin={0}>

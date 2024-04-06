@@ -32,6 +32,8 @@ const ScaleImage = ({
   alt,
   ...props
 }: ScaleImageProps) => {
+  const sizes = `${containerWidth ?? props.width ?? 320}px`;
+
   return (
     <ScaleEffectImageContainer
       width={containerWidth ?? `${props.width}` ?? '320px'}
@@ -41,8 +43,8 @@ const ScaleImage = ({
         quality="85"
         alt={alt ?? 'Product Image'}
         src={props.src}
+        sizes={sizes}
         fill
-        objectFit="fill"
       />
     </ScaleEffectImageContainer>
   );

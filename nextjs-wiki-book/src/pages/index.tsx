@@ -1,14 +1,10 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
-import ShapeImage from '@/components/atoms/ShapeImage';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import ProductCard from '@/components/organisms/ProductCard';
 import ProductCardCrousel from '@/components/organisms/ProductCardCarousel';
 import Layout from '@/components/templates/Layout';
 import { ProductsDocument } from '@/generated/graphql';
-import { theme } from '@/styles/themes';
 import { Product } from '@/types';
 
 type HomePageProps = InferGetStaticPropsType<typeof getStaticProps>;
@@ -18,51 +14,6 @@ const Home = ({
   figuresProducts,
   padProducts,
 }: HomePageProps) => {
-  const renderProductCardCarousel = (products: Product[]) => {
-    return (
-      <ProductCardCrousel>
-        {products.map((product: Product) => (
-          <Box key={product.id}>
-            <Link href={`/products/${product.id}`} passHref>
-              <ProductCard
-                variant="small"
-                title={product.title}
-                price={product.price}
-                imageUrl={
-                  product.imageUrl &&
-                  `http://localhost:4000/${product.imageUrl}`
-                }
-                blurDataUrl={product.blurDataUrl}
-              />
-            </Link>
-          </Box>
-        ))}
-        {products.length === 6 && (
-          <Link href={`/search/${products[0].category}`}>
-            <Flex flexDirection="column" alignItems="center" paddingTop={4}>
-              <ShapeImage
-                src="/moreProducts.png"
-                alt="더보기"
-                shape="circle"
-                width={200}
-                height={200}
-                style={{ cursor: 'pointer' }}
-              />
-              <Text
-                color={theme.colors.secondary}
-                fontSize="extraLarge"
-                fontWeight="bold"
-                paddingTop={2}
-              >
-                더보기+
-              </Text>
-            </Flex>
-          </Link>
-        )}
-      </ProductCardCrousel>
-    );
-  };
-
   return (
     <Layout>
       <Flex
@@ -118,20 +69,20 @@ const Home = ({
             <Text as="h2" variant="large">
               이모티콘
             </Text>
-            {renderProductCardCarousel(emojiProducts)}
+            <ProductCardCrousel products={emojiProducts} />
           </Box>
           <Box marginBottom={3}>
             <Text as="h2" variant="large">
               피규어
             </Text>
-            {renderProductCardCarousel(figuresProducts)}
+            <ProductCardCrousel products={figuresProducts} />
           </Box>
 
           <Box>
             <Text as="h2" variant="large">
               마우스 패드
             </Text>
-            {renderProductCardCarousel(padProducts)}
+            <ProductCardCrousel products={padProducts} />
           </Box>
         </Box>
       </Flex>

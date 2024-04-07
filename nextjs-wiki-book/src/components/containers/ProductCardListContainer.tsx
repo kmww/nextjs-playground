@@ -46,7 +46,7 @@ const ProductCardListContainer = ({
           <Box key={`${uuid()}${product.id}`}>
             <Link href={`/products/${product.id}`} passHref>
               <ProductCard
-                variant="listing"
+                variant="small"
                 title={product.title}
                 price={product.price}
                 imageUrl={

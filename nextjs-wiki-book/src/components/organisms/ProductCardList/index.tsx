@@ -7,15 +7,17 @@ interface ProductCardListProps {
 
 const ProductCardList = ({
   numberPerRow = 4,
-  numberPerRowForMobile = 2,
+  numberPerRowForMobile = 1,
   children,
 }: React.PropsWithChildren<ProductCardListProps>) => {
   return (
     <Grid
-      gridGap="16px"
+      gridGap={{ base: '4px', md: '8px' }}
       gridTemplateColumns={{
         base: `repeat(${numberPerRowForMobile}, 1fr)`,
-        md: `repeat(${numberPerRow}, 1fr)`,
+        md: `repeat(2, 1fr)`,
+        xl: `repeat(${numberPerRow}, 1fr)`,
+        xxl: `repeat(6, 1fr)`,
       }}
     >
       {children}

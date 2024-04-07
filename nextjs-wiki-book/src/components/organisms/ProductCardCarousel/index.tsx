@@ -24,6 +24,7 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
     dots: true,
     infinite: false,
     arrows: false,
+    variableWidth: true,
     autoplay: true,
     autoplaySpeed: 10000,
     speed: 500,
@@ -35,6 +36,27 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
     responsive: [
       {
         breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -53,7 +75,7 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
     return (
       <>
         {productList.map((product) => (
-          <Box key={product.id} minWidth="347px">
+          <Box key={product.id}>
             <Box key={product.id}>
               <Link
                 href={`/products/${product.id}`}
@@ -79,11 +101,14 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
   };
 
   return (
-    <div className="slider-container">
-      {products.length > 3 ? (
+    <div
+      className="slider-container"
+      style={{ width: '100%', maxWidth: '100vw' }}
+    >
+      {products.length > 1 ? (
         <Slider {...settings}>
           {products.map((product: Product) => (
-            <Box key={product.id}>
+            <Box key={product.id} width={{ base: '250px', md: 'auto' }}>
               <Link
                 href={`/products/${product.id}`}
                 onClick={handleDragging}
@@ -102,16 +127,38 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
               </Link>
             </Box>
           ))}
-          {products.length === 6 && (
-            <Link href={`/search/${products[0].category}`}>
+          {products.length === 6 ? (
+            <Box>
+              <Link href={`/search/${products[0].category}`}>
+                <Flex flexDirection="column" alignItems="center" paddingTop={4}>
+                  <ShapeImage
+                    src="/moreProducts.png"
+                    alt="더보기"
+                    shape="circle"
+                    width={200}
+                    height={200}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <Text
+                    color="secondary"
+                    fontSize="extraLarge"
+                    fontWeight="bold"
+                    paddingTop={2}
+                  >
+                    상품 더보기+
+                  </Text>
+                </Flex>
+              </Link>
+            </Box>
+          ) : (
+            <Box>
               <Flex flexDirection="column" alignItems="center" paddingTop={4}>
                 <ShapeImage
-                  src="/moreProducts.png"
-                  alt="더보기"
+                  src="/noProducts.png"
+                  alt="상품 없음"
                   shape="circle"
                   width={200}
                   height={200}
-                  style={{ cursor: 'pointer' }}
                 />
                 <Text
                   color="secondary"
@@ -119,21 +166,14 @@ const ProductCardCrousel = ({ products }: ProductCardCarouselProps) => {
                   fontWeight="bold"
                   paddingTop={2}
                 >
-                  더보기+
+                  상품이 없습니다
                 </Text>
               </Flex>
-            </Link>
+            </Box>
           )}
         </Slider>
       ) : (
-        <>
-          <Flex display={{ base: 'none', md: 'flex' }}>
-            {renderProductLessThree(products)}
-          </Flex>
-          <Box display={{ base: 'block', md: 'none' }}>
-            <Slider {...settings}>{renderProductLessThree(products)}</Slider>
-          </Box>
-        </>
+        <Box>{renderProductLessThree(products)}</Box>
       )}
     </div>
   );

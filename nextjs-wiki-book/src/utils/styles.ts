@@ -21,6 +21,7 @@ const BREAKPOINTS: { [key: string]: string } = {
   md: '768px',
   lg: '1024px',
   xl: '1280px',
+  xxl: '2400px',
 };
 
 export const toPropValue = <T>(
@@ -44,7 +45,8 @@ export const toPropValue = <T>(
         responsiveKey === 'sm' ||
         responsiveKey === 'md' ||
         responsiveKey === 'lg' ||
-        responsiveKey === 'xl'
+        responsiveKey === 'xl' ||
+        responsiveKey === 'xxl'
       ) {
         const breakpoint = BREAKPOINTS[responsiveKey];
         const style = `${propKey}: ${toThemeValueIfNeeded(
@@ -126,12 +128,13 @@ const toThemeValueIfNeeded = <T>(
 
 const isResponsivePropType = <T>(prop: any): prop is ResponsiveProp<T> => {
   return (
-    prop &&
-    (prop.base !== undefined ||
-      prop.sm !== undefined ||
-      prop.md !== undefined ||
-      prop.lg !== undefined ||
-      prop.xl !== undefined)
+    (prop &&
+      (prop.base !== undefined ||
+        prop.sm !== undefined ||
+        prop.md !== undefined ||
+        prop.lg !== undefined ||
+        prop.xl !== undefined)) ||
+    prop.xxl !== undefined
   );
 };
 

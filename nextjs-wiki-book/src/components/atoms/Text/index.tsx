@@ -44,7 +44,9 @@ export type TextProps = {
   paddingBottom?: Responsive<Space>;
   paddingLeft?: Responsive<Space>;
   textWrap?: Responsive<string>;
+  textOverflow?: Responsive<string>;
   wordBreak?: Responsive<string>;
+  whiteSpace?: Responsive<string>;
 };
 
 const variants = {
@@ -125,7 +127,9 @@ const Text = styled.span<TextProps>`
   ${(props) => toPropValue('padding-left', props.paddingLeft, props.theme)}
   ${(props) => toPropValue('text-align', props.textAlign, props.theme)}
   ${(props) => toPropValue('text-wrap', props.textWrap, props.theme)}
+  ${(props) => toPropValue('text-overflow', props.textOverflow, props.theme)}
   ${(props) => toPropValue('word-break', props.wordBreak, props.theme)}
+  ${(props) => toPropValue('white-space', props.whiteSpace, props.theme)}
 `;
 
 Text.defaultProps = {

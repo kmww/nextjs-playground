@@ -18,14 +18,6 @@ const ScaleEffectImageContainer = styled.div<{
   ${({ height, theme }) => toPropValue('height', height, theme)}
 `;
 
-const ScaleEffectImage = styled(Image)`
-  transition: transform 0.5s linear;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
 const ScaleImage = ({
   containerWidth,
   containerHeight,
@@ -39,7 +31,7 @@ const ScaleImage = ({
       width={containerWidth ?? `${props.width}` ?? '320px'}
       height={containerHeight ?? `${props.height}` ?? '320px'}
     >
-      <ScaleEffectImage
+      <Image
         quality="85"
         alt={alt ?? 'Product Image'}
         src={props.src}

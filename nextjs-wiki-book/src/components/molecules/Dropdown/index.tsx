@@ -18,7 +18,7 @@ const DropdownControl = styled.div<{ hasError?: boolean }>`
       : `1px solid ${theme.colors.border}`};
   border-radius: 5px;
   box-sizing: border-box;
-  cursor: default;
+  cursor: pointer;
   outline: none;
   padding: 8px 52px 8px 12px;
 `;
@@ -71,6 +71,7 @@ const DropdownMenu = styled.div`
 
 const DropdownOption = styled.div`
   padding: 8px 12px 8px 12px;
+  cursor: pointer;
   &:hover {
     background-color: #f9f9f9;
   }

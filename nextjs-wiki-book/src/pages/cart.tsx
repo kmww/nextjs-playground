@@ -28,7 +28,7 @@ const CartPage: NextPage = () => {
         paddingRight={{ base: 2, md: 0 }}
         justifyContent="center"
       >
-        <Box width="1240px">
+        <Box width={{ base: '100%', md: '1240px' }}>
           <Breadcrumb>
             <BreadcrumbItem>
               <Link href="/">홈</Link>

@@ -32,7 +32,7 @@ const CartProduct = ({
 }: CartProductProps) => {
   return (
     <Flex justifyContent="space-between">
-      <Flex>
+      <Flex marginBottom={2}>
         <Box width="120px" height="120px">
           <Link href={`/products/${id}`} passHref>
             <Image
@@ -67,14 +67,14 @@ const CartProduct = ({
             </Box>
             <Flex marginTop={{ base: 2, md: 0 }}>
               <Button
-                width={{ base: '100px', md: '200px' }}
+                width={{ base: '70px', md: '200px' }}
                 onClick={() => onBuyButtonClick && onBuyButtonClick(id)}
               >
                 구입
               </Button>
               <Button
                 marginLeft={1}
-                width={{ base: '100px', md: '200px' }}
+                width={{ base: '70px', md: '200px' }}
                 display={{ base: 'block', md: 'none' }}
                 variant="danger"
                 onClick={() => onRemoveButtonClick && onRemoveButtonClick(id)}

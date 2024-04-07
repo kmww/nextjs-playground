@@ -77,7 +77,6 @@ const Home = ({
             </Text>
             <ProductCardCrousel products={figuresProducts} />
           </Box>
-
           <Box>
             <Text as="h2" variant="large">
               마우스 패드

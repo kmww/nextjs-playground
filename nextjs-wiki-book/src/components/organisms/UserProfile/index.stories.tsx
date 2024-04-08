@@ -28,13 +28,6 @@ const meta: Meta<typeof UserProfile> = {
         type: { summary: 'string' },
       },
     },
-    numberOfProducts: {
-      control: { type: 'number' },
-      description: '사용자 소유 상품 수',
-      table: {
-        type: { summary: 'number' },
-      },
-    },
     description: {
       control: { type: 'text' },
       description: '사용자 설명',

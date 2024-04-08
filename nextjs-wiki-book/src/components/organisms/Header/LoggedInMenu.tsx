@@ -67,7 +67,12 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
 
   const handleUserUpload = async (data: UserUploadDataProps) => {
     if (!updateUserLoading) {
-      await updateUser({ variables: { description: data.description } });
+      await updateUser({
+        variables: { description: data.description },
+        update: (cache) => {
+          cache.evict({ fieldName: 'me' });
+        },
+      });
       setIsDialogOpen(false);
     }
   };

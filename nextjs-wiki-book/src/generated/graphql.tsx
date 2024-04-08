@@ -113,7 +113,7 @@ export type MutationSignUpArgs = {
 
 
 export type MutationUpdateUserDataArgs = {
-  description: Scalars['String'];
+  description?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -276,7 +276,7 @@ export type SignUpMutationVariables = Exact<{
 export type SignUpMutation = { __typename?: 'Mutation', signUp: { __typename?: 'UserData', id: number, email: string, username: string, displayName: string, createdAt: string, updatedAt: string } };
 
 export type UpdateUserDataMutationVariables = Exact<{
-  description: Scalars['String'];
+  description?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -670,7 +670,7 @@ export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
 export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
 export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const UpdateUserDataDocument = gql`
-    mutation updateUserData($description: String!) {
+    mutation updateUserData($description: String) {
   updateUserData(description: $description)
 }
     `;

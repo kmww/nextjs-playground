@@ -213,7 +213,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async updateUserData(
     @Ctx() { verifiedUser }: MyContext,
-    @Arg('description') description?: string,
+    @Arg('description', { nullable: true }) description?: string,
   ): Promise<boolean> {
     try {
       await UserData.update({ id: verifiedUser.userId }, { description });

@@ -103,19 +103,14 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
             </Flex>
           </MenuItem>
           <Separator />
-          <div
-            onClick={!logoutLoading ? onLogoutClick : () => {}}
-            style={{ cursor: 'pointer' }}
-          >
-            <MenuItem>
-              <Flex>
-                <LogoutIcon color="danger" />
-                <Text fontWeight="bold" color="danger" marginLeft="5px">
-                  로그아웃
-                </Text>
-              </Flex>
-            </MenuItem>
-          </div>
+          <MenuItem>
+            <Flex onClick={onLogoutClick} style={{ cursor: 'pointer' }}>
+              <LogoutIcon color="danger" />
+              <Text fontWeight="bold" color="danger" marginLeft="5px">
+                로그아웃
+              </Text>
+            </Flex>
+          </MenuItem>
         </MenuList>
       </Menu>
     </>

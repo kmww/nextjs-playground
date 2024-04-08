@@ -1,11 +1,14 @@
 import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
-import { LogoutIcon } from '@/components/atoms/IconButton';
+import { useMemo, useState } from 'react';
+import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import MenuButton from '@/components/atoms/MenuButton/indext';
 import ShapeImage from '@/components/atoms/ShapeImage';
 import Separator from '@/components/atoms/Sparator';
 import Text from '@/components/atoms/Text';
+import UserProfileContainer, {
+  UserUploadDataProps,
+} from '@/components/containers/UserProfileContainer';
 import Flex from '@/components/layout/Flex';
 import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
@@ -13,6 +16,7 @@ import Menu from '@/components/organisms/Menu';
 import {
   MeQuery,
   useLogoutMutation,
+  useUpdateUserDataMutation,
   useUploadProfileImageMutation,
 } from '@/generated/graphql';
 
@@ -21,10 +25,13 @@ interface LoggedInMenuProps {
 }
 
 const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const client = useApolloClient();
   const router = useRouter();
   const [logout, { loading: logoutLoading }] = useLogoutMutation();
   const [upload] = useUploadProfileImageMutation();
+  const [updateUser, { loading: updateUserLoading }] =
+    useUpdateUserDataMutation();
 
   const profileImage = useMemo(() => {
     if (meData?.me?.profileImageUrl) {
@@ -58,8 +65,24 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
     }
   };
 
+  const handleUserUpload = async (data: UserUploadDataProps) => {
+    if (!updateUserLoading) {
+      await updateUser({ variables: { description: data.description } });
+      setIsDialogOpen(false);
+    }
+  };
+
+  const handleDialogStatus = (value: boolean) => {
+    setIsDialogOpen(value);
+  };
+
   return (
     <>
+      <UserProfileContainer
+        open={isDialogOpen}
+        onDialogStatus={handleDialogStatus}
+        onUserUpload={handleUserUpload}
+      />
       <Menu>
         <MenuButton paddingRight={0}>
           <ShapeImage
@@ -104,6 +127,16 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
           </MenuItem>
           <Separator />
           <MenuItem>
+            <Flex
+              onClick={() => handleDialogStatus(true)}
+              marginBottom={2}
+              style={{ cursor: 'pointer' }}
+            >
+              <SettingIcon color="text" />
+              <Text fontWeight="bold" marginLeft="5px">
+                유저소개
+              </Text>
+            </Flex>
             <Flex onClick={onLogoutClick} style={{ cursor: 'pointer' }}>
               <LogoutIcon color="danger" />
               <Text fontWeight="bold" color="danger" marginLeft="5px">

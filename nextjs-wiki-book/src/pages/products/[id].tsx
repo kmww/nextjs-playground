@@ -134,14 +134,12 @@ const ProductPage: NextPage<ProductPageProps> = ({
               <Text as="h2" variant="large" marginTop={0}>
                 게시자
               </Text>
-              <Link href={`users/${product?.owner.id}`}>
-                <UserProfile
-                  variant="small"
-                  username={product?.owner.username}
-                  profileImageUrl={profileImage}
-                  numberOfProducts={100}
-                />
-              </Link>
+              <UserProfile
+                variant="small"
+                username={product?.owner.username}
+                profileImageUrl={profileImage}
+                description={product?.owner.description}
+              />
             </Box>
           </Flex>
         </Box>

@@ -7,15 +7,13 @@ interface UserProfileProps {
   variant?: 'normal' | 'small';
   username: string;
   profileImageUrl: string;
-  numberOfProducts: number;
-  description?: string;
+  description?: string | null;
 }
 
 const UserProfile = ({
   variant = 'normal',
   username,
   profileImageUrl,
-  numberOfProducts,
   description,
 }: UserProfileProps) => {
   const profileImageSize = variant === 'small' ? 100 : 120;
@@ -52,12 +50,18 @@ const UserProfile = ({
             >
               {username}
             </Text>
-            <Text as="p" marginTop={0} marginBottom={1}>
-              {numberOfProducts}개의 제품 게시 완료
+            <Text
+              as="p"
+              width="200px"
+              marginTop={0}
+              marginBottom={1}
+              wordBreak="keep-all"
+            >
+              {description && description}
             </Text>
             {variant === 'normal' && (
               <Text as="p" margin={0} data-testid="user-description">
-                {description}
+                {description && description}
               </Text>
             )}
           </Box>

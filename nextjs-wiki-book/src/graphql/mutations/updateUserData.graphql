@@ -1,0 +1,3 @@
+mutation updateUserData($description: String!) {
+  updateUserData(description: $description)
+}

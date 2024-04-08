@@ -122,6 +122,9 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
                   {meData?.me?.displayName}
                 </Text>
                 <Text fontSize="medium">{meData?.me?.email}</Text>
+                <Text fontSize="small" wordBreak="break-word" textWrap="wrap">
+                  {meData?.me?.description}
+                </Text>
               </Flex>
             </Flex>
           </MenuItem>

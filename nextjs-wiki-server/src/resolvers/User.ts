@@ -208,4 +208,19 @@ export class UserResolver {
         .on('error', () => reject(Error('file upload failed'))),
     );
   }
+
+  @UseMiddleware(isAuthenticated)
+  @Mutation(() => Boolean)
+  async updateUserData(
+    @Ctx() { verifiedUser }: MyContext,
+    @Arg('description') description?: string,
+  ): Promise<boolean> {
+    try {
+      await UserData.update({ id: verifiedUser.userId }, { description });
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }

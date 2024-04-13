@@ -72,7 +72,7 @@ export type Mutation = {
   removeProduct: Scalars['Boolean'];
   signUp: UserData;
   updateUserData: Scalars['Boolean'];
-  uploadProfileImage: Scalars['Boolean'];
+  uploadProfileImage: Scalars['String'];
 };
 
 
@@ -287,7 +287,7 @@ export type UploadProfileImageMutationVariables = Exact<{
 }>;
 
 
-export type UploadProfileImageMutation = { __typename?: 'Mutation', uploadProfileImage: boolean };
+export type UploadProfileImageMutation = { __typename?: 'Mutation', uploadProfileImage: string };
 
 export type GetCartItemsQueryVariables = Exact<{ [key: string]: never; }>;
 

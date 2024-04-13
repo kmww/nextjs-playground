@@ -184,12 +184,12 @@ export class UserResolver {
   }
 
   @UseMiddleware(isAuthenticated)
-  @Mutation(() => Boolean)
+  @Mutation(() => String)
   async uploadProfileImage(
     @Ctx() { verifiedUser }: MyContext,
     @Arg('file', () => GraphQLUpload)
     { createReadStream, filename }: FileUpload,
-  ): Promise<boolean> {
+  ): Promise<string> {
     const realFileName = verifiedUser.userId + filename;
     const filePath = `public/${realFileName}`;
 
@@ -203,7 +203,7 @@ export class UserResolver {
               profileImageUrl: realFileName,
             },
           );
-          return resolve(true);
+          return resolve(realFileName);
         })
         .on('error', () => reject(Error('file upload failed'))),
     );

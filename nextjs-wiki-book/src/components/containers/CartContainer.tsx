@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import Spinner from '../atoms/Spinner';
 import CartProduct from '@/components/organisms/CartProduct';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import {
   GetCartItemsDocument,
   useGetCartItemsQuery,
@@ -9,7 +10,7 @@ import {
 } from '@/generated/graphql';
 
 const CartContainer = () => {
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
   const { data, loading, error, refetch } = useGetCartItemsQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
 

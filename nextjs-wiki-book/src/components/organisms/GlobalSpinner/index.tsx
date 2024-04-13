@@ -1,6 +1,7 @@
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import Spinner from '@/components/atoms/Spinner';
-import { useGlobalSpinnerContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 
 const GlobalSpinnerWrapper = styled.div`
   position: fixed;
@@ -16,8 +17,7 @@ const GlobalSpinnerWrapper = styled.div`
 `;
 
 const GlobalSpinner = () => {
-  const isGlobalSpinnerOn = useGlobalSpinnerContext();
-
+  const isGlobalSpinnerOn = useRecoilValue(globalSpinner);
   return (
     <>
       {isGlobalSpinnerOn && (

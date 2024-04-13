@@ -1,5 +1,6 @@
+import { useSetRecoilState } from 'recoil';
 import Button from '@/components/atoms/Button';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import { Product, useAddTocartMutation } from '@/generated/graphql';
 
 interface AddToCartButtonContainerProps {
@@ -10,7 +11,7 @@ const AddToCartButtonContainer = ({
   product,
 }: AddToCartButtonContainerProps) => {
   const [addToCart] = useAddTocartMutation();
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
 
   const handleAddToCartButtonClick = async () => {
     try {

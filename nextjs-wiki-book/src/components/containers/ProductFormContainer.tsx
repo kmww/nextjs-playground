@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import ProductForm, {
   ProductFormData,
 } from '@/components/organisms/ProductForm';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import { MeQueryResult, useRegistSaleMutation } from '@/generated/graphql';
 
 interface ProductFormContainerProps {
@@ -11,7 +12,7 @@ interface ProductFormContainerProps {
 
 const ProductFormContainer = ({ authUser }: ProductFormContainerProps) => {
   const router = useRouter();
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
   const [registSale] = useRegistSaleMutation();
 
   const handleSave = async (data: ProductFormData) => {

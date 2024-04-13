@@ -7,6 +7,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import BreadcrumbItem from '@/components/atoms/BreadcrumbItem';
 import Button from '@/components/atoms/Button';
@@ -19,7 +20,7 @@ import Breadcrumb from '@/components/molecules/Breadcrumb';
 import ProductCard from '@/components/organisms/ProductCard';
 import UserProfile from '@/components/organisms/UserProfile';
 import Layout from '@/components/templates/Layout';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import {
   ProductDocument,
   ProductQuery,
@@ -53,7 +54,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
 }: ProductPageProps) => {
   const { data: meData } = UseAuth();
   const [removeProduct] = useRemoveProductMutation();
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
   const router = useRouter();
 
   const product = data?.product;

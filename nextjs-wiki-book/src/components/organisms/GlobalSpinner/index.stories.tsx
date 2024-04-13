@@ -1,9 +1,8 @@
 import { Meta } from '@storybook/react';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
 import GlobalSpinner from './';
 import Button from '@/components/atoms/Button';
-import GlobalSpinnerContextProvider, {
-  useGlobalSpinnerActionsContext,
-} from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 
 const meta: Meta<typeof GlobalSpinner> = {
   title: 'Organisms/GlobalSpinner',
@@ -11,9 +10,9 @@ const meta: Meta<typeof GlobalSpinner> = {
 
 export default meta;
 
-export const withContextProvider = () => {
+export const WithContextProvider = () => {
   const ChildComponent = () => {
-    const setGlobalSpinner = useGlobalSpinnerActionsContext();
+    const setGlobalSpinner = useSetRecoilState(globalSpinner);
 
     // 실제 api 호출시 로딩 상황 연출
     const handleClick = () => {
@@ -31,8 +30,8 @@ export const withContextProvider = () => {
   };
 
   return (
-    <GlobalSpinnerContextProvider>
+    <RecoilRoot>
       <ChildComponent />
-    </GlobalSpinnerContextProvider>
+    </RecoilRoot>
   );
 };

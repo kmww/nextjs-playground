@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import SignUpForm from '@/components/organisms/SignUpForm';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import { SignUpInput, useSignUpMutation } from '@/generated/graphql';
 
 const SignUpFormContainer = () => {
   const [signup, { loading }] = useSignUpMutation();
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
   const router = useRouter();
 
   const handleSubmit = async (signUpInput: SignUpInput) => {

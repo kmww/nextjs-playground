@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import SignInForm from '@/components/organisms/SignInForm';
 import { isLoggedInState } from '@/contexts/Auth/auth';
-import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
+import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
 import { LoginInput, useLoginMutation } from '@/generated/graphql';
 
 const SignInFormContainer = () => {
   const [login, { loading }] = useLoginMutation();
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
-  const setGlobalSpinner = useGlobalSpinnerActionsContext();
+  const setGlobalSpinner = useSetRecoilState(globalSpinner);
   const router = useRouter();
   const handleSignin = async (loginInput: LoginInput) => {
     try {

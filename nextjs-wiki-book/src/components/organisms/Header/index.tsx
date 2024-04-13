@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
@@ -9,7 +9,11 @@ import { SearchIcon, ShoppingCartIcon } from '@/components/atoms/IconButton';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import { isLoggedInState, userData } from '@/contexts/Auth/auth';
+import {
+  isLoggedInState,
+  profileImageUrlState,
+  userData,
+} from '@/contexts/Auth/auth';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const HeaderRoot = styled.header`
@@ -41,16 +45,16 @@ const Header = () => {
   const { data } = UseAuth();
   const [isLoggedIn] = useRecoilState(isLoggedInState);
   const [meData, setMeData] = useRecoilState(userData);
+  const setProfileImageUrl = useSetRecoilState(profileImageUrlState);
 
   useEffect(() => setSsrComplete(true), []);
 
   useEffect(() => {
-    if (!meData.me?.id) {
-      if (data) {
-        setMeData({ ...data });
-      }
+    if (data) {
+      setMeData(data);
+      setProfileImageUrl(data.me?.profileImageUrl);
     }
-  });
+  }, [data, meData, setMeData, setProfileImageUrl]);
 
   return (
     <HeaderRoot>

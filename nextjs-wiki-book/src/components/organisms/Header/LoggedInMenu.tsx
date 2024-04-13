@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import MenuButton from '@/components/atoms/MenuButton/indext';
 import ShapeImage from '@/components/atoms/ShapeImage';
@@ -14,7 +14,7 @@ import Flex from '@/components/layout/Flex';
 import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
 import Menu from '@/components/organisms/Menu';
-import { isLoggedInState } from '@/contexts/Auth/auth';
+import { isLoggedInState, profileImageUrlState } from '@/contexts/Auth/auth';
 import {
   MeQuery,
   useLogoutMutation,
@@ -35,13 +35,15 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const [upload] = useUploadProfileImageMutation();
   const [updateUser, { loading: updateUserLoading }] =
     useUpdateUserDataMutation();
+  const [profileImageUrl, setProfileImageUrl] =
+    useRecoilState(profileImageUrlState);
 
   const profileImage = useMemo(() => {
-    if (meData?.me?.profileImageUrl) {
-      return `http://localhost:4000/${meData.me.profileImageUrl}`;
+    if (profileImageUrl) {
+      return `http://localhost:4000/${profileImageUrl}`;
     }
     return 'http://localhost:4000/DefaultUser.png';
-  }, [meData]);
+  }, [profileImageUrl]);
 
   const onLogoutClick = async () => {
     try {
@@ -60,12 +62,13 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      await upload({
+      const res = await upload({
         variables: { file },
         update: (cache) => {
           cache.evict({ fieldName: 'me' });
         },
       });
+      setProfileImageUrl(res.data?.uploadProfileImage);
     }
   };
 

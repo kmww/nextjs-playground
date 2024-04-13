@@ -54,77 +54,79 @@ const Header = () => {
 
   return (
     <HeaderRoot>
-      <Flex paddingLeft={3} paddingRight={3} justifyContent="space-between">
-        <Nav as="nav" height="56px" alignItems="center">
-          <NavLink>
-            <Link href="/" passHref>
-              <Anchor>
-                <AppLogo />
-              </Anchor>
-            </Link>
-          </NavLink>
-          <NavLink>
-            <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search" passHref>
-                <Anchor>모두</Anchor>
-              </Link>
-            </Box>
-          </NavLink>
-          <NavLink>
-            <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search/emoji" passHref>
-                <Anchor>이모티콘</Anchor>
-              </Link>
-            </Box>
-          </NavLink>
-          <NavLink>
-            <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search/figures" passHref>
-                <Anchor>피규어</Anchor>
-              </Link>
-            </Box>
-          </NavLink>
-          <NavLink>
-            <Box display={{ base: 'none', md: 'block' }}>
-              <Link href="/search/pad" passHref>
-                <Anchor>마우스 패드</Anchor>
-              </Link>
-            </Box>
-          </NavLink>
-        </Nav>
-        <Nav as="nav" height="56px" alignItems="center">
-          <Box display={{ base: 'block', md: 'none' }}>
-            <Link href="/search" passHref>
-              <Anchor>
-                <SearchIcon size={30} />
-              </Anchor>
-            </Link>
-          </Box>
-          <>
-            {ssrComplete && isLoggedIn ? (
-              <>
-                <Link href="/cart" style={{ marginLeft: 10 }} passHref>
-                  <Anchor>
-                    <ShoppingCartIcon size={28} color="primaryDark" />
-                  </Anchor>
-                </Link>
-                <LoggedInMenu meData={meData} />
-                <NavLink>
-                  <Link href="/sell">
-                    <Button>등록</Button>
-                  </Link>
-                </NavLink>
-              </>
-            ) : (
-              <Link href="/signin" style={{ marginLeft: 10 }} passHref>
+      {ssrComplete && (
+        <Flex paddingLeft={3} paddingRight={3} justifyContent="space-between">
+          <Nav as="nav" height="56px" alignItems="center">
+            <NavLink>
+              <Link href="/" passHref>
                 <Anchor>
-                  <Button>로그인</Button>
+                  <AppLogo />
                 </Anchor>
               </Link>
-            )}
-          </>
-        </Nav>
-      </Flex>
+            </NavLink>
+            <NavLink>
+              <Box display={{ base: 'none', md: 'block' }}>
+                <Link href="/search" passHref>
+                  <Anchor>모두</Anchor>
+                </Link>
+              </Box>
+            </NavLink>
+            <NavLink>
+              <Box display={{ base: 'none', md: 'block' }}>
+                <Link href="/search/emoji" passHref>
+                  <Anchor>이모티콘</Anchor>
+                </Link>
+              </Box>
+            </NavLink>
+            <NavLink>
+              <Box display={{ base: 'none', md: 'block' }}>
+                <Link href="/search/figures" passHref>
+                  <Anchor>피규어</Anchor>
+                </Link>
+              </Box>
+            </NavLink>
+            <NavLink>
+              <Box display={{ base: 'none', md: 'block' }}>
+                <Link href="/search/pad" passHref>
+                  <Anchor>마우스 패드</Anchor>
+                </Link>
+              </Box>
+            </NavLink>
+          </Nav>
+          <Nav as="nav" height="56px" alignItems="center">
+            <Box display={{ base: 'block', md: 'none' }}>
+              <Link href="/search" passHref>
+                <Anchor>
+                  <SearchIcon size={30} />
+                </Anchor>
+              </Link>
+            </Box>
+            <>
+              {isLoggedIn ? (
+                <>
+                  <Link href="/cart" style={{ marginLeft: 10 }} passHref>
+                    <Anchor>
+                      <ShoppingCartIcon size={28} color="primaryDark" />
+                    </Anchor>
+                  </Link>
+                  <LoggedInMenu meData={meData} />
+                  <NavLink>
+                    <Link href="/sell">
+                      <Button>등록</Button>
+                    </Link>
+                  </NavLink>
+                </>
+              ) : (
+                <Link href="/signin" style={{ marginLeft: 10 }} passHref>
+                  <Anchor>
+                    <Button>로그인</Button>
+                  </Anchor>
+                </Link>
+              )}
+            </>
+          </Nav>
+        </Flex>
+      )}
     </HeaderRoot>
   );
 };

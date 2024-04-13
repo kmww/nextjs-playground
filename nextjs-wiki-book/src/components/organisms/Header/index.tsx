@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
@@ -8,6 +9,7 @@ import { SearchIcon, ShoppingCartIcon } from '@/components/atoms/IconButton';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
+import { isLoggedInState, userData } from '@/contexts/Auth/auth';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const HeaderRoot = styled.header`
@@ -35,12 +37,20 @@ export const Anchor = styled(Text)`
 `;
 
 const Header = () => {
-  const { accessToken, data } = UseAuth();
+  const [ssrComplete, setSsrComplete] = useState(false);
+  const { data } = UseAuth();
+  const [isLoggedIn] = useRecoilState(isLoggedInState);
+  const [meData, setMeData] = useRecoilState(userData);
 
-  const isLoggedIn = useMemo(() => {
-    if (accessToken) return data?.me?.id;
-    return false;
-  }, [accessToken, data?.me?.id]);
+  useEffect(() => setSsrComplete(true), []);
+
+  useEffect(() => {
+    if (!meData.me?.id) {
+      if (data) {
+        setMeData({ ...data });
+      }
+    }
+  });
 
   return (
     <HeaderRoot>
@@ -91,14 +101,14 @@ const Header = () => {
             </Link>
           </Box>
           <>
-            {isLoggedIn ? (
+            {ssrComplete && isLoggedIn ? (
               <>
                 <Link href="/cart" style={{ marginLeft: 10 }} passHref>
                   <Anchor>
                     <ShoppingCartIcon size={28} color="primaryDark" />
                   </Anchor>
                 </Link>
-                <LoggedInMenu meData={data} />
+                <LoggedInMenu meData={meData} />
                 <NavLink>
                   <Link href="/sell">
                     <Button>등록</Button>

@@ -1,13 +1,15 @@
 import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 import SignInForm from '@/components/organisms/SignInForm';
+import { isLoggedInState } from '@/contexts/Auth/auth';
 import { useGlobalSpinnerActionsContext } from '@/contexts/GlobalSpinnerContext';
 import { LoginInput, useLoginMutation } from '@/generated/graphql';
 
 const SignInFormContainer = () => {
   const [login, { loading }] = useLoginMutation();
+  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const setGlobalSpinner = useGlobalSpinnerActionsContext();
   const router = useRouter();
-
   const handleSignin = async (loginInput: LoginInput) => {
     try {
       setGlobalSpinner(true);
@@ -15,8 +17,8 @@ const SignInFormContainer = () => {
 
       if (res.data?.login.user) {
         const redirectTo = (router.query['redirect_to'] as string) ?? '/';
-
-        await router.push(redirectTo).then(() => router.reload());
+        setIsLoggedIn(true);
+        router.push(redirectTo);
 
         return res;
       } else if (res.data?.login.errors) {

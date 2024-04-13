@@ -1,6 +1,7 @@
 import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import MenuButton from '@/components/atoms/MenuButton/indext';
 import ShapeImage from '@/components/atoms/ShapeImage';
@@ -13,6 +14,7 @@ import Flex from '@/components/layout/Flex';
 import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
 import Menu from '@/components/organisms/Menu';
+import { isLoggedInState } from '@/contexts/Auth/auth';
 import {
   MeQuery,
   useLogoutMutation,
@@ -25,6 +27,7 @@ interface LoggedInMenuProps {
 }
 
 const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
+  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const client = useApolloClient();
   const router = useRouter();
@@ -35,7 +38,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
 
   const profileImage = useMemo(() => {
     if (meData?.me?.profileImageUrl) {
-      return `http://localhost:4000/${meData?.me?.profileImageUrl}`;
+      return `http://localhost:4000/${meData.me.profileImageUrl}`;
     }
     return 'http://localhost:4000/DefaultUser.png';
   }, [meData]);
@@ -45,8 +48,9 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
       if (!logoutLoading) {
         await logout();
         await client.resetStore();
+        setIsLoggedIn(false);
         localStorage.removeItem('access_token');
-        router.push('/').then(() => router.reload());
+        router.push('/');
       }
     } catch (error) {
       console.error(error);

@@ -22,14 +22,14 @@ const ToastWrapper = styled.div<{
 
   @keyframes fadeInOut {
     0% {
-      opacity: 0.1;
+      opacity: 0.3;
     }
     30% {
       opacity: 1;
     }
     90% {
       opacity: 0.9;
-      transform: rotateX(10deg);
+      transform: rotateX(20deg);
     }
     100% {
       opacity: 0;
@@ -44,14 +44,14 @@ interface GlobalToast {
 }
 
 const GlobalToast = (props: GlobalToast) => {
-  const { top = 25, duration = 2000 } = props;
-  const [[isToastOn, content], setToast] = useRecoilState(globalToast);
+  const { top = 25, duration = 1200 } = props;
+  const [[isToastOn, content, variant], setToast] = useRecoilState(globalToast);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isToastOn) {
       timer = setTimeout(() => {
-        setToast([false, '']);
+        setToast([false, '', '']);
       }, duration);
     }
     return () => clearTimeout(timer);
@@ -61,7 +61,7 @@ const GlobalToast = (props: GlobalToast) => {
     <>
       {isToastOn && (
         <ToastWrapper top={top} duration={duration}>
-          <Toast content={content} duration={duration} />
+          <Toast content={content} duration={duration} variant={variant} />
         </ToastWrapper>
       )}
     </>

@@ -27,18 +27,7 @@ export const profileImageUrlState = atom<string | null | undefined>({
   effects: [persistProfileImageUrl],
 });
 
-export const userData = atom<MeQuery>({
+export const userData = atom<MeQuery | undefined>({
   key: 'useData',
-  default: {
-    me: {
-      createdAt: '',
-      description: '',
-      displayName: '',
-      email: '',
-      id: 0,
-      profileImageUrl: '',
-      updatedAt: '',
-      username: '',
-    },
-  },
+  default: {},
 });

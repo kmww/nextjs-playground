@@ -14,6 +14,7 @@ const colors = {
   white: '#ffffff',
   text: '#392f31',
   seperate: '#cdced2',
+  info: '#FFA500',
 } as const;
 
 export default colors;

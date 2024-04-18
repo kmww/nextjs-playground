@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import Button from '@/components/atoms/Button';
 import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
+import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import { Product, useAddTocartMutation } from '@/generated/graphql';
 
 interface AddToCartButtonContainerProps {
@@ -12,6 +13,7 @@ const AddToCartButtonContainer = ({
 }: AddToCartButtonContainerProps) => {
   const [addToCart] = useAddTocartMutation();
   const setGlobalSpinner = useSetRecoilState(globalSpinner);
+  const setToast = useSetRecoilState(globalToast);
 
   const handleAddToCartButtonClick = async () => {
     try {
@@ -24,9 +26,9 @@ const AddToCartButtonContainer = ({
       });
 
       if (res.data?.addToCart.message === 'Product already exists in cart') {
-        window.alert('이미 장바구니에 추가한 상품입니다.');
+        setToast([true, '이미 장바구니에 추가한 상품입니다.', 'info']);
       } else {
-        window.alert('장바구니에 상품이 담겼습니다!');
+        setToast([true, '장바구니에 상품이 담겼습니다.', 'primary']);
       }
     } catch (error) {
       if (error instanceof Error) {

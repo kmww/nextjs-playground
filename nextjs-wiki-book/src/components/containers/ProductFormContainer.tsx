@@ -4,6 +4,7 @@ import ProductForm, {
   ProductFormData,
 } from '@/components/organisms/ProductForm';
 import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
+import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import { MeQueryResult, useRegistSaleMutation } from '@/generated/graphql';
 
 interface ProductFormContainerProps {
@@ -13,6 +14,7 @@ interface ProductFormContainerProps {
 const ProductFormContainer = ({ authUser }: ProductFormContainerProps) => {
   const router = useRouter();
   const setGlobalSpinner = useSetRecoilState(globalSpinner);
+  const setToast = useSetRecoilState(globalToast);
   const [registSale] = useRegistSaleMutation();
 
   const handleSave = async (data: ProductFormData) => {
@@ -35,7 +37,7 @@ const ProductFormContainer = ({ authUser }: ProductFormContainerProps) => {
           ...product,
         },
       });
-      window.alert('등록이 완료되었습니다.');
+      setToast([true, '등록이 완료되었습니다.', 'primary']);
       router.push('/');
     } catch (error: unknown) {
       if (error instanceof Error) {

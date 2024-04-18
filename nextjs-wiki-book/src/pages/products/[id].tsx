@@ -21,6 +21,7 @@ import ProductCard from '@/components/organisms/ProductCard';
 import UserProfile from '@/components/organisms/UserProfile';
 import Layout from '@/components/templates/Layout';
 import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
+import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import {
   ProductDocument,
   ProductQuery,
@@ -55,6 +56,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
   const { data: meData } = UseAuth();
   const [removeProduct] = useRemoveProductMutation();
   const setGlobalSpinner = useSetRecoilState(globalSpinner);
+  const setToast = useSetRecoilState(globalToast);
   const router = useRouter();
 
   const product = data?.product;
@@ -80,7 +82,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
       await removeProduct({
         variables: { productId: product.id },
       });
-      window.alert('삭제 완료');
+      setToast([true, '삭제 완료', 'primary']);
       router.push('/');
     } catch (error) {
       if (error instanceof Error) {

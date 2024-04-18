@@ -3,6 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import Spinner from '../atoms/Spinner';
 import CartProduct from '@/components/organisms/CartProduct';
 import { globalSpinner } from '@/contexts/GlobalSpinner/globalSpinner';
+import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import {
   GetCartItemsDocument,
   useGetCartItemsQuery,
@@ -11,6 +12,7 @@ import {
 
 const CartContainer = () => {
   const setGlobalSpinner = useSetRecoilState(globalSpinner);
+  const setToast = useSetRecoilState(globalToast);
   const { data, loading, error, refetch } = useGetCartItemsQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
 
@@ -25,7 +27,7 @@ const CartContainer = () => {
         variables: { productId },
         refetchQueries: [{ query: GetCartItemsDocument }],
       });
-      window.alert('삭제 완료');
+      setToast([true, '삭제 완료', 'primary']);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -42,7 +44,7 @@ const CartContainer = () => {
         variables: { productId },
         refetchQueries: [{ query: GetCartItemsDocument }],
       });
-      window.alert('구매 완료');
+      setToast([true, '구매 완료', 'primary']);
     } catch (error: unknown) {
       if (error instanceof Error) {
         window.alert(error.message);

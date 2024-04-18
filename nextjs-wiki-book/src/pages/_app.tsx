@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { createApolloClient } from '@/apollo/createApolloClient';
 import GlobalSpinner from '@/components/organisms/GlobalSpinner';
+import GlobalToast from '@/components/organisms/GlobalToast';
 import { theme } from '@/styles/themes';
 
 const GlobalStyle = createGlobalStyle`
@@ -51,6 +52,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <ApolloProvider client={apolloClient}>
           <RecoilRoot>
             <GlobalSpinner />
+            <GlobalToast />
             <Component {...pageProps} />
           </RecoilRoot>
         </ApolloProvider>

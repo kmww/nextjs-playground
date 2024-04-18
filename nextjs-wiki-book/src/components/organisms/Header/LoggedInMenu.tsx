@@ -15,6 +15,7 @@ import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
 import Menu from '@/components/organisms/Menu';
 import { isLoggedInState, profileImageUrlState } from '@/contexts/Auth/auth';
+import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import {
   MeQuery,
   useLogoutMutation,
@@ -29,6 +30,7 @@ interface LoggedInMenuProps {
 const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const setToast = useSetRecoilState(globalToast);
   const client = useApolloClient();
   const router = useRouter();
   const [logout, { loading: logoutLoading }] = useLogoutMutation();
@@ -52,6 +54,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
         await client.resetStore();
         setIsLoggedIn(false);
         localStorage.removeItem('access_token');
+        setToast([true, '로그아웃이 완료되었습니다.', 'primary']);
         router.push('/');
       }
     } catch (error) {
@@ -80,6 +83,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
           cache.evict({ fieldName: 'me' });
         },
       });
+      setToast([true, '설정이 완료되었습니다.', 'primary']);
       setIsDialogOpen(false);
     }
   };

@@ -5,6 +5,9 @@ import http from 'http';
 import { createDB } from './db/db-client';
 import createApolloServer from './apollo/createApolloServer';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function main() {
   await createDB();

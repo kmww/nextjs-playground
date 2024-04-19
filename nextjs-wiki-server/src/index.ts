@@ -26,6 +26,11 @@ async function main() {
     },
   });
 
+  // healthcheck
+  app.get('/', (_, res) => {
+    res.status(200).send();
+  });
+
   const httpServer = http.createServer(app);
 
   httpServer.listen(process.env.PORT || 4000, () => {

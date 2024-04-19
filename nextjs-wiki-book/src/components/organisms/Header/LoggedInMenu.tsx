@@ -14,7 +14,11 @@ import Flex from '@/components/layout/Flex';
 import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
 import Menu from '@/components/organisms/Menu';
-import { isLoggedInState, profileImageUrlState } from '@/contexts/Auth/auth';
+import {
+  isLoggedInState,
+  profileImageUrlState,
+  userData,
+} from '@/contexts/Auth/auth';
 import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import {
   MeQuery,
@@ -39,6 +43,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
     useUpdateUserDataMutation();
   const [profileImageUrl, setProfileImageUrl] =
     useRecoilState(profileImageUrlState);
+  const setMeData = useSetRecoilState(userData);
 
   const profileImage = useMemo(() => {
     if (profileImageUrl) {
@@ -53,6 +58,8 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
         await logout();
         await client.resetStore();
         setIsLoggedIn(false);
+        setMeData(undefined);
+        localStorage.removeItem('profileImage');
         localStorage.removeItem('access_token');
         setToast([true, '로그아웃이 완료되었습니다.', 'primary']);
         router.push('/');

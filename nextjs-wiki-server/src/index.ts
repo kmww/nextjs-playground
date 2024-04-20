@@ -15,6 +15,10 @@ async function main() {
   app.use(express.static('public'));
   app.use(cookieParser());
   app.use(graphqlUploadExpress({ maxFileSize: 1024 * 1000 * 5, maxFiles: 1 }));
+  // healthcheck
+  app.get('/', (_, res) => {
+    res.status(200).send();
+  });
 
   const apolloServer = await createApolloServer();
   await apolloServer.start();
@@ -24,11 +28,6 @@ async function main() {
       origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
       credentials: true,
     },
-  });
-
-  // healthcheck
-  app.get('/', (_, res) => {
-    res.status(200).send();
   });
 
   const httpServer = http.createServer(app);

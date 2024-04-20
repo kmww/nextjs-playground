@@ -1,3 +1,4 @@
+import uuid from 'react-uuid';
 import { atom } from 'recoil';
 
 /**
@@ -8,6 +9,6 @@ import { atom } from 'recoil';
  * @default - [false, '내용을 입력하세요', 'primary']
  */
 export const globalToast = atom<[boolean, ...string[]]>({
-  key: 'isGlobalToastOn',
+  key: `isGlobalToastOn/${uuid()}`,
   default: [false, '내용을 입력하세요', 'primary'],
 });

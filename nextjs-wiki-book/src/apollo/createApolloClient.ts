@@ -15,7 +15,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject>;
 export const createApolloClient = (): ApolloClient<NormalizedCacheObject> => {
   apolloClient = new ApolloClient({
     cache: createApolloCache(),
-    uri: 'http://localhost:4000/graphql',
+    uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     link: from([authLink, errorLink, httpUploadLink as any]),
   });
@@ -50,7 +50,7 @@ Message: ${networkError.message}`);
 );
 
 const httpUploadLink = createUploadLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
   fetchOptions: 'include',
 });
 

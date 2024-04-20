@@ -90,15 +90,18 @@ const Home = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await fetch('http://localhost:4000/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const { data } = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/graphql` as string,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: ProductsDocument.loc?.source.body,
+      }),
     },
-    body: JSON.stringify({
-      query: ProductsDocument.loc?.source.body,
-    }),
-  }).then((res) => res.json());
+  ).then((res) => res.json());
 
   const emojiProducts = data.products
     .filter((product: Product) => product.category === 'emoji')

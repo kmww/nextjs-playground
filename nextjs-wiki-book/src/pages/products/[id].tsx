@@ -63,9 +63,9 @@ const ProductPage: NextPage<ProductPageProps> = ({
 
   const profileImage = useMemo(() => {
     if (product?.owner?.profileImageUrl) {
-      return `http://localhost:4000/${product.owner.profileImageUrl}`;
+      return `${process.env.NEXT_PUBLIC_BASE_URL}/${product.owner.profileImageUrl}`;
     }
-    return 'http://localhost:4000/DefaultUser.png';
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/DefaultUser.png`;
   }, [product?.owner]);
 
   const isMine = useMemo(() => {
@@ -129,7 +129,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
               price={product?.price}
               imageUrl={
                 product?.imageUrl &&
-                `http://localhost:4000/${product?.imageUrl}`
+                `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.imageUrl}`
               }
             />
             <Separator />
@@ -195,7 +195,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
 
 export const getStaticPaths = async () => {
   const { data }: ProductsQueryResult = await fetch(
-    'http://localhost:4000/graphql',
+    `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
     {
       method: 'POST',
       headers: {
@@ -226,7 +226,7 @@ export const getStaticProps: GetStaticProps<{
   const productId = Number(params.id);
 
   const { data }: ProductQueryResult = await fetch(
-    'http://localhost:4000/graphql',
+    `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
     {
       method: 'POST',
       headers: {

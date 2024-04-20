@@ -47,9 +47,9 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
 
   const profileImage = useMemo(() => {
     if (profileImageUrl) {
-      return `http://localhost:4000/${profileImageUrl}`;
+      return `${process.env.NEXT_PUBLIC_BASE_URL}/${profileImageUrl}`;
     }
-    return 'http://localhost:4000/DefaultUser.png';
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/DefaultUser.png`;
   }, [profileImageUrl]);
 
   const onLogoutClick = async () => {

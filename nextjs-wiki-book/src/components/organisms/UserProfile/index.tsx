@@ -27,7 +27,7 @@ const UserProfile = ({
           src={
             profileImageUrl !== null
               ? profileImageUrl
-              : 'http://localhost:4000/DefaultUser.png'
+              : `${process.env.NEXT_PUBLIC_BASE_URL}/DefaultUser.png`
           }
           alt={username}
           height={profileImageSize}

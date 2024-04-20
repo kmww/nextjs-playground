@@ -69,7 +69,8 @@ const CartContainer = () => {
             key={product.id}
             id={product.id}
             imageUrl={
-              product.imageUrl && `http://localhost:4000/${product.imageUrl}`
+              product.imageUrl &&
+              `${process.env.NEXT_PUBLIC_BASE_URL}/${product.imageUrl}`
             }
             title={product.title}
             price={product.price}

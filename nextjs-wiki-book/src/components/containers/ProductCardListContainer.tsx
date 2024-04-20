@@ -51,7 +51,7 @@ const ProductCardListContainer = ({
                 price={product.price}
                 imageUrl={
                   product.imageUrl &&
-                  `http://localhost:4000/${product.imageUrl}`
+                  `${process.env.NEXT_PUBLIC_BASE_URL}/${product.imageUrl}`
                 }
                 blurDataUrl={product.blurDataUrl}
               />

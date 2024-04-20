@@ -25,7 +25,11 @@ async function main() {
   apolloServer.applyMiddleware({
     app,
     cors: {
-      origin: ['http://localhost:3000', 'https://studio.apollographql.com'],
+      origin: [
+        'http://localhost:3000',
+        'https://studio.apollographql.com',
+        'https://loa-wiki.vercel.app',
+      ],
       credentials: true,
     },
   });

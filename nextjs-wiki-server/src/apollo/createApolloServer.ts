@@ -3,7 +3,10 @@ import { ProductResolver } from '../resolvers/Product';
 import { UserResolver } from '../resolvers/User';
 import { ShoppingCartResolver } from '../resolvers/Cart';
 import { buildSchema } from 'type-graphql';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageLocalDefault,
+} from 'apollo-server-core';
 import { Request, Response } from 'express';
 import {
   JwtVerifiedUser,
@@ -22,7 +25,11 @@ const createApolloServer = async (): Promise<ApolloServer> => {
     schema: await buildSchema({
       resolvers: [ProductResolver, UserResolver, ShoppingCartResolver],
     }),
-    plugins: [ApolloServerPluginLandingPageLocalDefault()],
+    plugins: [
+      process.env.NODE_ENV === 'production'
+        ? ApolloServerPluginLandingPageGraphQLPlayground()
+        : ApolloServerPluginLandingPageLocalDefault(),
+    ],
     context: ({ req, res }) => {
       const verified = verifyAccessTokenFromReqHeaders(req.headers);
       return { req, res, verifiedUser: verified, redis };

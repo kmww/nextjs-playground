@@ -5,7 +5,7 @@ import Product from '../entities/Product';
 
 export const createDB = async (): Promise<Connection> =>
   createConnection({
-    type: 'mysql',
+    type: 'mariadb',
     host: process.env.DB_HOST || 'localhost',
     port: Number(process.env.DB_PORT) || 3306,
     database: process.env.DB_DATABASE || 'loa_wiki_book',

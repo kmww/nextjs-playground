@@ -13,8 +13,6 @@ import {
   verifyAccessTokenFromReqHeaders,
 } from '../utils/jwt-auth';
 import redis from '../redis/redis-client';
-import { KeyvAdapter } from '@apollo/utils.keyvadapter';
-import Keyv from 'keyv';
 export interface MyContext {
   req: Request;
   res: Response;
@@ -37,11 +35,6 @@ const createApolloServer = async (): Promise<ApolloServer> => {
       const verified = verifyAccessTokenFromReqHeaders(req.headers);
       return { req, res, verifiedUser: verified, redis };
     },
-    cache: new KeyvAdapter(
-      new Keyv(
-        `redis://${process.env.REDIS_NAME}:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
-      ),
-    ),
   });
 };
 

@@ -8,6 +8,7 @@ const nextConfig = {
       'cdn-lostark.game.onstove.com',
       'd3kxs6kpbh59hp.cloudfront.net',
       'd2x8kymwjom7h7.cloudfront.net',
+      process.env.NEXT_PUBLIC_BASE_URL,
     ],
   },
   compiler: (() => {

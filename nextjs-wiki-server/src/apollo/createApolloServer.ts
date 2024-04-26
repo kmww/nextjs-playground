@@ -24,6 +24,7 @@ const createApolloServer = async (): Promise<ApolloServer> => {
   return new ApolloServer<MyContext>({
     schema: await buildSchema({
       resolvers: [ProductResolver, UserResolver, ShoppingCartResolver],
+      validate: { forbidUnknownValues: false },
     }),
     plugins: [
       process.env.NODE_ENV === 'production'

@@ -1,6 +1,7 @@
 import { Redis } from 'ioredis';
 import dotenv from 'dotenv';
 
+// 빌드시 env 가져오기 위함
 dotenv.config();
 
 const redis = new Redis({

@@ -21,7 +21,7 @@ type Condition = 'new' | 'used';
 export class ProductResolver {
   @Query(() => [Product])
   async products(): Promise<Product[]> {
-    return await Product.find({ relations: ['owner'] });
+    return await Product.find({ relations: ['owner'], order: { id: 'DESC' } });
   }
 
   @Query(() => Product)
@@ -41,7 +41,10 @@ export class ProductResolver {
     @Arg('conditions', () => [String], { nullable: true })
     conditions?: Condition[],
   ): Promise<Product[] | []> {
-    let products = await Product.find({ relations: ['owner'] });
+    let products = await Product.find({
+      relations: ['owner'],
+      order: { id: 'DESC' },
+    });
 
     if (category) {
       products = products.filter((product) => product.category === category);

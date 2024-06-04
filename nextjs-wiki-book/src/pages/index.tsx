@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
       figuresProducts,
       padProducts,
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 };
 

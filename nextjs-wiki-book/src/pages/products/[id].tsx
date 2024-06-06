@@ -65,7 +65,7 @@ const ProductPage: NextPage<ProductPageProps> = ({
     if (product?.owner?.profileImageUrl) {
       return `${process.env.NEXT_PUBLIC_BASE_URL}/${product.owner.profileImageUrl}`;
     }
-    return `${process.env.NEXT_PUBLIC_BASE_URL}/DefaultUser.png`;
+    return '/DefaultUser.png';
   }, [product?.owner]);
 
   const isMine = useMemo(() => {

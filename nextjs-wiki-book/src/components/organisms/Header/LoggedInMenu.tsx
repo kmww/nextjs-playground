@@ -49,7 +49,7 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
     if (profileImageUrl) {
       return `${process.env.NEXT_PUBLIC_BASE_URL}/${profileImageUrl}`;
     }
-    return `${process.env.NEXT_PUBLIC_BASE_URL}/DefaultUser.png`;
+    return '/DefaultUser.png';
   }, [profileImageUrl]);
 
   const onLogoutClick = async () => {

@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useMeQuery } from '@/generated/graphql';
 
 export const UseAuth = () => {
   const [accessToken, setAccessToken] = useState<string | undefined>();
-  const { data, error, loading, refetch } = useMeQuery({ skip: !accessToken });
+  const { data, error, refetch } = useMeQuery({ skip: !accessToken });
+  const isLoggedIn = useMemo(() => {
+    if (accessToken) return data?.me?.id;
+    else false;
+  }, [accessToken, data?.me?.id]);
 
   useEffect(() => {
     if (localStorage.getItem('access_token')) {
@@ -21,7 +25,7 @@ export const UseAuth = () => {
   return {
     accessToken,
     data,
+    isLoggedIn,
     error,
-    loading,
   };
 };

@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { LogoutIcon, SettingIcon } from '@/components/atoms/IconButton';
 import MenuButton from '@/components/atoms/MenuButton/indext';
 import ShapeImage from '@/components/atoms/ShapeImage';
@@ -14,11 +14,7 @@ import Flex from '@/components/layout/Flex';
 import MenuItem from '@/components/molecules/MenuItem';
 import MenuList from '@/components/molecules/MenuList.tsx';
 import Menu from '@/components/organisms/Menu';
-import {
-  isLoggedInState,
-  profileImageUrlState,
-  userData,
-} from '@/contexts/Auth/auth';
+import { userData } from '@/contexts/Auth/auth';
 import { globalToast } from '@/contexts/GlobalToast/globalToast';
 import {
   MeQuery,
@@ -32,7 +28,6 @@ interface LoggedInMenuProps {
 }
 
 const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
-  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const setToast = useSetRecoilState(globalToast);
   const client = useApolloClient();
@@ -41,25 +36,21 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const [upload] = useUploadProfileImageMutation();
   const [updateUser, { loading: updateUserLoading }] =
     useUpdateUserDataMutation();
-  const [profileImageUrl, setProfileImageUrl] =
-    useRecoilState(profileImageUrlState);
   const setMeData = useSetRecoilState(userData);
 
   const profileImage = useMemo(() => {
-    if (profileImageUrl) {
-      return `${process.env.NEXT_PUBLIC_BASE_URL}/${profileImageUrl}`;
+    if (meData?.me?.profileImageUrl) {
+      return `${process.env.NEXT_PUBLIC_BASE_URL}/${meData.me.profileImageUrl}`;
     }
-    return '/DefaultUser.png';
-  }, [profileImageUrl]);
+    return `/DefaultUser.png`;
+  }, [meData?.me]);
 
   const onLogoutClick = async () => {
     try {
       if (!logoutLoading) {
         await logout();
         await client.resetStore();
-        setIsLoggedIn(false);
         setMeData(undefined);
-        localStorage.removeItem('profileImage');
         localStorage.removeItem('access_token');
         setToast([true, '로그아웃이 완료되었습니다.', 'primary']);
         router.push('/');
@@ -72,13 +63,12 @@ const LoggedInMenu = ({ meData }: LoggedInMenuProps) => {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
-      const res = await upload({
+      await upload({
         variables: { file },
         update: (cache) => {
           cache.evict({ fieldName: 'me' });
         },
       });
-      setProfileImageUrl(res.data?.uploadProfileImage);
     }
   };
 

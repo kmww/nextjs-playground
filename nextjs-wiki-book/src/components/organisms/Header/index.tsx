@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import LoggedInMenu from './LoggedInMenu';
 import AppLogo from '@/components/atoms/AppLogo';
@@ -9,11 +9,7 @@ import { SearchIcon, ShoppingCartIcon } from '@/components/atoms/IconButton';
 import Text from '@/components/atoms/Text';
 import Box from '@/components/layout/Box';
 import Flex from '@/components/layout/Flex';
-import {
-  isLoggedInState,
-  profileImageUrlState,
-  userData,
-} from '@/contexts/Auth/auth';
+import { userData } from '@/contexts/Auth/auth';
 import { UseAuth } from '@/utils/hooks/useAuth';
 
 const HeaderRoot = styled.header`
@@ -42,19 +38,20 @@ export const Anchor = styled(Text)`
 
 const Header = () => {
   const [ssrComplete, setSsrComplete] = useState(false);
-  const { data } = UseAuth();
-  const [isLoggedIn] = useRecoilState(isLoggedInState);
+  const { data, isLoggedIn } = UseAuth();
   const [meData, setMeData] = useRecoilState(userData);
-  const setProfileImageUrl = useSetRecoilState(profileImageUrlState);
 
   useEffect(() => setSsrComplete(true), []);
 
   useEffect(() => {
     if (data) {
       setMeData(data);
-      setProfileImageUrl(data.me?.profileImageUrl);
     }
-  }, [data, meData, setMeData, setProfileImageUrl]);
+  }, [data, meData, setMeData]);
+
+  if (ssrComplete && typeof isLoggedIn === 'undefined') {
+    return <HeaderRoot />;
+  }
 
   return (
     <HeaderRoot>
